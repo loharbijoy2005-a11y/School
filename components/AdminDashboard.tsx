@@ -120,11 +120,38 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   const [newNoticeCategory, setNewNoticeCategory] = useState<'wbbse' | 'wbchse' | 'schemes' | 'holiday' | 'tender'>('wbbse');
   const [newNoticeDesc, setNewNoticeDesc] = useState('');
 
-  // Media Manager State
-  const [galleryItems, setGalleryItems] = useState<GalleryItem[]>([
-    { id: '1', title: 'Saraswati Puja Celebration', category: 'Cultural', imageUrl: '/assets/saraswati_puja.jpg' },
-    { id: '2', title: 'Annual Athletic Meet', category: 'Sports', imageUrl: '/assets/sports_day.jpg' },
-  ]);
+  // Media Manager State with localStorage Persistence
+  const [galleryItems, setGalleryItems] = useState<GalleryItem[]>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('mgghs_gallery');
+      if (saved) {
+        try { return JSON.parse(saved); } catch (e) {}
+      }
+    }
+    return [
+      { id: '1', title: 'School Heritage Gate & Main Building (Estd. 1945)', category: 'Hero Carousel', imageUrl: '/assets/hero_campus.jpg' },
+      { id: '2', title: 'Morning School Assembly & Student Uniforms', category: 'Hero Carousel', imageUrl: '/assets/school_hero.jpg' },
+      { id: '3', title: 'Physics & Chemistry Practical Demonstration Lab', category: 'Academics', imageUrl: '/assets/science_lab.jpg' },
+      { id: '4', title: 'Digital Smart Classrooms & Central Library', category: 'Facilities', imageUrl: '/assets/library_smartclass.jpg' },
+      { id: '5', title: 'Saraswati Puja Floral & Alpona Decoration', category: 'Cultural', imageUrl: '/assets/saraswati_puja.jpg' },
+      { id: '6', title: 'Annual Athletic Sports Championship Meet', category: 'Sports', imageUrl: '/assets/sports_day.jpg' },
+      { id: '7', title: 'STEM Science & Innovation Exhibition', category: 'Academics', imageUrl: '/assets/science_exhibition.jpg' },
+      { id: '8', title: 'Annual Academic Prize Distribution', category: 'Ceremony', imageUrl: '/assets/prize_distribution.jpg' },
+      { id: '9', title: 'NCC & Defense Drill Demonstration', category: 'Empowerment', imageUrl: '/assets/ncc_defense.jpg' },
+      { id: '10', title: 'Headmistress Smt. Kalyani Maity Portrait', category: 'Administration', imageUrl: '/assets/headmistress.jpg' },
+      { id: '11', title: 'Mahishadal Gayeswari Girls High School Crest Logo', category: 'Branding', imageUrl: '/assets/school_logo.jpg' },
+    ];
+  });
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('mgghs_gallery', JSON.stringify(galleryItems));
+    }
+  }, [galleryItems]);
+
+  const handleDeletePhoto = (id: string) => {
+    setGalleryItems(galleryItems.filter((g) => g.id !== id));
+  };
   const [newPhotoTitle, setNewPhotoTitle] = useState('');
   const [newPhotoCategory, setNewPhotoCategory] = useState('Cultural');
   const [newPhotoUrl, setNewPhotoUrl] = useState('');
@@ -637,12 +664,35 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             </form>
 
             <div className="bg-white p-6 rounded-2xl border border-[#E8DFD0] space-y-4 shadow-xs">
-              <h3 className="font-serif font-bold text-base text-[#1E293B]">Campus Gallery Media ({galleryItems.length})</h3>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="flex justify-between items-center border-b border-[#E8DFD0] pb-3">
+                <h3 className="font-serif font-bold text-base text-[#1E293B]">Website Media & Campus Photographs ({galleryItems.length})</h3>
+                <span className="text-xs text-[#047857] font-bold">Saved in LocalStorage</span>
+              </div>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                 {galleryItems.map((item) => (
-                  <div key={item.id} className="bg-[#FAF7F2] p-3 rounded-xl border border-[#E8DFD0] space-y-2">
-                    <img src={item.imageUrl} alt={item.title} className="w-full h-32 object-cover rounded-lg" />
-                    <h4 className="font-bold text-xs text-[#1E293B]">{item.title}</h4>
+                  <div key={item.id} className="bg-[#FAF7F2] p-3 rounded-2xl border border-[#E8DFD0] space-y-2 relative group hover:border-[#9D174D]/50 transition-all flex flex-col justify-between">
+                    <div className="space-y-2">
+                      <div className="h-32 rounded-xl overflow-hidden relative bg-slate-200">
+                        <img src={item.imageUrl} alt={item.title} className="w-full h-full object-cover" />
+                        <span className="absolute top-2 left-2 bg-[#9D174D] text-white text-[9px] font-extrabold px-2 py-0.5 rounded-full uppercase shadow-xs">
+                          {item.category}
+                        </span>
+                      </div>
+                      <h4 className="font-bold text-xs text-[#1E293B] line-clamp-2 leading-snug">{item.title}</h4>
+                      <p className="text-[10px] text-slate-500 font-mono truncate">{item.imageUrl}</p>
+                    </div>
+
+                    <div className="pt-2 border-t border-[#E8DFD0] flex justify-between items-center">
+                      <span className="text-[10px] text-[#047857] font-bold">Published</span>
+                      <button
+                        onClick={() => handleDeletePhoto(item.id)}
+                        className="bg-rose-100 hover:bg-rose-200 text-[#9D174D] p-1.5 rounded-lg transition-colors flex items-center gap-1 text-[10px] font-bold"
+                        title="Delete photo from website"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                        <span>Delete</span>
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>

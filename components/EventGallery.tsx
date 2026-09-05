@@ -22,7 +22,20 @@ export const EventGallery: React.FC<EventGalleryProps> = ({ galleryItems: propGa
     { id: '8', title: 'Independence Day Parade & Cultural Dance', category: 'Cultural', imageUrl: '/assets/hero_campus.jpg' },
   ];
 
-  const items = propGallery && propGallery.length > 0 ? propGallery : defaultItems;
+  const getSavedGallery = (): GalleryItem[] => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('mgghs_gallery');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        } catch (e) {}
+      }
+    }
+    return defaultItems;
+  };
+
+  const items = propGallery && propGallery.length > 0 ? propGallery : getSavedGallery();
 
   const filteredItems = activeCategory === 'all'
     ? items

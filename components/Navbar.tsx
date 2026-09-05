@@ -25,29 +25,32 @@ export const Navbar: React.FC<NavbarProps> = ({
     <>
       {/* 1. Top Utility Header Badges & Quick Action Pills Strip */}
       <div className="bg-[#F5F1EA] text-slate-700 py-2 border-b border-[#DFD7C7] text-xs">
-        <div className="max-w-7xl mx-auto px-4 flex flex-wrap justify-between items-center gap-3">
+        <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-2 md:gap-4">
           
           {/* Institutional Badges */}
-          <div className="flex flex-wrap items-center gap-2 text-[11px]">
+          <div className="flex flex-wrap items-center justify-center md:justify-start gap-1.5 text-[11px]">
+            <span className="bg-[#701A1E]/10 text-[#701A1E] border border-[#701A1E]/30 px-2.5 py-0.5 rounded-full font-bold">
+              ESTD. 1945
+            </span>
             <span className="bg-[#701A1E]/10 text-[#701A1E] border border-[#701A1E]/30 px-2.5 py-0.5 rounded-full font-bold">
               UDISE: 19190806002
             </span>
             <span className="bg-[#C58B24]/15 text-[#C58B24] border border-[#C58B24]/40 px-2.5 py-0.5 rounded-full font-bold">
               {currentLang === 'bn' ? 'বাংলার শিক্ষা ID: WB-1945-MGGHS' : 'Banglar Shiksha ID: WB-1945-MGGHS'}
             </span>
-            <span className="hidden sm:inline bg-[#1B4332]/10 text-[#1B4332] border border-[#1B4332]/30 px-2.5 py-0.5 rounded-full font-bold">
+            <span className="hidden sm:inline-block bg-[#1B4332]/10 text-[#1B4332] border border-[#1B4332]/30 px-2.5 py-0.5 rounded-full font-bold">
               WBBSE: E1-042 | WBCHSE: 105084
             </span>
-            <span className="hidden lg:inline text-slate-600 font-semibold">
+            <span className="hidden lg:inline-block text-slate-600 font-semibold ml-1">
               📞 +91 3228 240211
             </span>
           </div>
 
           {/* Quick Action Top Pills */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center justify-center gap-1.5 flex-wrap">
             <a
               href="#welfare"
-              className="bg-white hover:bg-amber-50 text-[#C58B24] border border-[#DFD7C7] text-[11px] font-bold px-2.5 py-1 rounded-lg transition-colors flex items-center gap-1 shadow-xs"
+              className="bg-white hover:bg-amber-50 text-[#C58B24] border border-[#DFD7C7] text-[11px] font-bold px-2.5 py-1 rounded-lg transition-colors flex items-center gap-1 shadow-xs cursor-pointer"
             >
               <Award className="w-3 h-3 text-[#C58B24]" />
               <span>FEES & SCHOLARSHIPS</span>
@@ -55,7 +58,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <a
               href="#notices"
-              className="bg-white hover:bg-rose-50 text-[#701A1E] border border-[#DFD7C7] text-[11px] font-bold px-2.5 py-1 rounded-lg transition-colors flex items-center gap-1 shadow-xs"
+              className="bg-white hover:bg-rose-50 text-[#701A1E] border border-[#DFD7C7] text-[11px] font-bold px-2.5 py-1 rounded-lg transition-colors flex items-center gap-1 shadow-xs cursor-pointer"
             >
               <FileText className="w-3 h-3 text-[#701A1E]" />
               <span>PROSPECTUS</span>
@@ -63,7 +66,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <a
               href="#gallery"
-              className="bg-white hover:bg-blue-50 text-blue-800 border border-[#DFD7C7] text-[11px] font-bold px-2.5 py-1 rounded-lg transition-colors flex items-center gap-1 shadow-xs"
+              className="bg-white hover:bg-blue-50 text-blue-800 border border-[#DFD7C7] text-[11px] font-bold px-2.5 py-1 rounded-lg transition-colors flex items-center gap-1 shadow-xs cursor-pointer"
             >
               <ImageIcon className="w-3 h-3 text-blue-700" />
               <span>PICTURE GALLERY</span>
@@ -72,7 +75,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Language Toggle Button */}
             <button
               onClick={onToggleLang}
-              className="bg-[#C58B24] hover:bg-[#A36F1A] text-white font-extrabold px-2.5 py-1 rounded-lg text-[11px] transition-colors flex items-center gap-1 ml-1 shadow-xs"
+              className="bg-[#C58B24] hover:bg-[#A36F1A] text-white font-extrabold px-2.5 py-1 rounded-lg text-[11px] transition-colors flex items-center gap-1 shadow-xs cursor-pointer"
               title="Toggle Bengali / English Language"
             >
               <Globe className="w-3 h-3" />
@@ -124,41 +127,41 @@ export const Navbar: React.FC<NavbarProps> = ({
           </a>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-6 text-xs font-bold uppercase tracking-wider text-slate-700">
-            <a href="#home" className="hover:text-[#701A1E] transition-colors">
+          <nav className="hidden lg:flex items-center gap-5 text-xs font-extrabold uppercase tracking-wider text-slate-700">
+            <a href="#home" className="hover:text-[#701A1E] transition-colors py-1">
               {currentLang === 'bn' ? 'মূল পাতা' : 'Home'}
             </a>
-            <a href="#desk" className="hover:text-[#701A1E] transition-colors">
-              {currentLang === 'bn' ? 'প্রশাসন ও শিক্ষকমণ্ডলী' : 'Administration'}
+            <a href="#desk" className="hover:text-[#701A1E] transition-colors py-1">
+              {currentLang === 'bn' ? 'প্রশাসন' : 'Administration'}
             </a>
-            <a href="#academics" className="hover:text-[#701A1E] transition-colors">
+            <a href="#academics" className="hover:text-[#701A1E] transition-colors py-1">
               {currentLang === 'bn' ? 'পাঠ্যক্রম' : 'Academics'}
             </a>
-            <a href="#notices" className="hover:text-[#701A1E] transition-colors">
-              {currentLang === 'bn' ? 'নোটিশ বোর্ড' : 'Notices'}
+            <a href="#notices" className="hover:text-[#701A1E] transition-colors py-1">
+              {currentLang === 'bn' ? 'নোটিশ' : 'Notices'}
             </a>
-            <a href="#welfare" className="hover:text-[#701A1E] transition-colors">
-              {currentLang === 'bn' ? 'সরকারি প্রকল্প' : 'Schemes'}
+            <a href="#welfare" className="hover:text-[#701A1E] transition-colors py-1">
+              {currentLang === 'bn' ? 'প্রকল্প' : 'Schemes'}
             </a>
-            <a href="#facilities" className="hover:text-[#701A1E] transition-colors">
+            <a href="#facilities" className="hover:text-[#701A1E] transition-colors py-1">
               {currentLang === 'bn' ? 'সুযোগ-সুবিধা' : 'Facilities'}
             </a>
-            <a href="#gallery" className="hover:text-[#701A1E] transition-colors">
+            <a href="#gallery" className="hover:text-[#701A1E] transition-colors py-1">
               {currentLang === 'bn' ? 'গ্যালারি' : 'Gallery'}
             </a>
 
             <button
               onClick={onOpenAdmissionModal}
-              className="bg-[#701A1E] hover:bg-[#501215] text-white font-extrabold px-4 py-2 rounded-full text-xs shadow-md transition-all transform hover:-translate-y-0.5"
+              className="bg-[#701A1E] hover:bg-[#501215] text-white font-extrabold px-4 py-2 rounded-full text-xs shadow-md transition-all transform hover:-translate-y-0.5 cursor-pointer ml-1"
             >
-              {currentLang === 'bn' ? 'অনলাইন ভর্তি ২০২৬' : 'Admission Inquiry'}
+              {currentLang === 'bn' ? 'ভর্তি ২০২৬' : 'Admission Inquiry'}
             </button>
           </nav>
 
           {/* Mobile Menu Toggle Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 text-slate-700 hover:text-[#701A1E]"
+            className="lg:hidden p-2 text-slate-700 hover:text-[#701A1E] cursor-pointer"
             aria-label="Toggle Mobile Menu"
           >
             <i className={`fa-solid ${mobileMenuOpen ? 'fa-xmark text-xl' : 'fa-bars text-xl'}`}></i>
@@ -168,7 +171,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="lg:hidden bg-[#FAF7F0] border-t border-[#DFD7C7] px-4 py-4 space-y-3 text-sm font-bold text-slate-800 shadow-lg">
+          <div className="lg:hidden bg-[#FAF7F0] border-t border-[#DFD7C7] px-4 py-4 space-y-3 text-sm font-bold text-slate-800 shadow-lg animate-in fade-in slide-in-from-top-2 duration-200">
             <a href="#home" onClick={() => setMobileMenuOpen(false)} className="block py-1 hover:text-[#701A1E]">Home</a>
             <a href="#desk" onClick={() => setMobileMenuOpen(false)} className="block py-1 hover:text-[#701A1E]">Administration & Faculty</a>
             <a href="#academics" onClick={() => setMobileMenuOpen(false)} className="block py-1 hover:text-[#701A1E]">Academic Streams</a>
@@ -181,7 +184,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 setMobileMenuOpen(false);
                 onOpenAdmissionModal();
               }}
-              className="w-full bg-[#701A1E] text-white font-bold py-2.5 rounded-xl text-xs"
+              className="w-full bg-[#701A1E] text-white font-bold py-2.5 rounded-xl text-xs shadow-md"
             >
               Online Admission Inquiry 2026
             </button>
