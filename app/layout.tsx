@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import React from 'react';
-import '../css/style.css';
+import './globals.css';
 
 export const metadata: Metadata = {
   title: "Mahishadal Gayeswari Girls' High School (H.S.) | Official Portal",
