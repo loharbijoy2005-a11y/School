@@ -1,114 +1,123 @@
 import React from 'react';
-import { ShieldCheck, UserCheck, Heart, AlertTriangle, Users, BookOpen, MessageSquare, Compass, ExternalLink } from 'lucide-react';
-import { DigitalPortalItem } from '../types';
+import { Laptop, UserCheck, AlertTriangle, MessageSquare, Users, Star, BookOpen, Compass } from 'lucide-react';
 import ScrollRevealCard from './ScrollRevealCard';
 
 export const DigitalPortals: React.FC = () => {
-  const portals: DigitalPortalItem[] = [
+  const portals = [
     {
       id: '1',
-      title: 'Banglar Shiksha Sync',
-      category: 'Govt Portal',
-      description: 'Direct integration with West Bengal Govt Banglar Shiksha e-portal for student registration and ID tracking.',
-      icon: 'ShieldCheck',
+      title: 'Learning Management',
+      subtitle: 'Courses, notes & assignments online',
+      icon: <Laptop className="w-6 h-6 text-white" />,
+      ringBg: 'bg-[#0F2E23]',
+      ringGlow: 'bg-emerald-100 border border-emerald-300',
+      bottomBar: 'bg-[#0F2E23]',
+      cardBg: 'from-emerald-50/80 via-[#FDFBF7] to-white',
       targetUrl: 'https://banglarshiksha.gov.in',
-      badgeText: 'Official Govt Portal',
     },
     {
       id: '2',
-      title: 'Student Identity & Marks Portal',
-      category: 'Academic Desk',
-      description: 'Online access for guardians to check Madhyamik and HS summative exam marks and report cards.',
-      icon: 'UserCheck',
+      title: 'Student Profile',
+      subtitle: 'View & manage your student profile',
+      icon: <UserCheck className="w-6 h-6 text-white" />,
+      ringBg: 'bg-[#1B4332]',
+      ringGlow: 'bg-teal-100 border border-teal-300',
+      bottomBar: 'bg-[#1B4332]',
+      cardBg: 'from-teal-50/80 via-[#FDFBF7] to-white',
       targetUrl: '#',
-      badgeText: 'Student Portal',
     },
     {
       id: '3',
-      title: 'Kanyashree & Welfare Schemes Hub',
-      category: 'Welfare Wings',
-      description: 'Track Kanyashree K1/K2 grant status, Sabooj Sathi cycle distribution, and Taruner Swapna tab grants.',
-      icon: 'Heart',
-      targetUrl: 'https://wbkanyashree.gov.in',
-      badgeText: 'State Schemes',
+      title: 'Grievance Redressal',
+      subtitle: 'Report & resolve concerns confidentially',
+      icon: <AlertTriangle className="w-6 h-6 text-white" />,
+      ringBg: 'bg-[#881337]',
+      ringGlow: 'bg-rose-100 border border-rose-300',
+      bottomBar: 'bg-[#881337]',
+      cardBg: 'from-rose-50/80 via-[#FDFBF7] to-white',
+      targetUrl: '#',
     },
     {
       id: '4',
-      title: 'Grievance & Student Safety Desk',
-      category: 'Safety & Protection',
-      description: '24/7 confidential safety hotline, anti-ragging desk, and student mental health counselling portal.',
-      icon: 'AlertTriangle',
+      title: 'Online Feedback',
+      subtitle: 'Share your valuable feedback with us',
+      icon: <MessageSquare className="w-6 h-6 text-white" />,
+      ringBg: 'bg-indigo-900',
+      ringGlow: 'bg-purple-100 border border-purple-300',
+      bottomBar: 'bg-indigo-900',
+      cardBg: 'from-purple-50/80 via-[#FDFBF7] to-white',
       targetUrl: '#',
-      badgeText: '24/7 Helpline',
     },
     {
       id: '5',
-      title: 'Alumni / Ex-Students Association',
-      category: 'Community',
-      description: 'Network for past graduates of Mahishadal Gayeswari Girls\' High School working across India and abroad.',
-      icon: 'Users',
+      title: 'Alumni Portal',
+      subtitle: 'Reconnect through Praktani Sabha',
+      icon: <Users className="w-6 h-6 text-white" />,
+      ringBg: 'bg-amber-800',
+      ringGlow: 'bg-amber-100 border border-amber-300',
+      bottomBar: 'bg-amber-800',
+      cardBg: 'from-amber-50/80 via-[#FDFBF7] to-white',
       targetUrl: '#',
-      badgeText: 'Alumni Network',
     },
     {
       id: '6',
-      title: 'Teacher Performance & Lesson Plans',
-      category: 'Faculty Governance',
-      description: 'Digital lesson plan repository, teaching learning material (TLM) archives, and academic calendar.',
-      icon: 'BookOpen',
+      title: '360° Teacher Appraisal',
+      subtitle: 'Faculty performance assessment',
+      icon: <Star className="w-6 h-6 text-white" />,
+      ringBg: 'bg-[#0F172A]',
+      ringGlow: 'bg-blue-100 border border-blue-300',
+      bottomBar: 'bg-[#0F172A]',
+      cardBg: 'from-blue-50/80 via-[#FDFBF7] to-white',
       targetUrl: '#',
-      badgeText: 'Faculty Resource',
     },
     {
       id: '7',
-      title: 'Online Guardian Feedback',
-      category: 'Parent Portal',
-      description: 'Direct interactive communication channel for parents to submit suggestions to the Headmistress.',
-      icon: 'MessageSquare',
+      title: 'WBBSE & WBCHSE Desk',
+      subtitle: 'Program & course outcome mapping',
+      icon: <BookOpen className="w-6 h-6 text-white" />,
+      ringBg: 'bg-[#C58B24]',
+      ringGlow: 'bg-yellow-100 border border-yellow-300',
+      bottomBar: 'bg-[#C58B24]',
+      cardBg: 'from-yellow-50/80 via-[#FDFBF7] to-white',
       targetUrl: '#',
-      badgeText: 'Parent Connect',
     },
     {
       id: '8',
-      title: '360° Virtual Campus Tour',
-      category: 'Digital Experience',
-      description: 'Explore our heritage school campus, STEM science labs, central library, and sports grounds online.',
-      icon: 'Compass',
+      title: 'Virtual Campus Tour',
+      subtitle: 'Explore our beautiful campus online',
+      icon: <Compass className="w-6 h-6 text-white" />,
+      ringBg: 'bg-slate-900',
+      ringGlow: 'bg-slate-100 border border-slate-300',
+      bottomBar: 'bg-slate-900',
+      cardBg: 'from-slate-100/80 via-[#FDFBF7] to-white',
       targetUrl: '#',
-      badgeText: 'Virtual Tour',
     },
   ];
 
-  const getIcon = (iconName: string) => {
-    switch (iconName) {
-      case 'ShieldCheck': return <ShieldCheck className="w-6 h-6 text-[#B45309]" />;
-      case 'UserCheck': return <UserCheck className="w-6 h-6 text-[#9D174D]" />;
-      case 'Heart': return <Heart className="w-6 h-6 text-rose-600" />;
-      case 'AlertTriangle': return <AlertTriangle className="w-6 h-6 text-[#B45309]" />;
-      case 'Users': return <Users className="w-6 h-6 text-blue-700" />;
-      case 'BookOpen': return <BookOpen className="w-6 h-6 text-[#047857]" />;
-      case 'MessageSquare': return <MessageSquare className="w-6 h-6 text-[#B45309]" />;
-      default: return <Compass className="w-6 h-6 text-[#9D174D]" />;
-    }
-  };
-
   return (
-    <section className="py-20 bg-[#FAF7F2] text-slate-800 relative border-b border-[#E8DFD0]">
+    <section className="py-20 bg-gradient-to-b from-[#FDFBF7] via-[#FAF7F2] to-[#FAF7F0] text-slate-900 relative border-b border-[#DFD7C7]">
       <div className="max-w-7xl mx-auto px-4 space-y-12">
         
+        {/* Section Header Matching Screenshot 1:1 */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <span className="text-xs font-bold text-[#9D174D] uppercase tracking-widest bg-rose-100/60 px-3 py-1 rounded-full border border-rose-300/60">
-            Digital Governance & Services
-          </span>
-          <h2 className="font-serif font-extrabold text-3xl md:text-4xl text-[#1E293B]">
-            Digital School Portals (High-Density 8-Card Grid)
+          <div className="flex items-center justify-center gap-2">
+            <span className="h-[1px] w-8 bg-amber-500"></span>
+            <span className="text-xs font-black text-amber-700 uppercase tracking-widest">
+              QUICK ACCESS
+            </span>
+            <span className="h-[1px] w-8 bg-amber-500"></span>
+          </div>
+
+          <h2 className="font-serif font-black text-3xl md:text-4xl lg:text-5xl text-[#0F2E23] tracking-tight">
+            Digital Campus Portals
           </h2>
-          <p className="text-xs text-slate-600">
-            Instant 1-click access to government student welfare portals, academic report cards, and safety helplines.
+
+          <p className="text-xs md:text-sm text-slate-600 font-medium leading-relaxed max-w-2xl mx-auto">
+            One-tap access to the systems students, staff and faculty use most — from classroom tools to grievance & feedback channels.
           </p>
         </div>
 
-        {/* 8-Card Grid */}
+        {/* 8-Card Grid Matching 1:1 Screenshot Design */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {portals.map((portal, idx) => (
             <ScrollRevealCard key={portal.id} delay={(idx % 4) * 90}>
@@ -116,31 +125,29 @@ export const DigitalPortals: React.FC = () => {
                 href={portal.targetUrl}
                 target={portal.targetUrl.startsWith('http') ? '_blank' : '_self'}
                 rel="noreferrer"
-                className="bg-white p-6 rounded-3xl border border-[#E8DFD0] hover:border-[#9D174D]/60 shadow-sm hover:shadow-md transition-all cursor-pointer group flex flex-col justify-between space-y-4 hover:-translate-y-1 h-full"
+                className={`bg-gradient-to-b ${portal.cardBg} border border-[#DFD7C7] hover:border-amber-500 rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col items-center text-center justify-between min-h-[260px] relative overflow-hidden cursor-pointer hover:-translate-y-1`}
               >
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <div className="w-12 h-12 rounded-2xl bg-[#FAF7F2] border border-[#E8DFD0] flex items-center justify-center group-hover:scale-110 transition-transform">
-                      {getIcon(portal.icon)}
+                {/* Central Dual-Ring Glow Circle Icon Badge */}
+                <div className="space-y-4 flex flex-col items-center w-full">
+                  <div className={`w-16 h-16 rounded-full ${portal.ringGlow} flex items-center justify-center p-1 shadow-inner group-hover:scale-110 transition-transform duration-300`}>
+                    <div className={`w-full h-full rounded-full ${portal.ringBg} flex items-center justify-center shadow-md`}>
+                      {portal.icon}
                     </div>
-                    <span className="text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-amber-100 text-[#B45309] border border-amber-200 uppercase">
-                      {portal.badgeText}
-                    </span>
                   </div>
 
-                  <h3 className="font-serif font-extrabold text-lg text-[#1E293B] group-hover:text-[#9D174D] transition-colors leading-snug">
-                    {portal.title}
-                  </h3>
-
-                  <p className="text-xs text-slate-600 leading-relaxed">
-                    {portal.description}
-                  </p>
+                  {/* Title & Subtitle */}
+                  <div className="space-y-1.5">
+                    <h3 className="font-serif font-black text-lg md:text-xl text-slate-900 group-hover:text-[#881337] transition-colors leading-snug">
+                      {portal.title}
+                    </h3>
+                    <p className="text-xs text-slate-500 font-medium leading-relaxed">
+                      {portal.subtitle}
+                    </p>
+                  </div>
                 </div>
 
-                <div className="pt-3 border-t border-[#E8DFD0] flex items-center justify-between text-xs font-bold text-[#9D174D] group-hover:text-[#B45309] transition-colors">
-                  <span>Access Portal</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </div>
+                {/* Bottom Color Accent Bar */}
+                <div className={`absolute bottom-0 inset-x-0 h-1.5 ${portal.bottomBar} rounded-b-3xl opacity-80 group-hover:opacity-100 transition-opacity`}></div>
               </a>
             </ScrollRevealCard>
           ))}
