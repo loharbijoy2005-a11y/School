@@ -97,9 +97,9 @@ export const Hero: React.FC<HeroProps> = ({
     : noticesList.filter((n) => n.category === activeTab);
 
   return (
-    <section id="home" className="relative bg-[#FAF7F2] text-[#292524] min-h-[600px] lg:min-h-[650px] flex items-center overflow-hidden border-b border-[#E8DFD0]">
+    <section id="home" className="relative bg-[#FAF7F2] text-[#292524] min-h-[620px] lg:min-h-[670px] flex items-center overflow-hidden border-b border-[#E8DFD0]">
       
-      {/* Dynamic Full-Width Campus Photo Slider */}
+      {/* Dynamic Full-Width Campus Photo Slider (High Visibility Opacity) */}
       <div className="absolute inset-0 z-0">
         {campusPhotos.map((photo, index) => (
           <div
@@ -112,103 +112,109 @@ export const Hero: React.FC<HeroProps> = ({
             <img
               src={photo.url}
               alt={photo.title}
-              className="w-full h-full object-cover opacity-35"
+              className="w-full h-full object-cover opacity-80"
             />
           </div>
         ))}
 
-        {/* Soft Warm Vignette Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#FAF7F2] via-[#FAF7F2]/90 to-[#FAF7F2]/50 lg:via-[#FAF7F2]/85"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#FAF7F2] via-transparent to-[#FAF7F2]/50"></div>
+        {/* Soft Warm Vignette Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#FAF7F2]/95 via-[#FAF7F2]/70 to-[#FAF7F2]/40 lg:via-[#FAF7F2]/65"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#FAF7F2] via-transparent to-[#FAF7F2]/40"></div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 py-12 w-full grid lg:grid-cols-12 gap-8 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 py-10 w-full grid lg:grid-cols-12 gap-8 items-center">
         
-        {/* Left Column: Headlines, Institutional Pitch & Stats */}
-        <div className="lg:col-span-7 space-y-6">
-          
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#881337]/10 border border-[#881337]/30 text-[#881337] font-extrabold text-xs uppercase tracking-wider shadow-xs">
-            <Sparkles className="w-4 h-4 text-[#D97706]" />
-            <span>PIONEER IN FEMALE EDUCATION SINCE 1945</span>
-          </div>
-
-          <h1 className="font-serif font-extrabold text-3xl sm:text-4xl md:text-5xl text-[#1C1917] leading-tight">
-            Empowering Young Girls, <br />
-            <span className="bg-gradient-to-r from-[#881337] via-[#D97706] to-[#1B4332] bg-clip-text text-transparent">
-              Inspiring Excellence Since 1945
-            </span>
-          </h1>
-
-          <p className="text-[#334155] text-sm md:text-base leading-relaxed max-w-2xl font-medium">
-            Mahishadal Gayeswari Girls' High School (H.S.) is a premier government-sponsored girls' institution in Purba Medinipur. Affiliated to WBBSE & WBCHSE, we foster academic distinction, scientific practical temper, and leadership skills from Class V to Class XII.
-          </p>
-
-          {/* Stats Row: 3 Glassmorphic Counter Tiles */}
-          <div className="flex flex-wrap gap-4 pt-2">
-            <div className="bg-white/90 backdrop-blur-sm border border-[#E8DFD0] px-4 py-3 rounded-2xl shadow-xs">
-              <p className="text-[#D97706] font-extrabold text-lg flex items-center gap-1">
-                <GraduationCap className="w-5 h-5 text-[#D97706]" />
-                100% Pass
-              </p>
-              <p className="text-[11px] text-[#334155] uppercase font-bold mt-0.5">Madhyamik & H.S.</p>
-            </div>
+        {/* Left Column: Glassmorphic Institutional Card */}
+        <div className="lg:col-span-7">
+          <div className="bg-[#FFFDF9]/92 backdrop-blur-md border border-[#E8DFD0] p-6 md:p-8 rounded-3xl shadow-xl space-y-5">
             
-            <div className="bg-white/90 backdrop-blur-sm border border-[#E8DFD0] px-4 py-3 rounded-2xl shadow-xs">
-              <p className="text-[#881337] font-extrabold text-lg flex items-center gap-1">
-                <Users className="w-5 h-5 text-[#881337]" />
-                2,200+ Girls
-              </p>
-              <p className="text-[11px] text-[#334155] uppercase font-bold mt-0.5">Enrolled Students</p>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#881337]/10 border border-[#881337]/30 text-[#881337] font-extrabold text-xs uppercase tracking-wider shadow-xs">
+              <Sparkles className="w-4 h-4 text-[#D97706]" />
+              <span>PIONEER IN FEMALE EDUCATION SINCE 1945</span>
             </div>
-            
-            <div className="bg-white/90 backdrop-blur-sm border border-[#E8DFD0] px-4 py-3 rounded-2xl shadow-xs">
-              <p className="text-[#1B4332] font-extrabold text-lg flex items-center gap-1">
-                <Laptop className="w-5 h-5 text-[#1B4332]" />
-                30+ Systems
-              </p>
-              <p className="text-[11px] text-[#334155] uppercase font-bold mt-0.5">ICT Computer Lab</p>
+
+            <h1 className="font-serif font-extrabold text-3xl sm:text-4xl md:text-5xl text-[#1C1917] leading-tight">
+              Empowering Young Girls, <br />
+              <span className="bg-gradient-to-r from-[#881337] via-[#D97706] to-[#1B4332] bg-clip-text text-transparent">
+                Inspiring Excellence Since 1945
+              </span>
+            </h1>
+
+            <p className="text-[#334155] text-xs md:text-sm leading-relaxed font-medium">
+              Mahishadal Gayeswari Girls' High School (H.S.) is a premier government-sponsored girls' institution in Purba Medinipur. Affiliated to WBBSE & WBCHSE, we foster academic distinction, scientific practical temper, and leadership skills from Class V to Class XII.
+            </p>
+
+            {/* Stats Row: 3 Glassmorphic Counter Tiles */}
+            <div className="flex flex-wrap gap-3 pt-1">
+              <div className="bg-white border border-[#E8DFD0] px-3.5 py-2.5 rounded-2xl shadow-xs">
+                <p className="text-[#D97706] font-extrabold text-base flex items-center gap-1">
+                  <GraduationCap className="w-4 h-4 text-[#D97706]" />
+                  100% Pass
+                </p>
+                <p className="text-[10px] text-[#334155] uppercase font-bold mt-0.5">Madhyamik & H.S.</p>
+              </div>
+              
+              <div className="bg-white border border-[#E8DFD0] px-3.5 py-2.5 rounded-2xl shadow-xs">
+                <p className="text-[#881337] font-extrabold text-base flex items-center gap-1">
+                  <Users className="w-4 h-4 text-[#881337]" />
+                  2,200+ Girls
+                </p>
+                <p className="text-[10px] text-[#334155] uppercase font-bold mt-0.5">Enrolled Students</p>
+              </div>
+              
+              <div className="bg-white border border-[#E8DFD0] px-3.5 py-2.5 rounded-2xl shadow-xs">
+                <p className="text-[#1B4332] font-extrabold text-base flex items-center gap-1">
+                  <Laptop className="w-4 h-4 text-[#1B4332]" />
+                  30+ Systems
+                </p>
+                <p className="text-[10px] text-[#334155] uppercase font-bold mt-0.5">ICT Computer Lab</p>
+              </div>
             </div>
-          </div>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-wrap gap-3 pt-4">
-            <button
-              onClick={onOpenAdmissionModal}
-              className="bg-[#881337] hover:bg-[#6b0f2b] text-white font-extrabold px-6 py-3.5 rounded-full text-xs shadow-md transition-all flex items-center gap-2 transform hover:-translate-y-0.5 cursor-pointer"
-            >
-              <span>Online Admission 2026</span>
-              <ChevronRight className="w-4 h-4" />
-            </button>
-
-            <a
-              href="#gallery"
-              className="bg-white hover:bg-amber-50/50 text-[#1C1917] border border-[#E8DFD0] hover:border-[#D97706] font-bold px-6 py-3.5 rounded-full text-xs transition-colors flex items-center gap-2 shadow-xs cursor-pointer"
-            >
-              <Camera className="w-4 h-4 text-[#D97706]" />
-              <span>Explore Campus Tour</span>
-            </a>
-          </div>
-
-          {/* Carousel Slide Indicators */}
-          <div className="flex items-center gap-2 pt-2">
-            <span className="text-[11px] text-[#334155] font-semibold mr-1">Campus View:</span>
-            {campusPhotos.map((_, idx) => (
+            {/* CTA Buttons */}
+            <div className="flex flex-wrap gap-3 pt-2">
               <button
-                key={idx}
-                onClick={() => setCurrentSlide(idx)}
-                className={`h-2 rounded-full transition-all cursor-pointer ${
-                  idx === currentSlide ? 'w-6 bg-[#881337]' : 'w-2 bg-slate-300 hover:bg-slate-400'
-                }`}
-                aria-label={`Slide ${idx + 1}`}
-              />
-            ))}
-          </div>
+                onClick={onOpenAdmissionModal}
+                className="bg-[#881337] hover:bg-[#6b0f2b] text-white font-extrabold px-6 py-3 rounded-full text-xs shadow-md transition-all flex items-center gap-2 transform hover:-translate-y-0.5 cursor-pointer"
+              >
+                <span>Online Admission 2026</span>
+                <ChevronRight className="w-4 h-4" />
+              </button>
 
+              <a
+                href="#gallery"
+                className="bg-white hover:bg-amber-50/50 text-[#1C1917] border border-[#E8DFD0] hover:border-[#D97706] font-bold px-6 py-3 rounded-full text-xs transition-colors flex items-center gap-2 shadow-xs cursor-pointer"
+              >
+                <Camera className="w-4 h-4 text-[#D97706]" />
+                <span>Explore Campus Tour</span>
+              </a>
+            </div>
+
+            {/* Carousel Slide Indicators */}
+            <div className="flex items-center gap-2 pt-1 border-t border-[#E8DFD0]">
+              <span className="text-[11px] text-[#334155] font-bold mr-1">
+                Active Photo: <span className="text-[#881337]">{campusPhotos[currentSlide].title}</span>
+              </span>
+              <div className="ml-auto flex gap-1.5">
+                {campusPhotos.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setCurrentSlide(idx)}
+                    className={`h-2 rounded-full transition-all cursor-pointer ${
+                      idx === currentSlide ? 'w-5 bg-[#881337]' : 'w-2 bg-slate-300 hover:bg-slate-400'
+                    }`}
+                    aria-label={`Slide ${idx + 1}`}
+                  />
+                ))}
+              </div>
+            </div>
+
+          </div>
         </div>
 
-        {/* Right Floating Notice Board Hub */}
+        {/* Right Column: Layered Notice Board Hub */}
         <div className="lg:col-span-5">
-          <div className="bg-white border border-[#DFD7C7] rounded-3xl p-6 shadow-lg space-y-5">
+          <div className="bg-white/95 backdrop-blur-md border border-[#DFD7C7] rounded-3xl p-6 shadow-xl space-y-5">
             
             {/* Notice Board Header */}
             <div className="flex items-center justify-between border-b border-[#E8DFD0] pb-3">

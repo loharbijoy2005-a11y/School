@@ -87,9 +87,9 @@ img {
 .floating-edge-left {
   position: fixed;
   left: 0;
-  top: 38%;
+  top: 62%;
   transform: translateY(-50%);
-  z-index: 40;
+  z-index: 30;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -98,9 +98,9 @@ img {
 .floating-edge-right {
   position: fixed;
   right: 0;
-  top: 38%;
+  top: 62%;
   transform: translateY(-50%);
-  z-index: 40;
+  z-index: 30;
   display: flex;
   flex-direction: column;
 }
