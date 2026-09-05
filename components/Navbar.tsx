@@ -41,20 +41,21 @@ export const Navbar: React.FC<NavbarProps> = ({
             </span>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             <button
               onClick={onToggleLang}
-              className="bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-200 px-3 py-0.5 rounded-full text-[11px] font-bold transition-all flex items-center gap-1.5"
+              className="bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-300 px-2.5 py-0.5 rounded-full text-[10px] font-bold transition-all flex items-center gap-1"
             >
               <Globe className="w-3 h-3 text-rose-400" />
               <span>{currentLang === 'en' ? 'বাংলা' : 'English'}</span>
             </button>
             <button
               onClick={onOpenAdminLoginModal}
-              className="bg-amber-500/20 hover:bg-amber-500 text-amber-300 hover:text-slate-950 border border-amber-500/40 px-3 py-0.5 rounded text-[11px] font-bold flex items-center gap-1.5 transition-all"
+              className="bg-slate-900 hover:bg-amber-500/20 text-slate-400 hover:text-amber-300 border border-slate-800 hover:border-amber-500/40 px-2.5 py-0.5 rounded text-[10px] font-bold flex items-center gap-1 transition-all"
+              title="Admin Portal Login"
             >
-              <ShieldCheck className="w-3.5 h-3.5" />
-              <span>ADMIN LOGIN</span>
+              <ShieldCheck className="w-3 h-3 text-amber-400" />
+              <span>Admin</span>
             </button>
           </div>
         </div>

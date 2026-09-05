@@ -91,30 +91,30 @@ export const Footer: React.FC<FooterProps> = ({ onOpenAdminLoginModal }) => {
       </div>
 
       {/* CRITICAL BOTTOM ACTIONS: Dual Distinct Admin & Office Buttons */}
-      <div className="max-w-7xl mx-auto px-4 py-6 bg-slate-900 rounded-2xl border border-slate-800 flex flex-wrap justify-between items-center gap-4 mb-8">
+      <div className="max-w-7xl mx-auto px-4 py-4 bg-slate-900/60 rounded-xl border border-slate-800/80 flex flex-wrap justify-between items-center gap-3 mb-8">
         <div>
-          <h4 className="text-white font-bold text-sm flex items-center gap-2">
-            <ShieldCheck className="w-4 h-4 text-rose-500" />
+          <h4 className="text-slate-200 font-bold text-xs flex items-center gap-1.5">
+            <ShieldCheck className="w-3.5 h-3.5 text-rose-500" />
             Institutional Staff & Portal Access
           </h4>
-          <p className="text-xs text-slate-400">Authenticated login portal for Headmistress and clerical office staff.</p>
+          <p className="text-[11px] text-slate-400">Authenticated portal for Headmistress & clerical office staff.</p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
           <button
             onClick={onOpenAdminLoginModal}
-            className="bg-rose-600 hover:bg-rose-700 text-white font-extrabold px-5 py-2.5 rounded-xl text-xs flex items-center gap-2 transition-all shadow-lg"
+            className="bg-rose-600/90 hover:bg-rose-600 text-white font-bold px-3 py-1.5 rounded-lg text-xs flex items-center gap-1.5 transition-all"
           >
-            <ShieldCheck className="w-4 h-4" />
-            <span>[ ADMIN LOG IN ]</span>
+            <ShieldCheck className="w-3.5 h-3.5" />
+            <span>Admin Login</span>
           </button>
 
           <button
             onClick={onOpenAdminLoginModal}
-            className="bg-slate-800 hover:bg-slate-700 text-amber-400 border border-amber-500/40 font-extrabold px-5 py-2.5 rounded-xl text-xs flex items-center gap-2 transition-all"
+            className="bg-slate-800 hover:bg-slate-700 text-amber-300 border border-slate-700 font-bold px-3 py-1.5 rounded-lg text-xs flex items-center gap-1.5 transition-all"
           >
-            <Lock className="w-4 h-4" />
-            <span>[ OFFICE LOG IN ]</span>
+            <Lock className="w-3.5 h-3.5" />
+            <span>Office Login</span>
           </button>
         </div>
       </div>
