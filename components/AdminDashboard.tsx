@@ -16,21 +16,34 @@ import {
   X,
   LogOut,
   Sparkles,
+  Users,
+  UserPlus,
+  Edit2,
+  CheckCircle,
 } from 'lucide-react';
-import { Notice, GalleryItem, AdmissionInquiry, AdminUser } from '../types';
+import { Notice, GalleryItem, AdmissionInquiry, AdminUser, FacultyMember, StaffCategory } from '../types';
 
 interface AdminDashboardProps {
   user: AdminUser;
   onLogout: () => void;
+  facultyList: FacultyMember[];
+  onAddFaculty: (staff: FacultyMember) => void;
+  onDeleteFaculty: (id: string) => void;
 }
 
-export const AdminDashboard: React.FC<AdminDashboardProps> = ({ user, onLogout }) => {
-  const [activeTab, setActiveTab] = useState<'overview' | 'notices' | 'gallery' | 'inquiries'>('overview');
+export const AdminDashboard: React.FC<AdminDashboardProps> = ({
+  user,
+  onLogout,
+  facultyList,
+  onAddFaculty,
+  onDeleteFaculty,
+}) => {
+  const [activeTab, setActiveTab] = useState<'overview' | 'notices' | 'gallery' | 'inquiries' | 'staff'>('overview');
   
-  // State for Emergency Notice Ticker
+  // Emergency Notice Ticker
   const [emergencyTickerActive, setEmergencyTickerActive] = useState(true);
 
-  // State for Notices
+  // Notices State
   const [notices, setNotices] = useState<Notice[]>([
     {
       id: '1',
@@ -56,7 +69,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ user, onLogout }
     },
   ]);
 
-  // State for Inquiries
+  // Inquiries State
   const [inquiries, setInquiries] = useState<AdmissionInquiry[]>([
     {
       id: '1',
@@ -90,8 +103,18 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ user, onLogout }
     { id: '1', title: 'Saraswati Puja Celebration', category: 'Cultural', imageUrl: '/assets/saraswati_puja.jpg', assignedSection: 'events' },
     { id: '2', title: 'Annual Athletic Meet', category: 'Sports', imageUrl: '/assets/sports_day.jpg', assignedSection: 'events' },
   ]);
-  const [newPhotoTitle, setNewPhotoTitle] = useState('');
-  const [newPhotoSection, setNewPhotoSection] = useState<'hero' | 'events' | 'facilities'>('events');
+
+  // Staff Roster Form State
+  const [staffCategoryFilter, setStaffCategoryFilter] = useState<StaffCategory | 'all'>('all');
+  const [newStaffName, setNewStaffName] = useState('');
+  const [newStaffDesignation, setNewStaffDesignation] = useState('');
+  const [newStaffQualification, setNewStaffQualification] = useState('');
+  const [newStaffSubject, setNewStaffSubject] = useState('');
+  const [newStaffDepartment, setNewStaffDepartment] = useState<'Languages' | 'Science & Math' | 'Social Sciences' | 'IT & Sports' | 'Office & Library' | 'Support & Security'>('Languages');
+  const [newStaffCategory, setNewStaffCategory] = useState<StaffCategory>('teaching');
+  const [newStaffGender, setNewStaffGender] = useState<'Sir' | 'Madam'>('Madam');
+  const [newStaffImageUrl, setNewStaffImageUrl] = useState('');
+  const [newStaffBio, setNewStaffBio] = useState('');
 
   const handleDeleteNotice = (id: string) => {
     setNotices(notices.filter((n) => n.id !== id));
@@ -99,40 +122,53 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ user, onLogout }
 
   const handleAddNotice = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newNoticeTitle || !newNoticeDesc) return;
-    const item: Notice = {
-      id: str(Date.now()),
+    if (!newNoticeTitle) return;
+    const newNotice: Notice = {
+      id: Date.now().toString(),
       title: newNoticeTitle,
       category: newNoticeCategory,
-      publishDate: '05 Sep 2026',
-      pdfUrl: '/notices/sample.pdf',
+      publishDate: new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }),
+      pdfUrl: '#',
       isNew: true,
       isPinned: false,
-      fileSize: '210 KB',
-      description: newNoticeDesc,
+      fileSize: '180 KB',
+      description: newNoticeDesc || newNoticeTitle,
     };
-    setNotices([item, ...notices]);
+    setNotices([newNotice, ...notices]);
     setNewNoticeTitle('');
     setNewNoticeDesc('');
-    alert('New official notice created and published to front page!');
+    alert('Notice published successfully!');
   };
 
-  const handleAddPhoto = (e: React.FormEvent) => {
+  const handleAddStaffSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newPhotoTitle) return;
-    const item: GalleryItem = {
-      id: str(Date.now()),
-      title: newPhotoTitle,
-      category: newPhotoSection.toUpperCase(),
-      imageUrl: '/assets/science_exhibition.jpg',
-      assignedSection: newPhotoSection,
-    };
-    setGalleryItems([item, ...galleryItems]);
-    setNewPhotoTitle('');
-    alert(`Photo "${newPhotoTitle}" uploaded and assigned to ${newPhotoSection.toUpperCase()}!`);
-  };
+    if (!newStaffName || !newStaffDesignation) {
+      alert('Please fill in Staff Name and Designation.');
+      return;
+    }
 
-  const str = (val: any) => String(val);
+    const newStaff: FacultyMember = {
+      id: Date.now().toString(),
+      name: newStaffName,
+      designation: newStaffDesignation,
+      qualification: newStaffQualification || 'Graduate / Qualified',
+      subject: newStaffSubject || newStaffDesignation,
+      department: newStaffDepartment,
+      category: newStaffCategory,
+      gender: newStaffGender,
+      imageUrl: newStaffImageUrl || undefined,
+      bio: newStaffBio || `Welcome message from ${newStaffName}, ${newStaffDesignation} at Mahishadal Gayeswari Girls' High School (H.S.).`,
+    };
+
+    onAddFaculty(newStaff);
+    setNewStaffName('');
+    setNewStaffDesignation('');
+    setNewStaffQualification('');
+    setNewStaffSubject('');
+    setNewStaffImageUrl('');
+    setNewStaffBio('');
+    alert(`Successfully added ${newStaffName} to ${newStaffCategory.toUpperCase()} staff roster!`);
+  };
 
   const exportInquiriesCSV = () => {
     const csvContent =
@@ -152,6 +188,10 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ user, onLogout }
     link.click();
     document.body.removeChild(link);
   };
+
+  const filteredAdminFaculty = staffCategoryFilter === 'all'
+    ? facultyList
+    : facultyList.filter(f => f.category === staffCategoryFilter);
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 p-4 md:p-8 font-sans">
@@ -192,6 +232,15 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ user, onLogout }
           </button>
 
           <button
+            onClick={() => setActiveTab('staff')}
+            className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all ${
+              activeTab === 'staff' ? 'bg-rose-600 text-white shadow-lg' : 'bg-slate-900 text-slate-400 hover:bg-slate-800'
+            }`}
+          >
+            Staff & Faculty Roster ({facultyList.length})
+          </button>
+
+          <button
             onClick={() => setActiveTab('notices')}
             className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all ${
               activeTab === 'notices' ? 'bg-rose-600 text-white shadow-lg' : 'bg-slate-900 text-slate-400 hover:bg-slate-800'
@@ -222,291 +271,359 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ user, onLogout }
         {/* TAB 1: OVERVIEW HUD */}
         {activeTab === 'overview' && (
           <div className="space-y-8">
-            
-            {/* Quick Metrics Cards Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-2">
-                <div className="w-10 h-10 rounded-lg bg-rose-500/20 text-rose-400 flex items-center justify-center">
-                  <Bell className="w-5 h-5" />
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-slate-400 font-bold uppercase">Staff & Teachers</span>
+                  <Users className="w-5 h-5 text-rose-500" />
                 </div>
-                <h3 className="text-3xl font-extrabold text-white">{notices.length}</h3>
-                <p className="text-xs text-slate-400 font-bold uppercase">Active Notices Published</p>
+                <div className="text-3xl font-extrabold text-white">{facultyList.length}</div>
+                <p className="text-[11px] text-slate-500">Active Teachers & Support Roster</p>
               </div>
 
-              <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-2">
-                <div className="w-10 h-10 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center">
-                  <ImageIcon className="w-5 h-5" />
+              <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-slate-400 font-bold uppercase">Active Notices</span>
+                  <Bell className="w-5 h-5 text-amber-400" />
                 </div>
-                <h3 className="text-3xl font-extrabold text-white">{galleryItems.length}</h3>
-                <p className="text-xs text-slate-400 font-bold uppercase">Gallery Media Photos</p>
+                <div className="text-3xl font-extrabold text-white">{notices.length}</div>
+                <p className="text-[11px] text-slate-500">Published WBBSE & WBCHSE circulars</p>
               </div>
 
-              <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-2">
-                <div className="w-10 h-10 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
-                  <MessageSquare className="w-5 h-5" />
+              <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-slate-400 font-bold uppercase">Admission Leads</span>
+                  <MessageSquare className="w-5 h-5 text-emerald-400" />
                 </div>
-                <h3 className="text-3xl font-extrabold text-white">{inquiries.length}</h3>
-                <p className="text-xs text-slate-400 font-bold uppercase">Parent Inquiries Logged</p>
+                <div className="text-3xl font-extrabold text-white">{inquiries.length}</div>
+                <p className="text-[11px] text-slate-500">Parent admission inquiry forms</p>
               </div>
 
-              <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-2">
-                <div className="w-10 h-10 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center">
-                  <HardDrive className="w-5 h-5" />
+              <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-slate-400 font-bold uppercase">Gallery Media</span>
+                  <ImageIcon className="w-5 h-5 text-blue-400" />
                 </div>
-                <h3 className="text-3xl font-extrabold text-white">42.8 MB</h3>
-                <p className="text-xs text-slate-400 font-bold uppercase">Storage Used (Cloud)</p>
+                <div className="text-3xl font-extrabold text-white">{galleryItems.length}</div>
+                <p className="text-[11px] text-slate-500">High-res event photographs</p>
               </div>
             </div>
 
-            {/* Emergency Notice Push Toggle Box */}
-            <div className="bg-gradient-to-r from-rose-950/60 via-slate-900 to-indigo-950/60 border border-rose-500/40 p-6 rounded-2xl flex flex-wrap justify-between items-center gap-4">
+            <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 flex items-center justify-between">
               <div>
-                <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                  <AlertTriangle className="w-5 h-5 text-rose-400" />
-                  Emergency Announcement Ticker Push
-                </h3>
-                <p className="text-xs text-slate-400 mt-1">
-                  Pushes immediate breaking notifications to the front-page horizontal ticker bar.
-                </p>
+                <h3 className="font-bold text-white text-base">Emergency Ticker Control</h3>
+                <p className="text-xs text-slate-400">Toggle live ticker marquee banner on header navigation.</p>
               </div>
-
               <button
                 onClick={() => setEmergencyTickerActive(!emergencyTickerActive)}
-                className={`px-6 py-2.5 rounded-full font-bold text-sm transition-all ${
-                  emergencyTickerActive ? 'bg-rose-600 text-white shadow-lg' : 'bg-slate-800 text-slate-400'
+                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+                  emergencyTickerActive ? 'bg-emerald-600 text-white' : 'bg-slate-800 text-slate-400'
                 }`}
               >
-                {emergencyTickerActive ? 'STATUS: TICKER LIVE ACTIVE' : 'TICKER PAUSED'}
+                {emergencyTickerActive ? 'LIVE TICKER ACTIVE' : 'TICKER PAUSED'}
               </button>
             </div>
-
           </div>
         )}
 
-        {/* TAB 2: NOTICES MANAGER (CRUD) */}
-        {activeTab === 'notices' && (
-          <div className="grid md:grid-cols-12 gap-8">
+        {/* TAB 2: STAFF & FACULTY ROSTER MANAGEMENT */}
+        {activeTab === 'staff' && (
+          <div className="space-y-8">
             
-            {/* Create Notice Form */}
-            <div className="md:col-span-5 bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-4">
-              <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                <Plus className="w-5 h-5 text-rose-400" />
-                Publish New Official Notice
-              </h3>
+            {/* Add New Staff Form */}
+            <div className="bg-slate-900 p-6 md:p-8 rounded-2xl border border-slate-800 space-y-6">
+              <div className="flex items-center gap-2 border-b border-slate-800 pb-4">
+                <UserPlus className="w-5 h-5 text-rose-500" />
+                <h3 className="font-serif font-bold text-lg text-white">
+                  Add New Teacher or Staff Member
+                </h3>
+              </div>
 
-              <form onSubmit={handleAddNotice} className="space-y-4">
+              <form onSubmit={handleAddStaffSubmit} className="grid md:grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-xs font-bold text-slate-400 uppercase mb-1">Notice Title *</label>
+                  <label className="block text-xs font-bold text-slate-400 uppercase mb-1">Full Name</label>
                   <input
                     type="text"
                     required
-                    placeholder="e.g. Class X Board Test Exam Schedule 2026"
-                    value={newNoticeTitle}
-                    onChange={(e) => setNewNoticeTitle(e.target.value)}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-sm text-white focus:outline-none focus:border-rose-500"
+                    placeholder="e.g. Smt. Sumita Sen / Sri Bikram Ray"
+                    value={newStaffName}
+                    onChange={(e) => setNewStaffName(e.target.value)}
+                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-rose-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-400 uppercase mb-1">Target Category *</label>
+                  <label className="block text-xs font-bold text-slate-400 uppercase mb-1">Designation</label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. Assistant Teacher / Head Clerk / Peon"
+                    value={newStaffDesignation}
+                    onChange={(e) => setNewStaffDesignation(e.target.value)}
+                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-rose-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-400 uppercase mb-1">Qualification</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. M.Sc. (Physics), B.Ed. / B.Com"
+                    value={newStaffQualification}
+                    onChange={(e) => setNewStaffQualification(e.target.value)}
+                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-rose-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-400 uppercase mb-1">Subject / Work Scope</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. Mathematics / Banglar Shiksha / Library"
+                    value={newStaffSubject}
+                    onChange={(e) => setNewStaffSubject(e.target.value)}
+                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-rose-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-400 uppercase mb-1">Staff Category</label>
                   <select
-                    value={newNoticeCategory}
-                    onChange={(e: any) => setNewNoticeCategory(e.target.value)}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-sm text-white focus:outline-none focus:border-rose-500"
+                    value={newStaffCategory}
+                    onChange={(e) => setNewStaffCategory(e.target.value as StaffCategory)}
+                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-rose-500"
                   >
-                    <option value="wbbse">WBBSE Secondary (Classes V-X)</option>
-                    <option value="wbchse">WBCHSE Higher Secondary (Classes XI-XII)</option>
-                    <option value="schemes">Government Schemes / Scholarships</option>
-                    <option value="holiday">Holiday Declaration</option>
+                    <option value="teaching">Teaching Faculty (Sirs & Madams)</option>
+                    <option value="non_teaching">Non-Teaching Staff (Office & Clerical)</option>
+                    <option value="support_group_d">Support & Group-D Staff</option>
                   </select>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-400 uppercase mb-1">PDF Attachment (Drag & Drop)</label>
-                  <div className="border-2 border-dashed border-slate-800 rounded-xl p-4 text-center cursor-pointer hover:border-rose-500 transition-colors">
-                    <Upload className="w-6 h-6 text-slate-500 mx-auto mb-1" />
-                    <span className="text-xs text-slate-400 font-bold block">Drag PDF document here (Max 5MB)</span>
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-slate-400 uppercase mb-1">Description / Instructions *</label>
-                  <textarea
-                    required
-                    rows={3}
-                    placeholder="Write details for students and guardians..."
-                    value={newNoticeDesc}
-                    onChange={(e) => setNewNoticeDesc(e.target.value)}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-sm text-white focus:outline-none focus:border-rose-500"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full bg-rose-600 hover:bg-rose-700 text-white font-bold py-2.5 rounded-xl shadow-lg transition-colors text-sm"
-                >
-                  Publish Notice Immediately
-                </button>
-              </form>
-            </div>
-
-            {/* Existing Notices Data Table */}
-            <div className="md:col-span-7 bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-4 overflow-x-auto">
-              <h3 className="text-lg font-bold text-white mb-2">Live Notices Directory</h3>
-              <table className="w-full text-left text-xs text-slate-300">
-                <thead className="bg-slate-950 text-slate-400 uppercase border-b border-slate-800">
-                  <tr>
-                    <th className="p-3">Title</th>
-                    <th className="p-3">Category</th>
-                    <th className="p-3">Date</th>
-                    <th className="p-3">Actions</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-800">
-                  {notices.map((n) => (
-                    <tr key={n.id} className="hover:bg-slate-800/50">
-                      <td className="p-3 font-bold text-white max-w-[200px] truncate">{n.title}</td>
-                      <td className="p-3 uppercase text-rose-400 font-bold">{n.category}</td>
-                      <td className="p-3 text-slate-400">{n.publishDate}</td>
-                      <td className="p-3 flex items-center gap-2">
-                        <button
-                          onClick={() => handleDeleteNotice(n.id)}
-                          className="text-rose-400 hover:text-rose-300 p-1"
-                          title="Delete Notice"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
-          </div>
-        )}
-
-        {/* TAB 3: MEDIA & GALLERY MANAGER */}
-        {activeTab === 'gallery' && (
-          <div className="space-y-6">
-            
-            {/* Upload Photo Form */}
-            <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-4">
-              <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-amber-400" />
-                Upload New Image Asset & Assign Section
-              </h3>
-
-              <form onSubmit={handleAddPhoto} className="grid md:grid-cols-3 gap-4">
-                <div>
-                  <label className="block text-xs font-bold text-slate-400 uppercase mb-1">Image Caption / Title *</label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="e.g. Rabindra Jayanti Celebrations"
-                    value={newPhotoTitle}
-                    onChange={(e) => setNewPhotoTitle(e.target.value)}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-sm text-white focus:outline-none focus:border-rose-500"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-slate-400 uppercase mb-1">Target Portal Section *</label>
+                  <label className="block text-xs font-bold text-slate-400 uppercase mb-1">Department Wing</label>
                   <select
-                    value={newPhotoSection}
-                    onChange={(e: any) => setNewPhotoSection(e.target.value)}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-sm text-white focus:outline-none focus:border-rose-500"
+                    value={newStaffDepartment}
+                    onChange={(e) => setNewStaffDepartment(e.target.value as any)}
+                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-rose-500"
                   >
-                    <option value="events">Events & Cultural Reel</option>
-                    <option value="hero">Hero Showcase Slider</option>
-                    <option value="facilities">Facilities Bento Grid</option>
+                    <option value="Languages">Languages (Bengali/English/Sanskrit)</option>
+                    <option value="Science & Math">Science & Math</option>
+                    <option value="Social Sciences">Social Sciences (History/Geo/Phil)</option>
+                    <option value="IT & Sports">IT & Sports</option>
+                    <option value="Office & Library">Office & Library</option>
+                    <option value="Support & Security">Support & Security</option>
                   </select>
                 </div>
 
-                <div className="flex items-end">
+                <div>
+                  <label className="block text-xs font-bold text-slate-400 uppercase mb-1">Honorific / Gender</label>
+                  <select
+                    value={newStaffGender}
+                    onChange={(e) => setNewStaffGender(e.target.value as 'Sir' | 'Madam')}
+                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-rose-500"
+                  >
+                    <option value="Madam">Madam</option>
+                    <option value="Sir">Sir</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-400 uppercase mb-1">Image URL (Optional)</label>
+                  <input
+                    type="text"
+                    placeholder="/assets/teacher.jpg or https://..."
+                    value={newStaffImageUrl}
+                    onChange={(e) => setNewStaffImageUrl(e.target.value)}
+                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-rose-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-400 uppercase mb-1">Welcome Quote / Bio</label>
+                  <input
+                    type="text"
+                    placeholder="Brief intro or welcome message..."
+                    value={newStaffBio}
+                    onChange={(e) => setNewStaffBio(e.target.value)}
+                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-rose-500"
+                  />
+                </div>
+
+                <div className="md:col-span-3 flex justify-end">
                   <button
                     type="submit"
-                    className="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-2.5 rounded-xl transition-colors text-sm"
+                    className="bg-rose-600 hover:bg-rose-500 text-white font-bold px-6 py-2.5 rounded-xl text-xs flex items-center gap-2 shadow-lg transition-all"
                   >
-                    Upload & Assign Media
+                    <Plus className="w-4 h-4" />
+                    <span>Save & Publish Staff Member</span>
                   </button>
                 </div>
               </form>
             </div>
 
-            {/* Gallery Media Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {galleryItems.map((g) => (
-                <div key={g.id} className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden group relative">
-                  <img src={g.imageUrl} alt={g.title} className="w-full h-40 object-cover" />
-                  <div className="p-3">
-                    <h4 className="font-bold text-white text-xs truncate">{g.title}</h4>
-                    <span className="text-[10px] text-amber-400 font-bold uppercase">{g.assignedSection}</span>
-                  </div>
+            {/* Staff List Table */}
+            <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-4">
+              <div className="flex flex-wrap justify-between items-center gap-4">
+                <h3 className="font-serif font-bold text-lg text-white">
+                  Active School Staff Directory ({filteredAdminFaculty.length})
+                </h3>
+
+                <div className="flex gap-2">
+                  {[
+                    { id: 'all', label: 'All Staff' },
+                    { id: 'teaching', label: 'Teaching' },
+                    { id: 'non_teaching', label: 'Non-Teaching' },
+                    { id: 'support_group_d', label: 'Support/Group D' },
+                  ].map((tab) => (
+                    <button
+                      key={tab.id}
+                      onClick={() => setStaffCategoryFilter(tab.id as StaffCategory | 'all')}
+                      className={`px-3 py-1 rounded-lg text-xs font-bold ${
+                        staffCategoryFilter === tab.id
+                          ? 'bg-rose-600 text-white'
+                          : 'bg-slate-950 text-slate-400 border border-slate-800'
+                      }`}
+                    >
+                      {tab.label}
+                    </button>
+                  ))}
                 </div>
-              ))}
+              </div>
+
+              <div className="overflow-x-auto">
+                <table className="w-full text-left text-xs text-slate-300">
+                  <thead className="bg-slate-950 text-slate-400 font-bold uppercase border-b border-slate-800">
+                    <tr>
+                      <th className="p-3">Staff Name</th>
+                      <th className="p-3">Designation</th>
+                      <th className="p-3">Qualification</th>
+                      <th className="p-3">Subject / Work</th>
+                      <th className="p-3">Category</th>
+                      <th className="p-3 text-right">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-800">
+                    {filteredAdminFaculty.map((staff) => (
+                      <tr key={staff.id} className="hover:bg-slate-950/50">
+                        <td className="p-3 font-bold text-white flex items-center gap-2">
+                          <span className={`w-2 h-2 rounded-full ${staff.gender === 'Sir' ? 'bg-blue-400' : 'bg-rose-400'}`}></span>
+                          <span>{staff.name}</span>
+                        </td>
+                        <td className="p-3 text-amber-400 font-medium">{staff.designation}</td>
+                        <td className="p-3 text-slate-400 italic">{staff.qualification}</td>
+                        <td className="p-3">{staff.subject}</td>
+                        <td className="p-3">
+                          <span className="capitalize px-2 py-0.5 rounded text-[10px] font-bold bg-slate-800 text-slate-300">
+                            {staff.category}
+                          </span>
+                        </td>
+                        <td className="p-3 text-right">
+                          <button
+                            onClick={() => onDeleteFaculty(staff.id)}
+                            className="bg-rose-500/20 hover:bg-rose-500 text-rose-400 hover:text-white p-1.5 rounded-lg transition-colors"
+                            title="Delete Staff"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
 
           </div>
         )}
 
-        {/* TAB 4: ADMISSION INQUIRIES & WHATSAPP DATA VIEWER */}
-        {activeTab === 'inquiries' && (
-          <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-6">
-            
-            <div className="flex flex-wrap justify-between items-center gap-4 border-b border-slate-800 pb-4">
-              <div>
-                <h3 className="text-lg font-bold text-white">Parent Admission Queries Directory</h3>
-                <p className="text-xs text-slate-400">Direct office clerk portal for contacting parents via WhatsApp or exporting data.</p>
+        {/* TAB 3: NOTICES MANAGER */}
+        {activeTab === 'notices' && (
+          <div className="space-y-6">
+            <form onSubmit={handleAddNotice} className="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-4">
+              <h3 className="font-serif font-bold text-base text-white">Publish New Notice</h3>
+              <div className="grid md:grid-cols-2 gap-4">
+                <input
+                  type="text"
+                  required
+                  placeholder="Notice Title"
+                  value={newNoticeTitle}
+                  onChange={(e) => setNewNoticeTitle(e.target.value)}
+                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white"
+                />
+                <select
+                  value={newNoticeCategory}
+                  onChange={(e) => setNewNoticeCategory(e.target.value as any)}
+                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white"
+                >
+                  <option value="wbbse">WBBSE Madhyamik</option>
+                  <option value="wbchse">WBCHSE Higher Secondary</option>
+                  <option value="schemes">Kanyashree / Schemes</option>
+                  <option value="holiday">Holiday / Event</option>
+                </select>
               </div>
+              <textarea
+                placeholder="Description / Notice Content"
+                value={newNoticeDesc}
+                onChange={(e) => setNewNoticeDesc(e.target.value)}
+                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white h-20"
+              />
+              <button type="submit" className="bg-rose-600 text-white font-bold px-4 py-2 rounded-xl text-xs">
+                Publish Notice
+              </button>
+            </form>
 
-              <button
-                onClick={exportInquiriesCSV}
-                className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2 rounded-xl text-xs flex items-center gap-2 transition-colors shadow-md"
-              >
-                <FileSpreadsheet className="w-4 h-4" />
-                <span>Export to CSV / Excel</span>
+            <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-3">
+              <h3 className="font-serif font-bold text-base text-white">Published Notices ({notices.length})</h3>
+              {notices.map((notice) => (
+                <div key={notice.id} className="flex items-center justify-between bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs">
+                  <div>
+                    <h4 className="font-bold text-white">{notice.title}</h4>
+                    <p className="text-slate-400 text-[11px]">{notice.publishDate} | {notice.category.toUpperCase()}</p>
+                  </div>
+                  <button onClick={() => handleDeleteNotice(notice.id)} className="text-rose-400 p-2 hover:bg-rose-950 rounded-lg">
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* TAB 4: GALLERY */}
+        {activeTab === 'gallery' && (
+          <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-4">
+            <h3 className="font-serif font-bold text-base text-white">Campus Gallery Media</h3>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {galleryItems.map((item) => (
+                <div key={item.id} className="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-2">
+                  <img src={item.imageUrl} alt={item.title} className="w-full h-32 object-cover rounded-lg" />
+                  <h4 className="font-bold text-xs text-white">{item.title}</h4>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* TAB 5: INQUIRIES */}
+        {activeTab === 'inquiries' && (
+          <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-4">
+            <div className="flex justify-between items-center">
+              <h3 className="font-serif font-bold text-base text-white">Parent Admission Inquiries</h3>
+              <button onClick={exportInquiriesCSV} className="bg-emerald-600 text-white font-bold px-3 py-1.5 rounded-lg text-xs flex items-center gap-1.5">
+                <FileSpreadsheet className="w-3.5 h-3.5" /> Export CSV
               </button>
             </div>
-
-            {/* Table */}
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs text-slate-300">
-                <thead className="bg-slate-950 text-slate-400 uppercase border-b border-slate-800">
-                  <tr>
-                    <th className="p-3">Student Name</th>
-                    <th className="p-3">Guardian Name</th>
-                    <th className="p-3">Target Class</th>
-                    <th className="p-3">Parent Contact</th>
-                    <th className="p-3">Address</th>
-                    <th className="p-3">WhatsApp Chat</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-800">
-                  {inquiries.map((i) => (
-                    <tr key={i.id} className="hover:bg-slate-800/50">
-                      <td className="p-3 font-bold text-white">{i.studentName}</td>
-                      <td className="p-3">{i.guardianName}</td>
-                      <td className="p-3 font-bold text-rose-400">{i.targetClass}</td>
-                      <td className="p-3 font-mono">{i.phoneNumber}</td>
-                      <td className="p-3 text-slate-400 max-w-[180px] truncate">{i.address}</td>
-                      <td className="p-3">
-                        <a
-                          href={`https://wa.me/91${i.phoneNumber}?text=Hello%20${encodeURIComponent(i.guardianName)},%20regarding%20the%20admission%20inquiry%20for%20${encodeURIComponent(i.studentName)}%20at%20Mahishadal%20Gayeswari%20Girls%20High%20School.`}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="bg-emerald-500/20 hover:bg-emerald-500 text-emerald-400 hover:text-white border border-emerald-500/40 px-3 py-1 rounded-lg text-xs font-bold inline-flex items-center gap-1.5 transition-colors"
-                        >
-                          <MessageCircle className="w-3.5 h-3.5" />
-                          <span>Chat WhatsApp</span>
-                        </a>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            <div className="space-y-3">
+              {inquiries.map((inq) => (
+                <div key={inq.id} className="bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs space-y-1">
+                  <div className="flex justify-between font-bold text-white">
+                    <span>{inq.studentName} (Guardian: {inq.guardianName})</span>
+                    <span className="text-amber-400">{inq.targetClass}</span>
+                  </div>
+                  <p className="text-slate-400">Phone: {inq.phoneNumber} | Address: {inq.address}</p>
+                </div>
+              ))}
             </div>
-
           </div>
         )}
 

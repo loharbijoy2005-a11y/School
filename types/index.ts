@@ -95,6 +95,24 @@ export interface GalleryItem {
   assignedSection?: 'hero' | 'events' | 'facilities';
 }
 
+export type StaffCategory = 'teaching' | 'non_teaching' | 'support_group_d';
+
+export interface FacultyMember {
+  id: string;
+  name: string;
+  designation: string;
+  qualification: string;
+  subject: string;
+  department: 'Languages' | 'Science & Math' | 'Social Sciences' | 'IT & Sports' | 'Office & Library' | 'Support & Security';
+  category: StaffCategory;
+  gender: 'Sir' | 'Madam';
+  imageUrl?: string;
+  bio?: string;
+  joiningYear?: string;
+  email?: string;
+  phone?: string;
+}
+
 export interface AdminUser {
   username: string;
   role: 'headmistress' | 'office_clerk';
@@ -108,3 +126,4 @@ export interface DashboardStats {
   storageUsedMb: number;
   emergencyTickerActive: boolean;
 }
+
