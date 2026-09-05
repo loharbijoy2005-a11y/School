@@ -21,12 +21,17 @@ export const Navbar: React.FC<NavbarProps> = ({
       <div className="top-bar">
         <div className="container top-bar-content">
           <div className="top-info">
-            <span className="school-badge-pill">Banglar Shiksha ID: WB-1945-MGGHS</span>
+            <span className="school-badge-pill" style={{ background: 'rgba(244, 63, 94, 0.2)', color: '#FDA4AF', borderColor: 'rgba(244, 63, 94, 0.4)' }}>
+              UDISE: 19190806002
+            </span>
+            <span className="school-badge-pill">
+              {currentLang === 'bn' ? 'বাংলার শিক্ষা আইডি: WB-1945-MGGHS' : 'Banglar Shiksha ID: WB-1945-MGGHS'}
+            </span>
             <span
               className="school-badge-pill"
               style={{ background: 'rgba(5, 150, 105, 0.2)', color: '#A7F3D0', borderColor: 'rgba(5, 150, 105, 0.4)' }}
             >
-              WBBSE: E1-042 | WBCHSE: 105084
+              {currentLang === 'bn' ? 'মধ্যশিক্ষা পর্ষদ: E1-042 | উচ্চ মাধ্যমিক: 105084' : 'WBBSE: E1-042 | WBCHSE: 105084'}
             </span>
             <span className="top-info-item">
               <i className="fa-solid fa-phone"></i>
