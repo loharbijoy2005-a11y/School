@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Bell,
   Image as ImageIcon,
@@ -20,6 +20,7 @@ import {
   UserPlus,
   Edit2,
   CheckCircle,
+  Megaphone,
 } from 'lucide-react';
 import { Notice, GalleryItem, AdmissionInquiry, AdminUser, FacultyMember, StaffCategory } from '../types';
 
@@ -29,6 +30,8 @@ interface AdminDashboardProps {
   facultyList: FacultyMember[];
   onAddFaculty: (staff: FacultyMember) => void;
   onDeleteFaculty: (id: string) => void;
+  marqueeText?: string;
+  onUpdateMarquee?: (text: string) => void;
 }
 
 export const AdminDashboard: React.FC<AdminDashboardProps> = ({
@@ -37,37 +40,56 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   facultyList,
   onAddFaculty,
   onDeleteFaculty,
+  marqueeText = '',
+  onUpdateMarquee,
 }) => {
-  const [activeTab, setActiveTab] = useState<'overview' | 'notices' | 'gallery' | 'inquiries' | 'staff'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'notices' | 'ticker' | 'gallery' | 'inquiries' | 'staff'>('overview');
   
-  // Emergency Notice Ticker
-  const [emergencyTickerActive, setEmergencyTickerActive] = useState(true);
+  // Marquee Ticker State
+  const [liveTickerInput, setLiveTickerInput] = useState(
+    marqueeText || "🚨 ONLINE ADMISSION OPEN FOR CLASS V TO XI (SESSION 2026-27) | WBBSE & WBCHSE 2ND UNIT TEST ROUTINE PUBLISHED | KANYASHREE K1 & K2 GRANT DESK ACTIVE"
+  );
 
-  // Notices State
-  const [notices, setNotices] = useState<Notice[]>([
-    {
-      id: '1',
-      title: '2nd Summative Evaluation / Unit Test Routine (Classes V to X)',
-      category: 'wbbse',
-      publishDate: '05 Sep 2026',
-      pdfUrl: '/notices/unit-test-routine-2026.pdf',
-      isNew: true,
-      isPinned: true,
-      fileSize: '240 KB',
-      description: 'All guardians and students are informed that the 2nd Unit Test examinations will commence from 15th September 2026.',
-    },
-    {
-      id: '2',
-      title: 'Class XII H.S. Science Practical Laboratory Exam Schedule',
-      category: 'wbchse',
-      publishDate: '02 Sep 2026',
-      pdfUrl: '/notices/hs-practical-2026.pdf',
-      isNew: true,
-      isPinned: false,
-      fileSize: '310 KB',
-      description: 'Physics, Chemistry, Biology, and Geography practical examination timetable for Class XII Science and Arts students.',
-    },
-  ]);
+  // Notices State with localStorage Persistence
+  const [notices, setNotices] = useState<Notice[]>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('mgghs_notices');
+      if (saved) {
+        try { return JSON.parse(saved); } catch (e) {}
+      }
+    }
+    return [
+      {
+        id: '1',
+        title: '2nd Summative Evaluation / Unit Test Routine (Classes V to X)',
+        category: 'wbbse',
+        publishDate: '05 Sep 2026',
+        pdfUrl: '/notices/unit-test-routine-2026.pdf',
+        isNew: true,
+        isPinned: true,
+        fileSize: '240 KB',
+        description: 'All guardians and students are informed that the 2nd Unit Test examinations will commence from 15th September 2026.',
+      },
+      {
+        id: '2',
+        title: 'Class XII H.S. Science Practical Laboratory Exam Schedule',
+        category: 'wbchse',
+        publishDate: '02 Sep 2026',
+        pdfUrl: '/notices/hs-practical-2026.pdf',
+        isNew: true,
+        isPinned: false,
+        fileSize: '310 KB',
+        description: 'Physics, Chemistry, Biology, and Geography practical examination timetable for Class XII Science and Arts students.',
+      },
+    ];
+  });
+
+  // Save notices to localStorage
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('mgghs_notices', JSON.stringify(notices));
+    }
+  }, [notices]);
 
   // Inquiries State
   const [inquiries, setInquiries] = useState<AdmissionInquiry[]>([
@@ -95,14 +117,17 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
   // Form State for Adding Notice
   const [newNoticeTitle, setNewNoticeTitle] = useState('');
-  const [newNoticeCategory, setNewNoticeCategory] = useState<'wbbse' | 'wbchse' | 'schemes' | 'holiday'>('wbbse');
+  const [newNoticeCategory, setNewNoticeCategory] = useState<'wbbse' | 'wbchse' | 'schemes' | 'holiday' | 'tender'>('wbbse');
   const [newNoticeDesc, setNewNoticeDesc] = useState('');
 
   // Media Manager State
   const [galleryItems, setGalleryItems] = useState<GalleryItem[]>([
-    { id: '1', title: 'Saraswati Puja Celebration', category: 'Cultural', imageUrl: '/assets/saraswati_puja.jpg', assignedSection: 'events' },
-    { id: '2', title: 'Annual Athletic Meet', category: 'Sports', imageUrl: '/assets/sports_day.jpg', assignedSection: 'events' },
+    { id: '1', title: 'Saraswati Puja Celebration', category: 'Cultural', imageUrl: '/assets/saraswati_puja.jpg' },
+    { id: '2', title: 'Annual Athletic Meet', category: 'Sports', imageUrl: '/assets/sports_day.jpg' },
   ]);
+  const [newPhotoTitle, setNewPhotoTitle] = useState('');
+  const [newPhotoCategory, setNewPhotoCategory] = useState('Cultural');
+  const [newPhotoUrl, setNewPhotoUrl] = useState('');
 
   // Staff Roster Form State
   const [staffCategoryFilter, setStaffCategoryFilter] = useState<StaffCategory | 'all'>('all');
@@ -137,7 +162,33 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     setNotices([newNotice, ...notices]);
     setNewNoticeTitle('');
     setNewNoticeDesc('');
-    alert('Notice published successfully!');
+    alert('Notice published & saved to localStorage persistence successfully!');
+  };
+
+  const handleSaveTicker = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (onUpdateMarquee) {
+      onUpdateMarquee(liveTickerInput);
+    }
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('mgghs_marquee', liveTickerInput);
+    }
+    alert('Live breaking announcement ticker updated on homepage successfully!');
+  };
+
+  const handleAddPhotoSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newPhotoTitle || !newPhotoUrl) return;
+    const item: GalleryItem = {
+      id: Date.now().toString(),
+      title: newPhotoTitle,
+      category: newPhotoCategory,
+      imageUrl: newPhotoUrl,
+    };
+    setGalleryItems([item, ...galleryItems]);
+    setNewPhotoTitle('');
+    setNewPhotoUrl('');
+    alert('Photo published to campus gallery reel!');
   };
 
   const handleAddStaffSubmit = (e: React.FormEvent) => {
@@ -200,13 +251,13 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         {/* Top Admin Header Bar */}
         <div className="flex flex-wrap justify-between items-center bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl gap-4">
           <div className="flex items-center gap-4">
-            <img src="/assets/school_logo.jpg" alt="Logo" className="w-12 h-12 rounded-full border-2 border-rose-500" />
+            <img src="/assets/school_logo.jpg" alt="Logo" className="w-12 h-12 rounded-full border-2 border-rose-500 p-0.5 bg-white" />
             <div>
               <h1 className="font-serif font-extrabold text-2xl text-white">
-                Headmistress & Admin Control Center
+                Headmistress & Admin Control Console
               </h1>
               <p className="text-xs text-rose-400 font-bold uppercase tracking-wider">
-                Authenticated as: {user.username} ({user.role})
+                Authenticated as: {user.username} ({user.role}) | localStorage Persisted
               </p>
             </div>
           </div>
@@ -232,6 +283,24 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           </button>
 
           <button
+            onClick={() => setActiveTab('notices')}
+            className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all ${
+              activeTab === 'notices' ? 'bg-rose-600 text-white shadow-lg' : 'bg-slate-900 text-slate-400 hover:bg-slate-800'
+            }`}
+          >
+            Notice Manager ({notices.length})
+          </button>
+
+          <button
+            onClick={() => setActiveTab('ticker')}
+            className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all ${
+              activeTab === 'ticker' ? 'bg-rose-600 text-white shadow-lg' : 'bg-slate-900 text-slate-400 hover:bg-slate-800'
+            }`}
+          >
+            Live Marquee Controller
+          </button>
+
+          <button
             onClick={() => setActiveTab('staff')}
             className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all ${
               activeTab === 'staff' ? 'bg-rose-600 text-white shadow-lg' : 'bg-slate-900 text-slate-400 hover:bg-slate-800'
@@ -241,21 +310,12 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           </button>
 
           <button
-            onClick={() => setActiveTab('notices')}
-            className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all ${
-              activeTab === 'notices' ? 'bg-rose-600 text-white shadow-lg' : 'bg-slate-900 text-slate-400 hover:bg-slate-800'
-            }`}
-          >
-            Notices Manager ({notices.length})
-          </button>
-
-          <button
             onClick={() => setActiveTab('gallery')}
             className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all ${
               activeTab === 'gallery' ? 'bg-rose-600 text-white shadow-lg' : 'bg-slate-900 text-slate-400 hover:bg-slate-800'
             }`}
           >
-            Media & Gallery ({galleryItems.length})
+            Photo Gallery Uploader ({galleryItems.length})
           </button>
 
           <button
@@ -278,7 +338,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   <Users className="w-5 h-5 text-rose-500" />
                 </div>
                 <div className="text-3xl font-extrabold text-white">{facultyList.length}</div>
-                <p className="text-[11px] text-slate-500">Active Teachers & Support Roster</p>
+                <p className="text-[11px] text-slate-500">Active Sirs, Madams & Office Roster</p>
               </div>
 
               <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-2">
@@ -296,7 +356,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   <MessageSquare className="w-5 h-5 text-emerald-400" />
                 </div>
                 <div className="text-3xl font-extrabold text-white">{inquiries.length}</div>
-                <p className="text-[11px] text-slate-500">Parent admission inquiry forms</p>
+                <p className="text-[11px] text-slate-500">Parent admission forms submitted</p>
               </div>
 
               <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-2">
@@ -305,32 +365,49 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   <ImageIcon className="w-5 h-5 text-blue-400" />
                 </div>
                 <div className="text-3xl font-extrabold text-white">{galleryItems.length}</div>
-                <p className="text-[11px] text-slate-500">High-res event photographs</p>
+                <p className="text-[11px] text-slate-500">High-res campus event photos</p>
               </div>
-            </div>
-
-            <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 flex items-center justify-between">
-              <div>
-                <h3 className="font-bold text-white text-base">Emergency Ticker Control</h3>
-                <p className="text-xs text-slate-400">Toggle live ticker marquee banner on header navigation.</p>
-              </div>
-              <button
-                onClick={() => setEmergencyTickerActive(!emergencyTickerActive)}
-                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
-                  emergencyTickerActive ? 'bg-emerald-600 text-white' : 'bg-slate-800 text-slate-400'
-                }`}
-              >
-                {emergencyTickerActive ? 'LIVE TICKER ACTIVE' : 'TICKER PAUSED'}
-              </button>
             </div>
           </div>
         )}
 
-        {/* TAB 2: STAFF & FACULTY ROSTER MANAGEMENT */}
+        {/* TAB 2: MARQUEE TICKER CONTROLLER */}
+        {activeTab === 'ticker' && (
+          <div className="bg-slate-900 p-6 md:p-8 rounded-2xl border border-slate-800 space-y-6">
+            <div className="flex items-center gap-2 border-b border-slate-800 pb-4">
+              <Megaphone className="w-5 h-5 text-amber-400" />
+              <h3 className="font-serif font-bold text-lg text-white">
+                Live Homepage Breaking Marquee Announcement Controller
+              </h3>
+            </div>
+
+            <form onSubmit={handleSaveTicker} className="space-y-4">
+              <div>
+                <label className="block text-xs font-bold text-slate-400 uppercase mb-1">
+                  Marquee Announcement Text (Appears in continuous header ticker)
+                </label>
+                <textarea
+                  rows={3}
+                  required
+                  value={liveTickerInput}
+                  onChange={(e) => setLiveTickerInput(e.target.value)}
+                  className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-amber-300 font-bold focus:outline-none focus:border-amber-500"
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold px-6 py-2.5 rounded-xl text-xs shadow-lg transition-all"
+              >
+                Save & Update Live Marquee Text
+              </button>
+            </form>
+          </div>
+        )}
+
+        {/* TAB 3: STAFF & FACULTY ROSTER */}
         {activeTab === 'staff' && (
           <div className="space-y-8">
-            
-            {/* Add New Staff Form */}
             <div className="bg-slate-900 p-6 md:p-8 rounded-2xl border border-slate-800 space-y-6">
               <div className="flex items-center gap-2 border-b border-slate-800 pb-4">
                 <UserPlus className="w-5 h-5 text-rose-500" />
@@ -415,40 +492,6 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   </select>
                 </div>
 
-                <div>
-                  <label className="block text-xs font-bold text-slate-400 uppercase mb-1">Honorific / Gender</label>
-                  <select
-                    value={newStaffGender}
-                    onChange={(e) => setNewStaffGender(e.target.value as 'Sir' | 'Madam')}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-rose-500"
-                  >
-                    <option value="Madam">Madam</option>
-                    <option value="Sir">Sir</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-slate-400 uppercase mb-1">Image URL (Optional)</label>
-                  <input
-                    type="text"
-                    placeholder="/assets/teacher.jpg or https://..."
-                    value={newStaffImageUrl}
-                    onChange={(e) => setNewStaffImageUrl(e.target.value)}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-rose-500"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-slate-400 uppercase mb-1">Welcome Quote / Bio</label>
-                  <input
-                    type="text"
-                    placeholder="Brief intro or welcome message..."
-                    value={newStaffBio}
-                    onChange={(e) => setNewStaffBio(e.target.value)}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-rose-500"
-                  />
-                </div>
-
                 <div className="md:col-span-3 flex justify-end">
                   <button
                     type="submit"
@@ -461,35 +504,10 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               </form>
             </div>
 
-            {/* Staff List Table */}
             <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-4">
-              <div className="flex flex-wrap justify-between items-center gap-4">
-                <h3 className="font-serif font-bold text-lg text-white">
-                  Active School Staff Directory ({filteredAdminFaculty.length})
-                </h3>
-
-                <div className="flex gap-2">
-                  {[
-                    { id: 'all', label: 'All Staff' },
-                    { id: 'teaching', label: 'Teaching' },
-                    { id: 'non_teaching', label: 'Non-Teaching' },
-                    { id: 'support_group_d', label: 'Support/Group D' },
-                  ].map((tab) => (
-                    <button
-                      key={tab.id}
-                      onClick={() => setStaffCategoryFilter(tab.id as StaffCategory | 'all')}
-                      className={`px-3 py-1 rounded-lg text-xs font-bold ${
-                        staffCategoryFilter === tab.id
-                          ? 'bg-rose-600 text-white'
-                          : 'bg-slate-950 text-slate-400 border border-slate-800'
-                      }`}
-                    >
-                      {tab.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
+              <h3 className="font-serif font-bold text-lg text-white">
+                Active Staff Roster ({filteredAdminFaculty.length})
+              </h3>
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs text-slate-300">
                   <thead className="bg-slate-950 text-slate-400 font-bold uppercase border-b border-slate-800">
@@ -497,31 +515,21 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                       <th className="p-3">Staff Name</th>
                       <th className="p-3">Designation</th>
                       <th className="p-3">Qualification</th>
-                      <th className="p-3">Subject / Work</th>
-                      <th className="p-3">Category</th>
+                      <th className="p-3">Subject</th>
                       <th className="p-3 text-right">Action</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-800">
                     {filteredAdminFaculty.map((staff) => (
                       <tr key={staff.id} className="hover:bg-slate-950/50">
-                        <td className="p-3 font-bold text-white flex items-center gap-2">
-                          <span className={`w-2 h-2 rounded-full ${staff.gender === 'Sir' ? 'bg-blue-400' : 'bg-rose-400'}`}></span>
-                          <span>{staff.name}</span>
-                        </td>
-                        <td className="p-3 text-amber-400 font-medium">{staff.designation}</td>
-                        <td className="p-3 text-slate-400 italic">{staff.qualification}</td>
+                        <td className="p-3 font-bold text-white">{staff.name}</td>
+                        <td className="p-3 text-amber-400">{staff.designation}</td>
+                        <td className="p-3 text-slate-400">{staff.qualification}</td>
                         <td className="p-3">{staff.subject}</td>
-                        <td className="p-3">
-                          <span className="capitalize px-2 py-0.5 rounded text-[10px] font-bold bg-slate-800 text-slate-300">
-                            {staff.category}
-                          </span>
-                        </td>
                         <td className="p-3 text-right">
                           <button
                             onClick={() => onDeleteFaculty(staff.id)}
-                            className="bg-rose-500/20 hover:bg-rose-500 text-rose-400 hover:text-white p-1.5 rounded-lg transition-colors"
-                            title="Delete Staff"
+                            className="bg-rose-500/20 text-rose-400 p-1.5 rounded-lg"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
                           </button>
@@ -532,15 +540,14 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 </table>
               </div>
             </div>
-
           </div>
         )}
 
-        {/* TAB 3: NOTICES MANAGER */}
+        {/* TAB 4: NOTICES MANAGER */}
         {activeTab === 'notices' && (
           <div className="space-y-6">
             <form onSubmit={handleAddNotice} className="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-4">
-              <h3 className="font-serif font-bold text-base text-white">Publish New Notice</h3>
+              <h3 className="font-serif font-bold text-base text-white">Publish New Notice (Saved to localStorage)</h3>
               <div className="grid md:grid-cols-2 gap-4">
                 <input
                   type="text"
@@ -559,6 +566,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   <option value="wbchse">WBCHSE Higher Secondary</option>
                   <option value="schemes">Kanyashree / Schemes</option>
                   <option value="holiday">Holiday / Event</option>
+                  <option value="tender">Tender / SMC</option>
                 </select>
               </div>
               <textarea
@@ -589,28 +597,66 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           </div>
         )}
 
-        {/* TAB 4: GALLERY */}
+        {/* TAB 5: PHOTO GALLERY UPLOADER */}
         {activeTab === 'gallery' && (
-          <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-4">
-            <h3 className="font-serif font-bold text-base text-white">Campus Gallery Media</h3>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {galleryItems.map((item) => (
-                <div key={item.id} className="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-2">
-                  <img src={item.imageUrl} alt={item.title} className="w-full h-32 object-cover rounded-lg" />
-                  <h4 className="font-bold text-xs text-white">{item.title}</h4>
-                </div>
-              ))}
+          <div className="space-y-6">
+            <form onSubmit={handleAddPhotoSubmit} className="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-4">
+              <h3 className="font-serif font-bold text-base text-white">Upload / Add New Photo to Gallery</h3>
+              <div className="grid md:grid-cols-3 gap-4">
+                <input
+                  type="text"
+                  required
+                  placeholder="Photo Title (e.g. Sports Day 2026)"
+                  value={newPhotoTitle}
+                  onChange={(e) => setNewPhotoTitle(e.target.value)}
+                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white"
+                />
+                <select
+                  value={newPhotoCategory}
+                  onChange={(e) => setNewPhotoCategory(e.target.value)}
+                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white"
+                >
+                  <option value="Cultural">Cultural</option>
+                  <option value="Sports">Sports</option>
+                  <option value="Empowerment">Empowerment</option>
+                  <option value="Academics">Academics</option>
+                  <option value="Ceremony">Ceremony</option>
+                </select>
+                <input
+                  type="text"
+                  required
+                  placeholder="Image URL (/assets/... or https://...)"
+                  value={newPhotoUrl}
+                  onChange={(e) => setNewPhotoUrl(e.target.value)}
+                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white"
+                />
+              </div>
+              <button type="submit" className="bg-rose-600 text-white font-bold px-4 py-2 rounded-xl text-xs">
+                Upload to Gallery Reel
+              </button>
+            </form>
+
+            <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-4">
+              <h3 className="font-serif font-bold text-base text-white">Campus Gallery Media ({galleryItems.length})</h3>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {galleryItems.map((item) => (
+                  <div key={item.id} className="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-2">
+                    <img src={item.imageUrl} alt={item.title} className="w-full h-32 object-cover rounded-lg" />
+                    <h4 className="font-bold text-xs text-white">{item.title}</h4>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         )}
 
-        {/* TAB 5: INQUIRIES */}
+        {/* TAB 6: INQUIRIES */}
         {activeTab === 'inquiries' && (
           <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-4">
             <div className="flex justify-between items-center">
               <h3 className="font-serif font-bold text-base text-white">Parent Admission Inquiries</h3>
               <button onClick={exportInquiriesCSV} className="bg-emerald-600 text-white font-bold px-3 py-1.5 rounded-lg text-xs flex items-center gap-1.5">
-                <FileSpreadsheet className="w-3.5 h-3.5" /> Export CSV
+                <FileSpreadsheet className="w-3.5 h-3.5" /> Export to CSV
               </button>
             </div>
             <div className="space-y-3">

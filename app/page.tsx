@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar } from '../components/Navbar';
+import { FloatingEdgeFlaps } from '../components/FloatingEdgeFlaps';
 import { HeroNoticeOverlay } from '../components/HeroNoticeOverlay';
 import { StickyQuickNav } from '../components/StickyQuickNav';
 import { AboutDesk } from '../components/AboutDesk';
@@ -15,6 +16,7 @@ import { BentoGrid } from '../components/BentoGrid';
 import { SwachhataSection } from '../components/SwachhataSection';
 import { EventGallery } from '../components/EventGallery';
 import { GoogleReviews } from '../components/GoogleReviews';
+import { ContactSection } from '../components/ContactSection';
 import { AdmissionModal } from '../components/AdmissionModal';
 import { AdminLoginModal } from '../components/AdminLoginModal';
 import { AdminDashboard } from '../components/AdminDashboard';
@@ -27,6 +29,15 @@ export default function HomePage() {
   const [isAdminLoginModalOpen, setIsAdminLoginModalOpen] = useState(false);
   const [adminUser, setAdminUser] = useState<AdminUser | null>(null);
   const [activePdfNotice, setActivePdfNotice] = useState<Notice | null>(null);
+
+  // Marquee Announcement Ticker State (Persisted in localStorage)
+  const [marqueeText, setMarqueeText] = useState<string>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('mgghs_marquee');
+      if (saved) return saved;
+    }
+    return "🚨 ONLINE ADMISSION OPEN FOR CLASS V TO XI (SESSION 2026-27) | WBBSE & WBCHSE 2ND UNIT TEST ROUTINE PUBLISHED | KANYASHREE K1 & K2 GRANT DESK ACTIVE";
+  });
 
   // Dynamic Faculty & Staff Roster State
   const [facultyList, setFacultyList] = useState<FacultyMember[]>([
@@ -288,6 +299,10 @@ export default function HomePage() {
     setFacultyList((prev) => prev.filter((item) => item.id !== id));
   };
 
+  const handleUpdateMarquee = (newText: string) => {
+    setMarqueeText(newText);
+  };
+
   // If Admin is logged in, show Admin Dashboard view!
   if (adminUser) {
     return (
@@ -297,6 +312,8 @@ export default function HomePage() {
         facultyList={facultyList}
         onAddFaculty={handleAddFaculty}
         onDeleteFaculty={handleDeleteFaculty}
+        marqueeText={marqueeText}
+        onUpdateMarquee={handleUpdateMarquee}
       />
     );
   }
@@ -304,15 +321,19 @@ export default function HomePage() {
   return (
     <div className={`min-h-screen ${currentLang === 'bn' ? 'lang-bn' : ''}`}>
       
-      {/* 1. Header Nav & Infinite Marquee Ticker */}
+      {/* Dual Edge Flaps (Left Vertical Tabs + Right Bottom Anchor) */}
+      <FloatingEdgeFlaps />
+
+      {/* 1. Header Nav & Continuous Running Announcement Ticker */}
       <Navbar
         currentLang={currentLang}
         onToggleLang={toggleLanguage}
         onOpenAdmissionModal={() => setIsAdmissionModalOpen(true)}
         onOpenAdminLoginModal={() => setIsAdminLoginModalOpen(true)}
+        marqueeText={marqueeText}
       />
 
-      {/* 2. Full-Width Hero Slider with Integrated Notice Overlay */}
+      {/* 2. Full-Width Hero Slider with Integrated Tabbed Notice Board Overlay */}
       <HeroNoticeOverlay
         onOpenAdmissionModal={() => setIsAdmissionModalOpen(true)}
         onDownloadRoutine={handleDownloadRoutine}
@@ -322,13 +343,13 @@ export default function HomePage() {
       {/* 3. Sticky Bottom Quick Navigation Bar */}
       <StickyQuickNav />
 
-      {/* 4. About Desk & Dynamic Categorized Teachers & Staff Roster */}
+      {/* 4. School Administration Split-View & Faculty Roster */}
       <AboutDesk facultyList={facultyList} />
 
-      {/* 5. Vision, Mission & Core Values Tabs */}
+      {/* 5. Vision, Mission & Core Philosophy 3-Column Glass Cards */}
       <VisionMissionTabs />
 
-      {/* 6. Academic Spectrum & Stream Explorer */}
+      {/* 6. Academic Spectrum & Stream Matrix */}
       <AcademicSpectrum />
 
       {/* 7. Seminars, Cultural Wings & Workshops Carousel */}
@@ -337,25 +358,28 @@ export default function HomePage() {
       {/* 8. Celebrating Our Students' Success Spotlight */}
       <StudentSuccess />
 
-      {/* 9. Digital Campus Portals 6-Card Action Grid */}
+      {/* 9. Digital Campus Portals 8-Card Action Grid */}
       <DigitalPortals />
 
       {/* 10. West Bengal Govt Welfare Schemes */}
       <SchemesCorner onOpenWelfareModal={handleOpenWelfareModal} />
 
-      {/* 11. Facilities That Support Every Student (Bento-Grid) */}
+      {/* 11. Campus Facilities Grid (14+ Bento-Cards) */}
       <BentoGrid />
 
-      {/* 12. Swachhata & Eco-Friendly Green Campus */}
+      {/* 12. Swachhata & Green Campus Showcase */}
       <SwachhataSection />
 
-      {/* 13. Auto-Scrolling Campus Photo Reel */}
+      {/* 13. Auto-Scrolling Campus Photo Reel & Lightbox */}
       <EventGallery />
 
       {/* 14. Real Google Reviews Widget */}
       <GoogleReviews />
 
-      {/* 15. Institutional Footer with Dual ADMIN & OFFICE LOG IN Buttons */}
+      {/* 15. Dual Query & Geolocation Section */}
+      <ContactSection />
+
+      {/* 16. Institutional Footer with Dual ADMIN LOG IN & OFFICE LOG IN Buttons */}
       <Footer onOpenAdminLoginModal={() => setIsAdminLoginModalOpen(true)} />
 
       {/* Admission Modal Dialog */}
@@ -373,35 +397,30 @@ export default function HomePage() {
 
       {/* PDF Viewer Simulation Modal */}
       {activePdfNotice && (
-        <div className="modal-backdrop" style={{ display: 'flex' }}>
-          <div className="modal-box" style={{ maxWidth: '640px' }}>
-            <div className="modal-header">
-              <h3 className="modal-title">{activePdfNotice.title}</h3>
-              <button className="modal-close" onClick={handleClosePdfModal}>
-                <i className="fa-solid fa-xmark"></i>
+        <div className="modal-backdrop-luxury">
+          <div className="bg-slate-900 text-white rounded-3xl max-w-xl w-full p-6 md:p-8 border border-slate-700 shadow-2xl relative space-y-4">
+            <div className="flex justify-between items-center border-b border-slate-800 pb-3">
+              <h3 className="font-serif font-extrabold text-lg text-white">{activePdfNotice.title}</h3>
+              <button className="text-slate-400 hover:text-white" onClick={handleClosePdfModal}>
+                <i className="fa-solid fa-xmark text-lg"></i>
               </button>
             </div>
-            <div className="modal-body">
-              <p style={{ fontWeight: 700, marginBottom: '0.5rem', color: '#0F172A' }}>
-                MAHISHADAL GAYESWARI GIRLS' HIGH SCHOOL (H.S.)
-              </p>
-              <p style={{ color: '#64748B', fontSize: '0.85rem', marginBottom: '1rem' }}>
-                Category: {activePdfNotice.category.toUpperCase()} | Date: {activePdfNotice.publishDate}
-              </p>
-              <p style={{ color: '#334155', lineHeight: 1.6 }}>{activePdfNotice.description}</p>
-              <div style={{ marginTop: '1.5rem', display: 'flex', justifyContent: 'flex-end', gap: '0.75rem' }}>
-                <button className="btn btn-outline" onClick={handleClosePdfModal} style={{ padding: '0.5rem 1.2rem', fontSize: '0.85rem' }}>
+            <div className="space-y-3 text-xs">
+              <p className="font-bold text-amber-400">MAHISHADAL GAYESWARI GIRLS' HIGH SCHOOL (H.S.)</p>
+              <p className="text-slate-400">Category: {activePdfNotice.category.toUpperCase()} | Publish Date: {activePdfNotice.publishDate}</p>
+              <p className="text-slate-300 leading-relaxed bg-slate-950 p-4 rounded-xl border border-slate-800">{activePdfNotice.description}</p>
+              <div className="flex justify-end gap-3 pt-3">
+                <button className="bg-slate-800 text-slate-300 font-bold px-4 py-2 rounded-xl" onClick={handleClosePdfModal}>
                   Close
                 </button>
                 <button
-                  className="btn btn-rose"
+                  className="bg-rose-600 hover:bg-rose-500 text-white font-bold px-4 py-2 rounded-xl flex items-center gap-1.5"
                   onClick={() => {
-                    alert(`Downloading ${activePdfNotice.title}.pdf...`);
+                    alert(`Downloading official PDF for ${activePdfNotice.title}...`);
                     handleClosePdfModal();
                   }}
-                  style={{ padding: '0.5rem 1.2rem', fontSize: '0.85rem' }}
                 >
-                  <i className="fa-solid fa-download"></i> Download PDF
+                  <i className="fa-solid fa-download"></i> Download PDF Document
                 </button>
               </div>
             </div>

@@ -1,114 +1,144 @@
 import React from 'react';
-import { BookOpen, UserCheck, HeartHandshake, ShieldAlert, Smartphone, Bike, Utensils, ArrowUpRight } from 'lucide-react';
+import { ShieldCheck, UserCheck, Heart, AlertTriangle, Users, BookOpen, MessageSquare, Compass, ExternalLink } from 'lucide-react';
 import { DigitalPortalItem } from '../types';
 
 export const DigitalPortals: React.FC = () => {
   const portals: DigitalPortalItem[] = [
     {
-      id: 'banglar_shiksha',
-      title: 'Banglar Shiksha Portal Sync',
+      id: '1',
+      title: 'Banglar Shiksha Sync',
       category: 'Govt Portal',
-      description: 'Access official student profiles, e-marksheets, attendance, and UDISE 19190806002 records.',
-      icon: 'UserCheck',
+      description: 'Direct integration with West Bengal Govt Banglar Shiksha e-portal for student registration and ID tracking.',
+      icon: 'ShieldCheck',
       targetUrl: 'https://banglarshiksha.gov.in',
-      badgeText: 'GOVT SYNC',
+      badgeText: 'Official Govt Portal',
     },
     {
-      id: 'kanyashree_tracker',
-      title: 'Kanyashree Prakalpa (K1/K2) Tracker',
-      category: 'Welfare Scheme',
-      description: 'Check annual K1 stipend & one-time K2 grant sanction status for eligible female students.',
-      icon: 'HeartHandshake',
-      targetUrl: '#welfare',
-      badgeText: 'K1 & K2 STATUS',
+      id: '2',
+      title: 'Student Identity & Marks Portal',
+      category: 'Academic Desk',
+      description: 'Online access for guardians to check Madhyamik and HS summative exam marks and report cards.',
+      icon: 'UserCheck',
+      targetUrl: '#',
+      badgeText: 'Student Portal',
     },
     {
-      id: 'sabooj_sathi',
-      title: 'Sabooj Sathi Bicycle Desk',
-      category: 'Student Logistics',
-      description: 'Bicycle distribution schedule, frame allotment verification & student ID tracking for Class IX-XII.',
-      icon: 'Bike',
-      targetUrl: '#welfare',
-      badgeText: 'FREE BICYCLE',
+      id: '3',
+      title: 'Kanyashree & Welfare Schemes Hub',
+      category: 'Welfare Wings',
+      description: 'Track Kanyashree K1/K2 grant status, Sabooj Sathi cycle distribution, and Taruner Swapna tab grants.',
+      icon: 'Heart',
+      targetUrl: 'https://wbkanyashree.gov.in',
+      badgeText: 'State Schemes',
     },
     {
-      id: 'taruner_swapna',
-      title: 'Taruner Swapna (Tab Grant) Desk',
-      category: 'Digital Scheme',
-      description: 'Direct Bank Transfer (DBT) verification for Class XI & XII tablet / smartphone grant distribution.',
-      icon: 'Smartphone',
-      targetUrl: '#welfare',
-      badgeText: '₹10,000 TAB GRANT',
+      id: '4',
+      title: 'Grievance & Student Safety Desk',
+      category: 'Safety & Protection',
+      description: '24/7 confidential safety hotline, anti-ragging desk, and student mental health counselling portal.',
+      icon: 'AlertTriangle',
+      targetUrl: '#',
+      badgeText: '24/7 Helpline',
     },
     {
-      id: 'midday_meal',
-      title: 'Mid-Day Meal & Nutrition Dashboard',
-      category: 'Health & Hygiene',
-      description: 'Daily cooked meal menu schedule, nutrition audit & hygienic dining status for Class V-VIII.',
-      icon: 'Utensils',
-      targetUrl: '#facilities',
-      badgeText: 'HYGIENIC MEALS',
+      id: '5',
+      title: 'Alumni / Ex-Students Association',
+      category: 'Community',
+      description: 'Network for past graduates of Mahishadal Gayeswari Girls\' High School working across India and abroad.',
+      icon: 'Users',
+      targetUrl: '#',
+      badgeText: 'Alumni Network',
     },
     {
-      id: 'grievance',
-      title: 'Grievance & Anti-Bullying Cell',
-      category: 'Safety & Security',
-      description: 'Confidential online helpdesk for student complaints, campus security, and zero-tolerance anti-bullying.',
-      icon: 'ShieldAlert',
-      targetUrl: '#admission',
-      badgeText: '100% CONFIDENTIAL',
+      id: '6',
+      title: 'Teacher Performance & Lesson Plans',
+      category: 'Faculty Governance',
+      description: 'Digital lesson plan repository, teaching learning material (TLM) archives, and academic calendar.',
+      icon: 'BookOpen',
+      targetUrl: '#',
+      badgeText: 'Faculty Resource',
+    },
+    {
+      id: '7',
+      title: 'Online Guardian Feedback',
+      category: 'Parent Portal',
+      description: 'Direct interactive communication channel for parents to submit suggestions to the Headmistress.',
+      icon: 'MessageSquare',
+      targetUrl: '#',
+      badgeText: 'Parent Connect',
+    },
+    {
+      id: '8',
+      title: '360° Virtual Campus Tour',
+      category: 'Digital Experience',
+      description: 'Explore our heritage school campus, STEM science labs, central library, and sports grounds online.',
+      icon: 'Compass',
+      targetUrl: '#',
+      badgeText: 'Virtual Tour',
     },
   ];
 
+  const getIcon = (iconName: string) => {
+    switch (iconName) {
+      case 'ShieldCheck': return <ShieldCheck className="w-6 h-6 text-amber-400" />;
+      case 'UserCheck': return <UserCheck className="w-6 h-6 text-rose-400" />;
+      case 'Heart': return <Heart className="w-6 h-6 text-rose-500" />;
+      case 'AlertTriangle': return <AlertTriangle className="w-6 h-6 text-amber-400" />;
+      case 'Users': return <Users className="w-6 h-6 text-blue-400" />;
+      case 'BookOpen': return <BookOpen className="w-6 h-6 text-emerald-400" />;
+      case 'MessageSquare': return <MessageSquare className="w-6 h-6 text-amber-400" />;
+      default: return <Compass className="w-6 h-6 text-rose-400" />;
+    }
+  };
+
   return (
-    <section className="py-20 bg-slate-900 text-white">
-      <div className="max-w-7xl mx-auto px-4">
+    <section className="py-20 bg-slate-950 text-white relative">
+      <div className="max-w-7xl mx-auto px-4 space-y-12">
         
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-rose-500/20 border border-rose-500/40 text-rose-300 font-bold text-xs uppercase mb-3">
-            <BookOpen className="w-4 h-4 text-rose-400" />
-            <span>Digital Access Grid</span>
-          </div>
-          <h2 className="font-serif text-3xl md:text-4xl font-extrabold text-white mb-3">
-            Digital Campus Portals & Services
+        <div className="text-center max-w-3xl mx-auto space-y-3">
+          <span className="text-xs font-bold text-rose-400 uppercase tracking-widest bg-rose-500/10 px-3 py-1 rounded-full border border-rose-500/30">
+            Digital Governance & Services
+          </span>
+          <h2 className="font-serif font-extrabold text-3xl md:text-4xl text-white">
+            Digital School Portals (High-Density 8-Card Grid)
           </h2>
-          <p className="text-slate-400">
-            One-tap action portals for notes, welfare tracking, profile records, and alumni.
+          <p className="text-xs text-slate-400">
+            Instant 1-click access to government student welfare portals, academic report cards, and safety helplines.
           </p>
         </div>
 
-        {/* 6-Card Action Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {portals.map((p) => (
+        {/* 8-Card Grid */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {portals.map((portal) => (
             <a
-              key={p.id}
-              href={p.targetUrl}
-              className="bg-slate-950 p-6 rounded-2xl border border-slate-800 hover:border-rose-500 shadow-xl transition-all duration-300 group flex flex-col justify-between"
+              key={portal.id}
+              href={portal.targetUrl}
+              target={portal.targetUrl.startsWith('http') ? '_blank' : '_self'}
+              rel="noreferrer"
+              className="bg-slate-900 p-6 rounded-3xl border border-slate-800 hover:border-amber-500/60 shadow-xl transition-all cursor-pointer group flex flex-col justify-between space-y-4 hover:-translate-y-1"
             >
-              <div>
-                <div className="flex items-center justify-between mb-4">
-                  <div className="w-12 h-12 rounded-xl bg-rose-500/20 text-rose-400 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    {p.icon === 'UserCheck' && <UserCheck className="w-6 h-6" />}
-                    {p.icon === 'HeartHandshake' && <HeartHandshake className="w-6 h-6" />}
-                    {p.icon === 'Bike' && <Bike className="w-6 h-6" />}
-                    {p.icon === 'Smartphone' && <Smartphone className="w-6 h-6" />}
-                    {p.icon === 'Utensils' && <Utensils className="w-6 h-6" />}
-                    {p.icon === 'ShieldAlert' && <ShieldAlert className="w-6 h-6" />}
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="w-12 h-12 rounded-2xl bg-slate-950 border border-slate-800 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    {getIcon(portal.icon)}
                   </div>
-                  <span className="bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full uppercase">
-                    {p.badgeText}
+                  <span className="text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/30 uppercase">
+                    {portal.badgeText}
                   </span>
                 </div>
 
-                <h3 className="font-bold text-lg text-white mb-1.5 group-hover:text-rose-400 transition-colors">
-                  {p.title}
+                <h3 className="font-serif font-extrabold text-lg text-white group-hover:text-amber-400 transition-colors leading-snug">
+                  {portal.title}
                 </h3>
-                <p className="text-slate-400 text-xs leading-relaxed mb-4">{p.description}</p>
+
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  {portal.description}
+                </p>
               </div>
 
-              <div className="flex items-center justify-between text-xs font-bold text-slate-400 pt-3 border-t border-slate-900 group-hover:text-white">
+              <div className="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs font-bold text-rose-400 group-hover:text-amber-400 transition-colors">
                 <span>Access Portal</span>
-                <ArrowUpRight className="w-4 h-4 text-rose-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                <ExternalLink className="w-3.5 h-3.5" />
               </div>
             </a>
           ))}

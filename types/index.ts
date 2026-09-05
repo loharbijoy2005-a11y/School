@@ -1,6 +1,6 @@
 /**
  * MAHISHADAL GAYESWARI GIRLS' HIGH SCHOOL (H.S.)
- * Complete High-Density TypeScript Type Definitions
+ * 10x Ultra-Luxurious Educational Portal TypeScript Definitions
  */
 
 export type NoticeCategory = 'all' | 'wbbse' | 'wbchse' | 'schemes' | 'holiday' | 'tender';
@@ -113,6 +113,26 @@ export interface FacultyMember {
   phone?: string;
 }
 
+export interface AcademicStream {
+  id: string;
+  title: string;
+  wing: 'Secondary' | 'HS Arts' | 'HS Science' | 'Vocational';
+  duration: string;
+  description: string;
+  subjects: string[];
+  outcomes: string;
+}
+
+export interface CulturalEvent {
+  id: string;
+  title: string;
+  date: string;
+  venue: string;
+  description: string;
+  imageUrl: string;
+  badge: string;
+}
+
 export interface AdminUser {
   username: string;
   role: 'headmistress' | 'office_clerk';
@@ -126,4 +146,3 @@ export interface DashboardStats {
   storageUsedMb: number;
   emergencyTickerActive: boolean;
 }
-

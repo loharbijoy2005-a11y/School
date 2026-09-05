@@ -1,169 +1,153 @@
 import React, { useState } from 'react';
-import { BookOpen, Award, CheckCircle2 } from 'lucide-react';
+import { BookOpen, GraduationCap, Microscope, Atom, FileText, CheckCircle2, ChevronRight, Award, Laptop } from 'lucide-react';
+import { AcademicStream } from '../types';
 
 export const AcademicSpectrum: React.FC = () => {
-  const [activeStream, setActiveStream] = useState<'secondary' | 'arts' | 'science' | 'vocational'>('secondary');
+  const [activeWing, setActiveWing] = useState<'Secondary' | 'HS Arts' | 'HS Science' | 'Vocational'>('Secondary');
+
+  const streams: AcademicStream[] = [
+    {
+      id: 'sec-1',
+      title: 'Secondary Education Wing (Class V to X)',
+      wing: 'Secondary',
+      duration: '5 Years (Class V to X)',
+      description: 'Comprehensive general foundation curriculum prescribed by West Bengal Board of Secondary Education (WBBSE) leading to Madhyamik Pariksha.',
+      subjects: ['First Language (Bengali)', 'Second Language (English)', 'Mathematics', 'Physical Science', 'Life Science', 'History', 'Geography', 'Physical Education & Work Education'],
+      outcomes: '100% Pass record in Madhyamik Pariksha with high first-division rate.',
+    },
+    {
+      id: 'arts-1',
+      title: 'Higher Secondary Humanities / Arts Stream',
+      wing: 'HS Arts',
+      duration: '2 Years (Class XI & XII)',
+      description: 'Rich liberal arts stream under WBCHSE offering diverse humanities subject combinations with practical map-pointing and nutrition lab work.',
+      subjects: ['Bengali (A)', 'English (B)', 'History', 'Geography', 'Philosophy', 'Political Science', 'Nutrition', 'Sanskrit'],
+      outcomes: 'Preparation for BA Honors, Civil Services, Law, Journalism, and Education degrees.',
+    },
+    {
+      id: 'sci-1',
+      title: 'Higher Secondary Pure & Bio-Science Stream',
+      wing: 'HS Science',
+      duration: '2 Years (Class XI & XII)',
+      description: 'Rigorous science stream under WBCHSE with hands-on laboratory practicals in Physics, Chemistry, Biology, and Mathematics.',
+      subjects: ['Bengali (A)', 'English (B)', 'Physics', 'Chemistry', 'Mathematics', 'Biological Sciences', 'Computer Application'],
+      outcomes: 'Direct path to WBJEE, NEET, B.Sc. Research, Engineering, and Medical careers.',
+    },
+    {
+      id: 'voc-1',
+      title: 'Vocational & ICT Skill Certification Courses',
+      wing: 'Vocational',
+      duration: '1 Year Certification',
+      description: 'State government sponsored skill development and computer literacy programs for empowering female students with job-ready technical skills.',
+      subjects: ['Information Technology & Computer Application', 'Apparel & Tailoring Design', 'Karate & Self-Defense Certification', 'Health Care & Nursing Basics'],
+      outcomes: 'Govt. Skill Certification and self-employment empowerment.',
+    },
+  ];
+
+  const filteredStreams = streams.filter(s => s.wing === activeWing);
 
   return (
-    <section id="academics" className="py-20 bg-slate-50">
-      <div className="max-w-7xl mx-auto px-4">
+    <section id="academics" className="py-20 bg-slate-900 text-white relative">
+      <div className="max-w-7xl mx-auto px-4 space-y-12">
         
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-rose-100 border border-rose-300 text-rose-700 font-bold text-xs uppercase mb-3">
-            <BookOpen className="w-4 h-4 text-rose-600" />
-            <span>Academic Spectrum</span>
-          </div>
-          <h2 className="font-serif text-3xl md:text-4xl font-extrabold text-slate-900 mb-3">
-            Streams & Subject Combination Explorer
+        <div className="text-center max-w-3xl mx-auto space-y-3">
+          <span className="text-xs font-bold text-rose-400 uppercase tracking-widest bg-rose-500/10 px-3 py-1 rounded-full border border-rose-500/30">
+            WBBSE & WBCHSE Curriculum
+          </span>
+          <h2 className="font-serif font-extrabold text-3xl md:text-4xl text-white">
+            Academic Programmes & Stream Matrix
           </h2>
-          <p className="text-slate-600">
-            Affiliated to WBBSE (Classes V-X) and WBCHSE (Higher Secondary Science, Arts & Vocational).
+          <p className="text-xs text-slate-400">
+            Explore secondary and higher secondary stream combinations, lab practicals, and syllabus structure.
           </p>
         </div>
 
-        {/* Stream Filter Buttons */}
-        <div className="flex justify-center gap-2 flex-wrap mb-10">
-          <button
-            onClick={() => setActiveStream('secondary')}
-            className={`px-5 py-2.5 rounded-full font-bold text-xs uppercase tracking-wider transition-all ${
-              activeStream === 'secondary' ? 'bg-slate-900 text-white shadow-md' : 'bg-white text-slate-600 border border-slate-200'
-            }`}
-          >
-            Secondary Wing (Classes V - X)
-          </button>
-
-          <button
-            onClick={() => setActiveStream('arts')}
-            className={`px-5 py-2.5 rounded-full font-bold text-xs uppercase tracking-wider transition-all ${
-              activeStream === 'arts' ? 'bg-amber-600 text-white shadow-md' : 'bg-white text-slate-600 border border-slate-200'
-            }`}
-          >
-            H.S. Arts Stream (WBCHSE)
-          </button>
-
-          <button
-            onClick={() => setActiveStream('science')}
-            className={`px-5 py-2.5 rounded-full font-bold text-xs uppercase tracking-wider transition-all ${
-              activeStream === 'science' ? 'bg-emerald-600 text-white shadow-md' : 'bg-white text-slate-600 border border-slate-200'
-            }`}
-          >
-            H.S. Science Stream (WBCHSE)
-          </button>
-
-          <button
-            onClick={() => setActiveStream('vocational')}
-            className={`px-5 py-2.5 rounded-full font-bold text-xs uppercase tracking-wider transition-all ${
-              activeStream === 'vocational' ? 'bg-rose-600 text-white shadow-md' : 'bg-white text-slate-600 border border-slate-200'
-            }`}
-          >
-            Job-Oriented & Vocational
-          </button>
+        {/* Filterable Stream Tabs */}
+        <div className="flex flex-wrap justify-center gap-2 bg-slate-950 p-2 rounded-2xl border border-slate-800 max-w-3xl mx-auto">
+          {[
+            { id: 'Secondary', label: 'Secondary Wing (Class V-X - WBBSE)' },
+            { id: 'HS Arts', label: 'HS Arts Stream (WBCHSE)' },
+            { id: 'HS Science', label: 'HS Science Stream (WBCHSE)' },
+            { id: 'Vocational', label: 'Vocational & ICT Skills' },
+          ].map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveWing(tab.id as any)}
+              className={`px-4 py-2.5 rounded-xl text-xs font-extrabold transition-all ${
+                activeWing === tab.id
+                  ? 'bg-gradient-to-r from-rose-600 to-amber-600 text-white shadow-lg'
+                  : 'text-slate-400 hover:text-white hover:bg-slate-900'
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
         </div>
 
-        {/* Display Card */}
-        <div className="bg-white rounded-2xl p-8 border border-slate-200 shadow-md max-w-4xl mx-auto">
-          {activeStream === 'secondary' && (
-            <div className="space-y-4">
-              <div className="flex justify-between items-center border-b border-slate-200 pb-4">
-                <h3 className="font-serif font-extrabold text-2xl text-slate-900">Secondary Education (Classes V to X)</h3>
-                <span className="bg-slate-100 text-slate-700 text-xs font-bold px-3 py-1 rounded-full">Affiliation: WBBSE</span>
-              </div>
-              <p className="text-slate-600 text-sm leading-relaxed">
-                Foundational holistic curriculum following West Bengal Board of Secondary Education.
-              </p>
-              <div className="grid md:grid-cols-2 gap-4 pt-2">
-                <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
-                  <h4 className="font-bold text-slate-900 text-xs uppercase mb-2 text-rose-600">Core Subjects</h4>
-                  <ul className="text-xs text-slate-600 space-y-1">
-                    <li>• First Language (Bengali) & Second Language (English)</li>
-                    <li>• Mathematics & Physical Science</li>
-                    <li>• Life Science & Environment</li>
-                    <li>• History & Geography</li>
-                  </ul>
-                </div>
-                <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
-                  <h4 className="font-bold text-slate-900 text-xs uppercase mb-2 text-emerald-600">Key Information</h4>
-                  <ul className="text-xs text-slate-600 space-y-1">
-                    <li>• Free Textbooks & Mid-Day Meal provided</li>
-                    <li>• 100% Madhyamik Board Exam Pass Rate</li>
-                    <li>• Smart Classroom Multimedia Support</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          )}
+        {/* Stream Details Cards */}
+        <div className="grid lg:grid-cols-12 gap-8 items-stretch">
+          {filteredStreams.map((stream) => (
+            <React.Fragment key={stream.id}>
+              
+              {/* Left Column: Stream Overview */}
+              <div className="lg:col-span-6 bg-slate-950 p-8 rounded-3xl border border-slate-800 space-y-6 flex flex-col justify-between shadow-2xl">
+                <div className="space-y-4">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-300 font-bold text-xs">
+                    <GraduationCap className="w-4 h-4" />
+                    <span>{stream.duration}</span>
+                  </div>
+                  
+                  <h3 className="font-serif font-extrabold text-2xl text-white">
+                    {stream.title}
+                  </h3>
 
-          {activeStream === 'arts' && (
-            <div className="space-y-4">
-              <div className="flex justify-between items-center border-b border-slate-200 pb-4">
-                <h3 className="font-serif font-extrabold text-2xl text-slate-900">Higher Secondary Arts (Classes XI & XII)</h3>
-                <span className="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full">Affiliation: WBCHSE</span>
-              </div>
-              <p className="text-slate-600 text-sm leading-relaxed">
-                Humanities stream with flexible subject combinations preparing female students for competitive exams, teaching, civil services, and law.
-              </p>
-              <div className="grid md:grid-cols-2 gap-4 pt-2">
-                <div className="bg-amber-50 p-4 rounded-xl border border-amber-200">
-                  <h4 className="font-bold text-slate-900 text-xs uppercase mb-2 text-amber-700">Elective Combinations</h4>
-                  <ul className="text-xs text-slate-700 space-y-1">
-                    <li>• Political Science & History</li>
-                    <li>• Education & Philosophy</li>
-                    <li>• Sanskrit & Geography</li>
-                    <li>• Nutrition & Computer Application</li>
-                  </ul>
+                  <p className="text-slate-300 text-xs leading-relaxed">
+                    {stream.description}
+                  </p>
                 </div>
-                <div className="bg-amber-50 p-4 rounded-xl border border-amber-200">
-                  <h4 className="font-bold text-slate-900 text-xs uppercase mb-2 text-amber-700">Seats & Faculty</h4>
-                  <ul className="text-xs text-slate-700 space-y-1">
-                    <li>• Total Seat Capacity: 250 Seats</li>
-                    <li>• Experienced PG & M.Phil Teachers</li>
-                    <li>• Regular Unit Tests & Mock Exams</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          )}
 
-          {activeStream === 'science' && (
-            <div className="space-y-4">
-              <div className="flex justify-between items-center border-b border-slate-200 pb-4">
-                <h3 className="font-serif font-extrabold text-2xl text-slate-900">Higher Secondary Science (Classes XI & XII)</h3>
-                <span className="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full">Affiliation: WBCHSE</span>
-              </div>
-              <p className="text-slate-600 text-sm leading-relaxed">
-                Rigorous STEM curriculum preparing students for NEET, WBJEE, JEE Main, and university research.
-              </p>
-              <div className="grid md:grid-cols-2 gap-4 pt-2">
-                <div className="bg-emerald-50 p-4 rounded-xl border border-emerald-200">
-                  <h4 className="font-bold text-slate-900 text-xs uppercase mb-2 text-emerald-700">Subject Combination</h4>
-                  <ul className="text-xs text-slate-700 space-y-1">
-                    <li>• Physics & Chemistry</li>
-                    <li>• Biological Science & Mathematics</li>
-                    <li>• Computer Application / Science</li>
-                  </ul>
-                </div>
-                <div className="bg-emerald-50 p-4 rounded-xl border border-emerald-200">
-                  <h4 className="font-bold text-slate-900 text-xs uppercase mb-2 text-emerald-700">Practical Facilities</h4>
-                  <ul className="text-xs text-slate-700 space-y-1">
-                    <li>• Equipped Physics, Chemistry & Bio Labs</li>
-                    <li>• NEET/WBJEE Guidance Workshops</li>
-                  </ul>
+                <div className="bg-slate-900 p-4 rounded-2xl border border-slate-800 space-y-2">
+                  <span className="text-[10px] font-extrabold text-emerald-400 uppercase tracking-wider">
+                    Expected Learning Outcome:
+                  </span>
+                  <p className="text-xs text-slate-200 font-medium leading-relaxed">
+                    {stream.outcomes}
+                  </p>
                 </div>
               </div>
-            </div>
-          )}
 
-          {activeStream === 'vocational' && (
-            <div className="space-y-4">
-              <div className="flex justify-between items-center border-b border-slate-200 pb-4">
-                <h3 className="font-serif font-extrabold text-2xl text-slate-900">Job-Oriented Skill & Vocational Courses</h3>
-                <span className="bg-rose-100 text-rose-800 text-xs font-bold px-3 py-1 rounded-full">WBSCT&VE&SD</span>
+              {/* Right Column: Subject Combination List */}
+              <div className="lg:col-span-6 bg-slate-950 p-8 rounded-3xl border border-slate-800 space-y-6 shadow-2xl">
+                <div className="border-b border-slate-800 pb-3 flex items-center justify-between">
+                  <h4 className="font-extrabold text-sm text-white uppercase tracking-wider flex items-center gap-2">
+                    <BookOpen className="w-4 h-4 text-rose-500" />
+                    Subject Combination & Lab Practicals
+                  </h4>
+                  <span className="text-[10px] font-bold text-amber-400">Official Syllabus</span>
+                </div>
+
+                <div className="grid sm:grid-cols-2 gap-3 text-xs">
+                  {stream.subjects.map((sub, idx) => (
+                    <div key={idx} className="bg-slate-900 p-3 rounded-xl border border-slate-800 flex items-center gap-2 text-slate-200">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                      <span>{sub}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="pt-2 flex flex-wrap gap-3">
+                  <button
+                    onClick={() => alert(`Downloading Official WBBSE/WBCHSE Syllabus for ${stream.title}...`)}
+                    className="bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold px-5 py-2.5 rounded-full text-xs transition-colors flex items-center gap-2 shadow-md"
+                  >
+                    <FileText className="w-4 h-4" />
+                    <span>Download Full Syllabus PDF</span>
+                  </button>
+                </div>
               </div>
-              <p className="text-slate-600 text-sm leading-relaxed">
-                Skill development courses under the West Bengal State Council of Technical & Vocational Education to foster self-employment and immediate career opportunities.
-              </p>
-            </div>
-          )}
+
+            </React.Fragment>
+          ))}
         </div>
 
       </div>
