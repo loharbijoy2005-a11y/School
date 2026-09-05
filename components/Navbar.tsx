@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Globe, Bell, Menu, X, Phone, ShieldCheck } from 'lucide-react';
 
 interface NavbarProps {
   currentLang: 'en' | 'bn';
@@ -16,143 +15,119 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const tickerItems = [
-    'Class XI Admission Open 2026-27 | Madhyamik & HS Practical Schedules Published',
-    'Kanyashree K1 & K2 Annual Grant Verification Desk Active at Office',
-    'Taruner Swapna Class XII ₹10,000 Tab Scheme Account Validation Open',
-    'Admission Open for Class V to IX (Session 2026-27)',
-  ];
-
   return (
     <>
-      {/* Sleek Ultra-Clean Top Utility Bar */}
-      <div className="bg-slate-950 text-slate-300 text-xs py-2 border-b border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 flex flex-wrap justify-between items-center gap-2">
-          <div className="flex items-center gap-3 flex-wrap text-[11px] font-medium">
-            <span className="bg-rose-500/20 text-rose-300 border border-rose-500/40 px-2.5 py-0.5 rounded font-bold">
-              UDISE: 19190806002
+      {/* 1. Top Utility Header */}
+      <div className="top-bar">
+        <div className="container top-bar-content">
+          <div className="top-info">
+            <span className="school-badge-pill">Banglar Shiksha ID: WB-1945-MGGHS</span>
+            <span
+              className="school-badge-pill"
+              style={{ background: 'rgba(5, 150, 105, 0.2)', color: '#A7F3D0', borderColor: 'rgba(5, 150, 105, 0.4)' }}
+            >
+              WBBSE: E1-042 | WBCHSE: 105084
             </span>
-            <span className="bg-amber-500/20 text-amber-300 border border-amber-500/40 px-2.5 py-0.5 rounded font-bold">
-              Banglar Shiksha: WB-1945-MGGHS
+            <span className="top-info-item">
+              <i className="fa-solid fa-phone"></i>
+              <span>+91 3228 240211</span>
             </span>
-            <span className="hidden md:flex items-center gap-1 text-slate-400">
-              <Phone className="w-3 h-3 text-amber-400" />
-              +91 3228 240211
+            <span className="top-info-item">
+              <i className="fa-solid fa-envelope"></i>
+              <span>mgghschool1945@gmail.com</span>
             </span>
           </div>
 
-          <div className="flex items-center gap-2">
-            <button
-              onClick={onToggleLang}
-              className="bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-300 px-2.5 py-0.5 rounded-full text-[10px] font-bold transition-all flex items-center gap-1"
-            >
-              <Globe className="w-3 h-3 text-rose-400" />
+          <div className="top-actions" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <button onClick={onToggleLang} className="lang-toggle-btn" title="Toggle Language (English / Bengali)">
+              <i className="fa-solid fa-globe"></i>
               <span>{currentLang === 'en' ? 'বাংলা' : 'English'}</span>
             </button>
+
             <button
               onClick={onOpenAdminLoginModal}
-              className="bg-slate-900 hover:bg-amber-500/20 text-slate-400 hover:text-amber-300 border border-slate-800 hover:border-amber-500/40 px-2.5 py-0.5 rounded text-[10px] font-bold flex items-center gap-1 transition-all"
+              className="lang-toggle-btn"
+              style={{ background: 'rgba(245, 158, 11, 0.2)', color: '#FDE68A', borderColor: 'rgba(245, 158, 11, 0.4)', padding: '0.25rem 0.65rem' }}
               title="Admin Portal Login"
             >
-              <ShieldCheck className="w-3 h-3 text-amber-400" />
-              <span>Admin</span>
+              <i className="fa-solid fa-shield-halved" style={{ color: '#F59E0B' }}></i>
+              <span style={{ fontSize: '0.8rem', fontWeight: 700 }}>Admin</span>
             </button>
           </div>
         </div>
       </div>
 
-      {/* Infinite Horizontal Marquee Ticker */}
-      <div className="bg-gradient-to-r from-indigo-950 via-slate-950 to-indigo-950 text-white py-1.5 overflow-hidden border-b border-rose-500/30 flex items-center relative z-40">
-        <div className="bg-rose-600 text-white font-extrabold text-[11px] px-3 py-0.5 rounded-r-md flex items-center gap-1.5 z-10 shadow-lg shrink-0 uppercase tracking-wider">
-          <span className="w-2 h-2 rounded-full bg-white animate-ping" />
-          <span>LIVE</span>
+      {/* 2. Continuous Infinite Marquee Ticker */}
+      <div className="ticker-bar">
+        <div className="ticker-label">
+          <span className="radar-dot"></span> LIVE UPDATES
         </div>
-
-        <div className="overflow-hidden whitespace-nowrap w-full">
-          <div className="inline-block animate-marquee whitespace-nowrap text-xs font-medium text-slate-200">
-            {tickerItems.map((item, idx) => (
-              <span key={idx} className="inline-flex items-center gap-2 mx-6">
-                <Bell className="w-3.5 h-3.5 text-amber-400 inline" />
-                {item}
-              </span>
-            ))}
-            {tickerItems.map((item, idx) => (
-              <span key={`dup-${idx}`} className="inline-flex items-center gap-2 mx-6">
-                <Bell className="w-3.5 h-3.5 text-amber-400 inline" />
-                {item}
-              </span>
-            ))}
+        <div className="ticker-wrapper">
+          <div className="ticker-track">
+            <span className="ticker-item"><i className="fa-solid fa-bell"></i> Online Admission Open for Class V to XI (Session 2026-27)</span>
+            <span className="ticker-item"><i className="fa-solid fa-calendar-check"></i> Madhyamik & Higher Secondary 2nd Unit Test Examination Routine Published</span>
+            <span className="ticker-item"><i className="fa-solid fa-graduation-cap"></i> Kanyashree K1 & K2 Grant Verification Helpdesk Active at Office</span>
+            <span className="ticker-item"><i className="fa-solid fa-laptop"></i> Taruner Swapna Tab Grant Account Verification Desk Open</span>
+            {/* Duplicated track for seamless infinite loop */}
+            <span className="ticker-item"><i className="fa-solid fa-bell"></i> Online Admission Open for Class V to XI (Session 2026-27)</span>
+            <span className="ticker-item"><i className="fa-solid fa-calendar-check"></i> Madhyamik & Higher Secondary 2nd Unit Test Examination Routine Published</span>
+            <span className="ticker-item"><i className="fa-solid fa-graduation-cap"></i> Kanyashree K1 & K2 Grant Verification Helpdesk Active at Office</span>
+            <span className="ticker-item"><i className="fa-solid fa-laptop"></i> Taruner Swapna Tab Grant Account Verification Desk Open</span>
           </div>
         </div>
       </div>
 
-      {/* Main Glass Navigation Header */}
-      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-          <a href="#" className="flex items-center gap-3 group">
-            <img
-              src="/assets/school_logo.jpg"
-              alt="MGGHS Emblem Logo"
-              className="w-12 h-12 md:w-14 md:h-14 object-contain rounded-full shadow-md group-hover:scale-105 transition-transform"
-            />
-            <div>
-              <h1 className="font-serif font-extrabold text-base md:text-lg text-slate-900 leading-tight">
-                Mahishadal Gayeswari Girls' High School (H.S.)
+      {/* 3. Main Navigation Header */}
+      <header className="header-nav">
+        <div className="container nav-container">
+          <a href="#" className="brand-logo-group">
+            <img src="/assets/school_logo.jpg" alt="MGGHS Crest Emblem Logo" className="logo-img" />
+            <div className="brand-titles">
+              <h1>
+                {currentLang === 'bn'
+                  ? 'মহিষাদল গায়েশ্বরী বালিকা উচ্চ বিদ্যালয় (উঃ মাঃ)'
+                  : "Mahishadal Gayeswari Girls' High School (H.S.)"}
               </h1>
-              <p className="text-xs font-bold text-rose-600">
-                Govt. Sponsored Institution • Estd. 1945 • WBBSE & WBCHSE
+              <p>
+                {currentLang === 'bn'
+                  ? '১৯৪৫ সাল থেকে জ্ঞান চর্চা, শৃঙ্খলা ও নারী শিক্ষার অগ্রদূত'
+                  : "Govt. Sponsored Girls' Institution | Estd. 1945 | WBBSE & WBCHSE"}
               </p>
             </div>
           </a>
 
-          {/* Desktop Nav Items */}
-          <nav className="hidden lg:flex items-center gap-6 font-bold text-xs uppercase tracking-wider text-slate-800">
-            <a href="#home" className="hover:text-rose-600 transition-colors">Home</a>
-            <a href="#desk" className="hover:text-rose-600 transition-colors">HM Message</a>
-            <a href="#academics" className="hover:text-rose-600 transition-colors">Academics</a>
-            <a href="#notices" className="hover:text-rose-600 transition-colors">Notices</a>
-            <a href="#welfare" className="hover:text-rose-600 transition-colors">Schemes</a>
-            <a href="#facilities" className="hover:text-rose-600 transition-colors">Facilities</a>
-            <a href="#gallery" className="hover:text-rose-600 transition-colors">Gallery</a>
-
-            <button
-              onClick={onOpenAdmissionModal}
-              className="bg-gradient-to-r from-rose-600 to-rose-700 hover:from-rose-700 hover:to-rose-800 text-white px-4 py-2 rounded-full shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 text-xs font-bold"
-            >
-              Admission 2026
-            </button>
+          <nav>
+            <ul className={`nav-links ${mobileMenuOpen ? 'active' : ''}`}>
+              <li><a href="#home" className="nav-link" onClick={() => setMobileMenuOpen(false)}>{currentLang === 'bn' ? 'মূল পাতা' : 'Home'}</a></li>
+              <li><a href="#desk" className="nav-link" onClick={() => setMobileMenuOpen(false)}>{currentLang === 'bn' ? 'প্রধান শিক্ষিকার বার্তা' : 'HM Message'}</a></li>
+              <li><a href="#academics" className="nav-link" onClick={() => setMobileMenuOpen(false)}>{currentLang === 'bn' ? 'পাঠ্যক্রম' : 'Academics'}</a></li>
+              <li><a href="#notices" className="nav-link" onClick={() => setMobileMenuOpen(false)}>{currentLang === 'bn' ? 'নোটিশ বোর্ড' : 'Notice Board'}</a></li>
+              <li><a href="#welfare" className="nav-link" onClick={() => setMobileMenuOpen(false)}>{currentLang === 'bn' ? 'সরকারি প্রকল্প' : 'Govt Schemes'}</a></li>
+              <li><a href="#facilities" className="nav-link" onClick={() => setMobileMenuOpen(false)}>{currentLang === 'bn' ? 'সুযোগ-সুবিধা' : 'Facilities'}</a></li>
+              <li><a href="#gallery" className="nav-link" onClick={() => setMobileMenuOpen(false)}>{currentLang === 'bn' ? 'গ্যালারি' : 'Gallery'}</a></li>
+              <li>
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    onOpenAdmissionModal();
+                  }}
+                  className="btn btn-rose"
+                  style={{ fontSize: '0.85rem', padding: '0.55rem 1.2rem' }}
+                >
+                  <i className="fa-solid fa-user-plus"></i> {currentLang === 'bn' ? 'অনলাইন ভর্তি ২০২৬' : 'Admission Inquiry'}
+                </button>
+              </li>
+            </ul>
           </nav>
 
-          {/* Mobile Menu Button */}
           <button
+            className="mobile-menu-btn"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden text-slate-900 p-2"
+            aria-label="Toggle Navigation"
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            <i className={`fa-solid ${mobileMenuOpen ? 'fa-xmark' : 'fa-bars'}`}></i>
           </button>
         </div>
-
-        {/* Mobile Dropdown */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden bg-white border-b border-slate-200 px-6 py-4 flex flex-col gap-4 font-bold text-slate-800">
-            <a href="#home" onClick={() => setMobileMenuOpen(false)}>Home</a>
-            <a href="#desk" onClick={() => setMobileMenuOpen(false)}>HM Message</a>
-            <a href="#academics" onClick={() => setMobileMenuOpen(false)}>Academics</a>
-            <a href="#notices" onClick={() => setMobileMenuOpen(false)}>Notices</a>
-            <a href="#welfare" onClick={() => setMobileMenuOpen(false)}>Schemes</a>
-            <a href="#facilities" onClick={() => setMobileMenuOpen(false)}>Facilities</a>
-            <a href="#gallery" onClick={() => setMobileMenuOpen(false)}>Gallery</a>
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenAdminLoginModal();
-              }}
-              className="bg-slate-900 text-amber-400 px-4 py-2 rounded-full text-center text-xs"
-            >
-              Admin Portal Login
-            </button>
-          </div>
-        )}
       </header>
     </>
   );

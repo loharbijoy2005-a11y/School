@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap');
-
 /* ==========================================================================
    MAHISHADAL GAYESWARI GIRLS' HIGH SCHOOL (H.S.) - ULTRA-MODERN ANIMATED STYLESHEET
    Theme: Deep Navy (#1E3A8A), Warm Rose Gold (#F43F5E), Royal Gold (#F59E0B)
@@ -9,6 +7,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap');
 
 
 :root {
