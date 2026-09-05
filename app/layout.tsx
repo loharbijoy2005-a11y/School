@@ -14,6 +14,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" type="image/jpg" href="/assets/school_logo.jpg" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+      </head>
       <body className="bg-slate-50 text-slate-900 antialiased font-sans">
         {children}
       </body>
