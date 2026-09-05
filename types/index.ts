@@ -1,6 +1,6 @@
 /**
  * MAHISHADAL GAYESWARI GIRLS' HIGH SCHOOL (H.S.)
- * Extended TypeScript Definitions (Including Admin Dashboard)
+ * Complete High-Density TypeScript Type Definitions
  */
 
 export type NoticeCategory = 'all' | 'wbbse' | 'wbchse' | 'schemes' | 'holiday' | 'tender';
@@ -27,6 +27,45 @@ export interface AdmissionInquiry {
   remarks?: string;
   submittedAt?: string;
   status?: 'pending' | 'verified' | 'contacted';
+}
+
+export interface StudentTopper {
+  id: string;
+  name: string;
+  exam: 'Madhyamik' | 'Higher Secondary';
+  percentage: string;
+  rank: string;
+  stream: string;
+  imageUrl: string;
+  testimonial: string;
+}
+
+export interface GoogleReview {
+  id: string;
+  authorName: string;
+  role: 'Parent' | 'Alumni' | 'Student';
+  rating: number;
+  date: string;
+  comment: string;
+  authorAvatar: string;
+}
+
+export interface DigitalPortalItem {
+  id: string;
+  title: string;
+  category: string;
+  description: string;
+  icon: string;
+  targetUrl: string;
+  badgeText: string;
+}
+
+export interface SwachhataItem {
+  id: string;
+  title: string;
+  description: string;
+  imageUrl: string;
+  icon: string;
 }
 
 export interface SchemeDetail {

@@ -2,11 +2,19 @@
 
 import React, { useState } from 'react';
 import { Navbar } from '../components/Navbar';
-import { Hero } from '../components/Hero';
-import { NoticeBoard } from '../components/NoticeBoard';
+import { HeroNoticeOverlay } from '../components/HeroNoticeOverlay';
+import { StickyQuickNav } from '../components/StickyQuickNav';
+import { AboutDesk } from '../components/AboutDesk';
+import { VisionMissionTabs } from '../components/VisionMissionTabs';
+import { AcademicSpectrum } from '../components/AcademicSpectrum';
+import { SeminarsCarousel } from '../components/SeminarsCarousel';
+import { StudentSuccess } from '../components/StudentSuccess';
+import { DigitalPortals } from '../components/DigitalPortals';
 import { BentoGrid } from '../components/BentoGrid';
-import { SchemesCorner } from '../components/SchemesCorner';
+import { SwachhataSection } from '../components/SwachhataSection';
 import { EventGallery } from '../components/EventGallery';
+import { GoogleReviews } from '../components/GoogleReviews';
+import { SchemesCorner } from '../components/SchemesCorner';
 import { AdmissionModal } from '../components/AdmissionModal';
 import { AdminLoginModal } from '../components/AdminLoginModal';
 import { AdminDashboard } from '../components/AdminDashboard';
@@ -53,7 +61,7 @@ export default function HomePage() {
   return (
     <div className={`min-h-screen ${currentLang === 'bn' ? 'lang-bn' : ''}`}>
       
-      {/* 1. Glass Navbar & Infinite Ticker */}
+      {/* 1. Header Nav & Infinite Marquee Ticker */}
       <Navbar
         currentLang={currentLang}
         onToggleLang={toggleLanguage}
@@ -61,70 +69,66 @@ export default function HomePage() {
         onOpenAdminLoginModal={() => setIsAdminLoginModalOpen(true)}
       />
 
-      {/* 2. 3D Parallax Hero Showcase */}
-      <Hero
+      {/* 2. Full-Width Hero Slider with Integrated Notice Overlay */}
+      <HeroNoticeOverlay
         onOpenAdmissionModal={() => setIsAdmissionModalOpen(true)}
         onDownloadRoutine={handleDownloadRoutine}
+        onOpenPdfModal={handleOpenPdfModal}
       />
 
-      {/* 3. Real-Time Filterable Notice Board */}
-      <NoticeBoard onOpenPdfModal={handleOpenPdfModal} />
+      {/* 3. Sticky Bottom Quick Navigation Bar */}
+      <StickyQuickNav />
 
-      {/* 4. Headmistress Desk Message */}
-      <section id="desk" className="py-20 bg-slate-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-12 gap-10 items-center">
-          <div className="md:col-span-4 text-center">
-            <div className="w-56 h-56 mx-auto rounded-full p-1.5 bg-gradient-to-r from-rose-500 to-amber-500 shadow-2xl">
-              <img
-                src="assets/headmistress.jpg"
-                alt="Headmistress Smt. Kalyani Maity"
-                className="w-full h-full object-cover rounded-full border-4 border-slate-900"
-              />
-            </div>
-            <h3 className="font-serif font-extrabold text-xl text-white mt-4">Smt. Kalyani Maity</h3>
-            <p className="text-amber-400 text-sm font-bold">Headmistress, M.A., B.Ed.</p>
-          </div>
+      {/* 4. About Desk & HM Welcome Speech */}
+      <AboutDesk />
 
-          <div className="md:col-span-8 space-y-4">
-            <h2 className="font-serif text-3xl md:text-4xl font-extrabold text-white">
-              Headmistress's Desk
-            </h2>
-            <p className="text-slate-300 text-base leading-relaxed">
-              Welcome to Mahishadal Gayeswari Girls' High School (H.S.). Since 1945, our school has been dedicated to moulding young girls into confident, moral, and educated citizens.
-            </p>
-            <p className="text-slate-300 text-base leading-relaxed">
-              Through government welfare programs like Kanyashree, Sabooj Sathi, ICT Computer lab, and dedicated faculty, we ensure a safe, supportive, and vibrant learning atmosphere for every girl child.
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* 5. Vision, Mission & Core Values Tabs */}
+      <VisionMissionTabs />
 
-      {/* 5. West Bengal Govt Welfare Schemes */}
+      {/* 6. Academic Spectrum & Stream Explorer */}
+      <AcademicSpectrum />
+
+      {/* 7. Seminars, Cultural Wings & Workshops Carousel */}
+      <SeminarsCarousel />
+
+      {/* 8. Celebrating Our Students' Success Spotlight */}
+      <StudentSuccess />
+
+      {/* 9. Digital Campus Portals 6-Card Action Grid */}
+      <DigitalPortals />
+
+      {/* 10. West Bengal Govt Welfare Schemes */}
       <SchemesCorner onOpenWelfareModal={handleOpenWelfareModal} />
 
-      {/* 6. Bento Grid Facilities */}
+      {/* 11. Facilities That Support Every Student (Bento-Grid) */}
       <BentoGrid />
 
-      {/* 7. Auto-Scrolling Event Reel */}
+      {/* 12. Swachhata & Eco-Friendly Green Campus */}
+      <SwachhataSection />
+
+      {/* 13. Auto-Scrolling Campus Photo Reel */}
       <EventGallery />
 
-      {/* 8. Institutional Footer */}
-      <Footer />
+      {/* 14. Real Google Reviews Widget */}
+      <GoogleReviews />
 
-      {/* 9. Parent Admission Inquiry Modal */}
+      {/* 15. Institutional Footer with Dual ADMIN & OFFICE LOG IN Buttons */}
+      <Footer onOpenAdminLoginModal={() => setIsAdminLoginModalOpen(true)} />
+
+      {/* Admission Modal Dialog */}
       <AdmissionModal
         isOpen={isAdmissionModalOpen}
         onClose={() => setIsAdmissionModalOpen(false)}
       />
 
-      {/* 10. Admin Authentication Login Modal */}
+      {/* Admin Authentication Login Modal */}
       <AdminLoginModal
         isOpen={isAdminLoginModalOpen}
         onClose={() => setIsAdminLoginModalOpen(false)}
         onLoginSuccess={(user) => setAdminUser(user)}
       />
 
-      {/* 11. PDF Viewer Simulation Modal */}
+      {/* PDF Viewer Simulation Modal */}
       {activePdfNotice && (
         <div className="fixed inset-0 z-50 bg-slate-900/75 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="bg-white rounded-2xl max-w-2xl w-full p-6 md:p-8 shadow-2xl border border-slate-200">

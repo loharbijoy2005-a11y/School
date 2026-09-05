@@ -1,9 +1,13 @@
 import React from 'react';
-import { MapPin, Phone, Mail, ExternalLink } from 'lucide-react';
+import { MapPin, Phone, Mail, ExternalLink, ShieldCheck, Lock, UserCheck } from 'lucide-react';
 
-export const Footer: React.FC = () => {
+interface FooterProps {
+  onOpenAdminLoginModal: () => void;
+}
+
+export const Footer: React.FC<FooterProps> = ({ onOpenAdminLoginModal }) => {
   return (
-    <footer className="bg-slate-900 text-slate-400 py-16 border-t border-slate-800">
+    <footer className="bg-slate-950 text-slate-400 py-16 border-t border-slate-800">
       <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-4 gap-10 mb-12">
         
         {/* Brand Column */}
@@ -11,31 +15,31 @@ export const Footer: React.FC = () => {
           <h3 className="font-serif font-bold text-white text-lg leading-tight">
             Mahishadal Gayeswari Girls' High School (H.S.)
           </h3>
-          <p className="text-sm leading-relaxed">
+          <p className="text-xs leading-relaxed text-slate-400">
             Government Sponsored Girls High School. Affiliated to West Bengal Board of Secondary Education (WBBSE) & West Bengal Council of Higher Secondary Education (WBCHSE).
           </p>
         </div>
 
         {/* Quick Links */}
         <div>
-          <h4 className="font-bold text-white text-sm uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">
-            Quick Links
+          <h4 className="font-bold text-white text-xs uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">
+            Quick Navigation
           </h4>
-          <ul className="space-y-2 text-sm">
+          <ul className="space-y-2 text-xs">
             <li><a href="#home" className="hover:text-amber-400 transition-colors">Home Page</a></li>
             <li><a href="#desk" className="hover:text-amber-400 transition-colors">HM Message</a></li>
+            <li><a href="#academics" className="hover:text-amber-400 transition-colors">WBBSE & WBCHSE Streams</a></li>
             <li><a href="#notices" className="hover:text-amber-400 transition-colors">Notice Board</a></li>
             <li><a href="#welfare" className="hover:text-amber-400 transition-colors">Govt Welfare Schemes</a></li>
-            <li><a href="#facilities" className="hover:text-amber-400 transition-colors">Campus Facilities</a></li>
           </ul>
         </div>
 
         {/* Govt Portals */}
         <div>
-          <h4 className="font-bold text-white text-sm uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">
+          <h4 className="font-bold text-white text-xs uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">
             Govt. Portals
           </h4>
-          <ul className="space-y-2 text-sm">
+          <ul className="space-y-2 text-xs">
             <li>
               <a href="https://banglarshiksha.gov.in" target="_blank" rel="noreferrer" className="hover:text-amber-400 transition-colors flex items-center gap-1">
                 <span>Banglar Shiksha Portal</span>
@@ -65,12 +69,12 @@ export const Footer: React.FC = () => {
 
         {/* Contact Info */}
         <div>
-          <h4 className="font-bold text-white text-sm uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">
+          <h4 className="font-bold text-white text-xs uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">
             School Address
           </h4>
-          <ul className="space-y-3 text-sm">
+          <ul className="space-y-3 text-xs">
             <li className="flex items-start gap-2">
-              <MapPin className="w-4 h-4 text-amber-400 shrink-0 mt-1" />
+              <MapPin className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
               <span>Mahishadal Gayeswari Girls' High School (H.S.)<br />P.O. & P.S.- Mahishadal<br />Purba Medinipur, West Bengal - 721628</span>
             </li>
             <li className="flex items-center gap-2">
@@ -86,7 +90,36 @@ export const Footer: React.FC = () => {
 
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 pt-8 border-t border-slate-800 flex flex-wrap justify-between items-center text-xs text-slate-500 gap-4">
+      {/* CRITICAL BOTTOM ACTIONS: Dual Distinct Admin & Office Buttons */}
+      <div className="max-w-7xl mx-auto px-4 py-6 bg-slate-900 rounded-2xl border border-slate-800 flex flex-wrap justify-between items-center gap-4 mb-8">
+        <div>
+          <h4 className="text-white font-bold text-sm flex items-center gap-2">
+            <ShieldCheck className="w-4 h-4 text-rose-500" />
+            Institutional Staff & Portal Access
+          </h4>
+          <p className="text-xs text-slate-400">Authenticated login portal for Headmistress and clerical office staff.</p>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <button
+            onClick={onOpenAdminLoginModal}
+            className="bg-rose-600 hover:bg-rose-700 text-white font-extrabold px-5 py-2.5 rounded-xl text-xs flex items-center gap-2 transition-all shadow-lg"
+          >
+            <ShieldCheck className="w-4 h-4" />
+            <span>[ ADMIN LOG IN ]</span>
+          </button>
+
+          <button
+            onClick={onOpenAdminLoginModal}
+            className="bg-slate-800 hover:bg-slate-700 text-amber-400 border border-amber-500/40 font-extrabold px-5 py-2.5 rounded-xl text-xs flex items-center gap-2 transition-all"
+          >
+            <Lock className="w-4 h-4" />
+            <span>[ OFFICE LOG IN ]</span>
+          </button>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 pt-6 border-t border-slate-800 flex flex-wrap justify-between items-center text-xs text-slate-500 gap-4">
         <p>&copy; 2026 Mahishadal Gayeswari Girls' High School (H.S.). All Rights Reserved.</p>
         <p>Banglar Shiksha School ID: WB-1945-MGGHS | WBBSE: E1-042 | WBCHSE: 105084</p>
       </div>
