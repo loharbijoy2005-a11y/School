@@ -17,52 +17,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <>
-      {/* 1. Top Utility Header */}
-      <div className="top-bar">
-        <div className="container top-bar-content">
-          <div className="top-info">
-            <span className="school-badge-pill" style={{ background: 'rgba(244, 63, 94, 0.2)', color: '#FDA4AF', borderColor: 'rgba(244, 63, 94, 0.4)' }}>
-              UDISE: 19190806002
-            </span>
-            <span className="school-badge-pill">
-              {currentLang === 'bn' ? 'বাংলার শিক্ষা আইডি: WB-1945-MGGHS' : 'Banglar Shiksha ID: WB-1945-MGGHS'}
-            </span>
-            <span
-              className="school-badge-pill"
-              style={{ background: 'rgba(5, 150, 105, 0.2)', color: '#A7F3D0', borderColor: 'rgba(5, 150, 105, 0.4)' }}
-            >
-              {currentLang === 'bn' ? 'মধ্যশিক্ষা পর্ষদ: E1-042 | উচ্চ মাধ্যমিক: 105084' : 'WBBSE: E1-042 | WBCHSE: 105084'}
-            </span>
-            <span className="top-info-item">
-              <i className="fa-solid fa-phone"></i>
-              <span>+91 3228 240211</span>
-            </span>
-            <span className="top-info-item">
-              <i className="fa-solid fa-envelope"></i>
-              <span>mgghschool1945@gmail.com</span>
-            </span>
-          </div>
-
-          <div className="top-actions" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-            <button onClick={onToggleLang} className="lang-toggle-btn" title="Toggle Language (English / Bengali)">
-              <i className="fa-solid fa-globe"></i>
-              <span>{currentLang === 'en' ? 'বাংলা' : 'English'}</span>
-            </button>
-
-            <button
-              onClick={onOpenAdminLoginModal}
-              className="lang-toggle-btn"
-              style={{ background: 'rgba(245, 158, 11, 0.2)', color: '#FDE68A', borderColor: 'rgba(245, 158, 11, 0.4)', padding: '0.25rem 0.65rem' }}
-              title="Admin Portal Login"
-            >
-              <i className="fa-solid fa-shield-halved" style={{ color: '#F59E0B' }}></i>
-              <span style={{ fontSize: '0.8rem', fontWeight: 700 }}>Admin</span>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* 2. Continuous Infinite Marquee Ticker */}
+      {/* 1. Continuous Infinite Marquee Ticker */}
       <div className="ticker-bar">
         <div className="ticker-label">
           <span className="radar-dot"></span> LIVE UPDATES
@@ -82,7 +37,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
       </div>
 
-      {/* 3. Main Navigation Header */}
+      {/* 2. Main Glass Navigation Header */}
       <header className="header-nav">
         <div className="container nav-container">
           <a href="#" className="brand-logo-group">
@@ -109,7 +64,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <nav>
             <ul className={`nav-links ${mobileMenuOpen ? 'active' : ''}`}>
               <li><a href="#home" className="nav-link" onClick={() => setMobileMenuOpen(false)}>{currentLang === 'bn' ? 'মূল পাতা' : 'Home'}</a></li>
-              <li><a href="#desk" className="nav-link" onClick={() => setMobileMenuOpen(false)}>{currentLang === 'bn' ? 'প্রধান শিক্ষিকার বার্তা' : 'HM Message'}</a></li>
+              <li><a href="#desk" className="nav-link" onClick={() => setMobileMenuOpen(false)}>{currentLang === 'bn' ? 'শিক্ষকমণ্ডলী' : 'HM & Faculty'}</a></li>
               <li><a href="#academics" className="nav-link" onClick={() => setMobileMenuOpen(false)}>{currentLang === 'bn' ? 'পাঠ্যক্রম' : 'Academics'}</a></li>
               <li><a href="#notices" className="nav-link" onClick={() => setMobileMenuOpen(false)}>{currentLang === 'bn' ? 'নোটিশ বোর্ড' : 'Notice Board'}</a></li>
               <li><a href="#welfare" className="nav-link" onClick={() => setMobileMenuOpen(false)}>{currentLang === 'bn' ? 'সরকারি প্রকল্প' : 'Govt Schemes'}</a></li>
