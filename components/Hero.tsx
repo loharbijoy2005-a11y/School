@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Bell, Download, ChevronRight, Camera, Sparkles, Laptop, GraduationCap, Users } from 'lucide-react';
+import { Bell, Download, ChevronLeft, ChevronRight, Trophy, Sparkles, Calendar, Award } from 'lucide-react';
 import { Notice, NoticeCategory } from '../types';
 
 interface HeroProps {
@@ -22,20 +22,32 @@ export const Hero: React.FC<HeroProps> = ({
 
   const campusPhotos = [
     {
+      id: '1',
+      badge: '🏆 SCHOOL ACHIEVEMENTS & SPORTS',
+      title: 'STUDENTS BRING HOME THE TROPHY',
+      subtitle: "Our girls celebrate with faculty and Headmistress Smt. Kalyani Maity after a hard-fought district championship win.",
+      url: '/assets/sports_day.jpg',
+    },
+    {
+      id: '2',
+      badge: '🏛️ HERITAGE SCHOOL CAMPUS (ESTD 1945)',
+      title: 'HISTORIC MAIN BUILDING & ASSEMBLY GROUND',
+      subtitle: "Over 2,200+ female students gather daily for morning prayers and value education in our historic campus.",
       url: '/assets/hero_campus.jpg',
-      title: 'School Heritage Gate & Historic Main Building (Estd. 1945)',
     },
     {
-      url: '/assets/school_hero.jpg',
-      title: 'Morning School Assembly & Uniformed Female Students',
-    },
-    {
+      id: '3',
+      badge: '🔬 STEM SCIENCE LABS & PRACTICALS',
+      title: 'ADVANCED PHYSICS & CHEMISTRY LABS',
+      subtitle: "State-of-the-art laboratory equipment fostering scientific practical temper for WBBSE & WBCHSE toppers.",
       url: '/assets/science_lab.jpg',
-      title: 'Physics & Chemistry Practical Demonstration Labs',
     },
     {
+      id: '4',
+      badge: '💻 ICT COMPUTER EDUCATION HUB',
+      title: 'DIGITAL SMART CLASSROOMS & 30+ PCs',
+      subtitle: "Empowering female students with computer literacy, IT/ITeS skill courses, and e-learning facilities.",
       url: '/assets/library_smartclass.jpg',
-      title: 'Digital Smart Classrooms & Central Library Archives',
     },
   ];
 
@@ -46,6 +58,14 @@ export const Hero: React.FC<HeroProps> = ({
     }, 4000);
     return () => clearInterval(interval);
   }, [campusPhotos.length]);
+
+  const handleNext = () => {
+    setCurrentSlide((prev) => (prev + 1) % campusPhotos.length);
+  };
+
+  const handlePrev = () => {
+    setCurrentSlide((prev) => (prev - 1 + campusPhotos.length) % campusPhotos.length);
+  };
 
   const defaultNotices: Notice[] = [
     {
@@ -96,212 +116,173 @@ export const Hero: React.FC<HeroProps> = ({
     ? noticesList
     : noticesList.filter((n) => n.category === activeTab);
 
+  const activePhoto = campusPhotos[currentSlide];
+
   return (
-    <section id="home" className="relative bg-[#FAF7F2] text-[#292524] min-h-[620px] lg:min-h-[670px] flex items-center overflow-hidden border-b border-[#E8DFD0]">
-      
-      {/* Dynamic Full-Width Campus Photo Slider (High Visibility Opacity) */}
-      <div className="absolute inset-0 z-0">
-        {campusPhotos.map((photo, index) => (
-          <div
-            key={index}
-            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-              index === currentSlide ? 'opacity-100 scale-105' : 'opacity-0 scale-100'
-            }`}
-            style={{ transitionProperty: 'opacity, transform' }}
-          >
-            <img
-              src={photo.url}
-              alt={photo.title}
-              className="w-full h-full object-cover opacity-80"
-            />
-          </div>
-        ))}
-
-        {/* Soft Warm Vignette Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#FAF7F2]/95 via-[#FAF7F2]/70 to-[#FAF7F2]/40 lg:via-[#FAF7F2]/65"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#FAF7F2] via-transparent to-[#FAF7F2]/40"></div>
-      </div>
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 py-10 w-full grid lg:grid-cols-12 gap-8 items-center">
+    <section id="home" className="py-6 px-4 bg-[#FAF7F2] text-slate-900 border-b border-[#DFD7C7]">
+      <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-6 items-stretch">
         
-        {/* Left Column: Glassmorphic Institutional Card */}
-        <div className="lg:col-span-7">
-          <div className="bg-[#FFFDF9]/92 backdrop-blur-md border border-[#E8DFD0] p-6 md:p-8 rounded-3xl shadow-xl space-y-5">
-            
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#881337]/10 border border-[#881337]/30 text-[#881337] font-extrabold text-xs uppercase tracking-wider shadow-xs">
-              <Sparkles className="w-4 h-4 text-[#D97706]" />
-              <span>PIONEER IN FEMALE EDUCATION SINCE 1945</span>
+        {/* Left 65% Column: REAL CAMPUS PHOTO SLIDER */}
+        <div className="lg:col-span-8 bg-white border border-[#DFD7C7] rounded-3xl overflow-hidden shadow-lg flex flex-col justify-between relative group min-h-[460px] lg:min-h-[520px]">
+          
+          {/* Background Active Campus Photo */}
+          <div className="absolute inset-0 z-0">
+            <img
+              src={activePhoto.url}
+              alt={activePhoto.title}
+              className="w-full h-full object-cover transition-all duration-700"
+            />
+            {/* Dark Gradient Overlay for Text Readability */}
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent"></div>
+          </div>
+
+          {/* Top Slide Counter Badge */}
+          <div className="relative z-10 p-4 flex justify-between items-center">
+            <span className="bg-[#0F2E23]/90 text-amber-300 text-xs font-bold px-3 py-1 rounded-full border border-amber-400/40 shadow-sm">
+              Mahishadal Gayeswari Girls' High School (H.S.)
+            </span>
+            <span className="bg-slate-950/80 backdrop-blur-md text-white font-mono text-xs font-extrabold px-3 py-1 rounded-full border border-slate-700">
+              0{currentSlide + 1} / 0{campusPhotos.length}
+            </span>
+          </div>
+
+          {/* Carousel Manual Prev / Next Buttons */}
+          <button
+            onClick={handlePrev}
+            className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-slate-950/60 hover:bg-[#881337] text-white flex items-center justify-center transition-colors shadow-lg border border-slate-700 cursor-pointer"
+            aria-label="Previous Slide"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+
+          <button
+            onClick={handleNext}
+            className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-slate-950/60 hover:bg-[#881337] text-white flex items-center justify-center transition-colors shadow-lg border border-slate-700 cursor-pointer"
+            aria-label="Next Slide"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
+
+          {/* Bottom Headline Text Overlay */}
+          <div className="relative z-10 p-6 md:p-8 space-y-3 max-w-3xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/90 text-slate-950 font-black text-xs uppercase tracking-wider shadow-md">
+              <span>{activePhoto.badge}</span>
             </div>
 
-            <h1 className="font-serif font-extrabold text-3xl sm:text-4xl md:text-5xl text-[#1C1917] leading-tight">
-              Empowering Young Girls, <br />
-              <span className="bg-gradient-to-r from-[#881337] via-[#D97706] to-[#1B4332] bg-clip-text text-transparent">
-                Inspiring Excellence Since 1945
-              </span>
-            </h1>
+            <h2 className="font-serif font-black text-2xl sm:text-3xl lg:text-4xl text-white tracking-tight leading-tight uppercase drop-shadow-md">
+              {activePhoto.title}
+            </h2>
 
-            <p className="text-[#334155] text-xs md:text-sm leading-relaxed font-medium">
-              Mahishadal Gayeswari Girls' High School (H.S.) is a premier government-sponsored girls' institution in Purba Medinipur. Affiliated to WBBSE & WBCHSE, we foster academic distinction, scientific practical temper, and leadership skills from Class V to Class XII.
+            <p className="text-slate-200 text-xs sm:text-sm font-medium leading-relaxed drop-shadow-sm max-w-2xl">
+              {activePhoto.subtitle}
             </p>
 
-            {/* Stats Row: 3 Glassmorphic Counter Tiles */}
-            <div className="flex flex-wrap gap-3 pt-1">
-              <div className="bg-white border border-[#E8DFD0] px-3.5 py-2.5 rounded-2xl shadow-xs">
-                <p className="text-[#D97706] font-extrabold text-base flex items-center gap-1">
-                  <GraduationCap className="w-4 h-4 text-[#D97706]" />
-                  100% Pass
-                </p>
-                <p className="text-[10px] text-[#334155] uppercase font-bold mt-0.5">Madhyamik & H.S.</p>
-              </div>
-              
-              <div className="bg-white border border-[#E8DFD0] px-3.5 py-2.5 rounded-2xl shadow-xs">
-                <p className="text-[#881337] font-extrabold text-base flex items-center gap-1">
-                  <Users className="w-4 h-4 text-[#881337]" />
-                  2,200+ Girls
-                </p>
-                <p className="text-[10px] text-[#334155] uppercase font-bold mt-0.5">Enrolled Students</p>
-              </div>
-              
-              <div className="bg-white border border-[#E8DFD0] px-3.5 py-2.5 rounded-2xl shadow-xs">
-                <p className="text-[#1B4332] font-extrabold text-base flex items-center gap-1">
-                  <Laptop className="w-4 h-4 text-[#1B4332]" />
-                  30+ Systems
-                </p>
-                <p className="text-[10px] text-[#334155] uppercase font-bold mt-0.5">ICT Computer Lab</p>
-              </div>
-            </div>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-wrap gap-3 pt-2">
+            <div className="pt-2 flex flex-wrap items-center gap-3">
               <button
                 onClick={onOpenAdmissionModal}
-                className="bg-[#881337] hover:bg-[#6b0f2b] text-white font-extrabold px-6 py-3 rounded-full text-xs shadow-md transition-all flex items-center gap-2 transform hover:-translate-y-0.5 cursor-pointer"
+                className="bg-[#881337] hover:bg-rose-900 text-white font-extrabold px-5 py-2.5 rounded-full text-xs shadow-md transition-all uppercase tracking-wider flex items-center gap-1.5 cursor-pointer"
               >
-                <span>Online Admission 2026</span>
-                <ChevronRight className="w-4 h-4" />
+                <span>Online Admission Inquiry 2026</span>
               </button>
 
               <a
                 href="#gallery"
-                className="bg-white hover:bg-amber-50/50 text-[#1C1917] border border-[#E8DFD0] hover:border-[#D97706] font-bold px-6 py-3 rounded-full text-xs transition-colors flex items-center gap-2 shadow-xs cursor-pointer"
+                className="bg-white/90 hover:bg-white text-slate-900 font-extrabold px-5 py-2.5 rounded-full text-xs shadow-md transition-colors uppercase tracking-wider flex items-center gap-1.5 cursor-pointer"
               >
-                <Camera className="w-4 h-4 text-[#D97706]" />
-                <span>Explore Campus Tour</span>
+                <span>Explore Photo Gallery</span>
               </a>
             </div>
-
-            {/* Carousel Slide Indicators */}
-            <div className="flex items-center gap-2 pt-1 border-t border-[#E8DFD0]">
-              <span className="text-[11px] text-[#334155] font-bold mr-1">
-                Active Photo: <span className="text-[#881337]">{campusPhotos[currentSlide].title}</span>
-              </span>
-              <div className="ml-auto flex gap-1.5">
-                {campusPhotos.map((_, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setCurrentSlide(idx)}
-                    className={`h-2 rounded-full transition-all cursor-pointer ${
-                      idx === currentSlide ? 'w-5 bg-[#881337]' : 'w-2 bg-slate-300 hover:bg-slate-400'
-                    }`}
-                    aria-label={`Slide ${idx + 1}`}
-                  />
-                ))}
-              </div>
-            </div>
-
           </div>
+
         </div>
 
-        {/* Right Column: Layered Notice Board Hub */}
-        <div className="lg:col-span-5">
-          <div className="bg-white/95 backdrop-blur-md border border-[#DFD7C7] rounded-3xl p-6 shadow-xl space-y-5">
-            
-            {/* Notice Board Header */}
-            <div className="flex items-center justify-between border-b border-[#E8DFD0] pb-3">
-              <div className="flex items-center gap-2">
-                <Bell className="w-5 h-5 text-[#881337] animate-bounce" />
-                <h3 className="font-serif font-extrabold text-lg text-[#1C1917]">
-                  Notice Board Hub
-                </h3>
-              </div>
-              <span className="text-[10px] font-extrabold text-[#1B4332] bg-emerald-100 px-2.5 py-0.5 rounded-full border border-emerald-300">
-                OFFICIAL WBBSE & WBCHSE
-              </span>
+        {/* Right 35% Column: NOTICE BOARD HUB */}
+        <div className="lg:col-span-4 bg-white border border-[#DFD7C7] rounded-3xl p-6 shadow-lg flex flex-col justify-between space-y-4">
+          
+          {/* Header */}
+          <div className="border-b border-[#DFD7C7] pb-3 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Bell className="w-5 h-5 text-rose-700 animate-bounce" />
+              <h3 className="font-serif font-black text-lg text-slate-900 uppercase">
+                NOTICE BOARD
+              </h3>
             </div>
-
-            {/* Switchable Notice Tabs */}
-            <div className="flex flex-wrap gap-1 bg-[#FAF7F2] p-1.5 rounded-2xl border border-[#E8DFD0] text-[11px] font-bold">
-              {[
-                { id: 'all', label: 'School Notices' },
-                { id: 'wbbse', label: 'WBBSE (V-X)' },
-                { id: 'wbchse', label: 'WBCHSE (XI-XII)' },
-                { id: 'schemes', label: 'Schemes' },
-                { id: 'tender', label: 'Tenders/SMC' },
-              ].map((tab) => (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id as NoticeCategory)}
-                  className={`px-2.5 py-1.5 rounded-xl transition-all cursor-pointer ${
-                    activeTab === tab.id
-                      ? 'bg-[#881337] text-white shadow-xs'
-                      : 'bg-white text-[#334155] hover:text-[#1C1917] border border-[#E8DFD0]'
-                  }`}
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </div>
-
-            {/* Notice Items Display */}
-            <div className="space-y-3 max-h-[280px] overflow-y-auto pr-1">
-              {filteredNotices.slice(0, 4).map((notice) => (
-                <div
-                  key={notice.id}
-                  onClick={() => onOpenPdfModal(notice)}
-                  className="bg-[#FFFDF9] hover:bg-[#FAF7F2] p-3.5 rounded-2xl border border-[#E2D7C3] hover:border-[#D97706]/60 transition-all cursor-pointer group flex items-start gap-3 shadow-2xs"
-                >
-                  {/* Calendar Date Badge (Maroon Square with White Text) */}
-                  <div className="w-11 h-11 bg-[#881337] border border-[#6b0f2b] rounded-xl flex flex-col items-center justify-center shrink-0 text-center text-white shadow-xs">
-                    <span className="text-[10px] font-extrabold uppercase leading-none text-amber-200">
-                      {notice.publishDate.split(' ')[1] || 'AUG'}
-                    </span>
-                    <span className="text-sm font-extrabold leading-none mt-0.5">
-                      {notice.publishDate.split(' ')[0] || '26'}
-                    </span>
-                  </div>
-
-                  <div className="space-y-1 flex-1 min-w-0">
-                    <div className="flex items-center gap-1.5">
-                      {notice.isNew && (
-                        <span className="bg-[#881337] text-white text-[9px] font-extrabold px-1.5 py-0.2 rounded uppercase animate-pulse">
-                          NEW
-                        </span>
-                      )}
-                      <span className="text-[10px] font-bold text-[#D97706] uppercase">
-                        {notice.category.toUpperCase()}
-                      </span>
-                    </div>
-                    <h4 className="text-xs font-bold text-[#1C1917] group-hover:text-[#881337] transition-colors line-clamp-2 leading-snug">
-                      {notice.title}
-                    </h4>
-                  </div>
-
-                  <div className="shrink-0 pt-1 text-slate-400 group-hover:text-[#881337] transition-colors">
-                    <Download className="w-4 h-4" />
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Bottom Archive Link */}
-            <div className="pt-2 border-t border-[#E8DFD0] flex justify-between items-center text-xs">
-              <a href="#notices" className="text-[#D97706] hover:underline font-bold flex items-center gap-1">
-                <span>VIEW FULL NOTICE ARCHIVE &rarr;</span>
-              </a>
-              <span className="text-slate-500 text-[11px] font-mono">Updated Today</span>
-            </div>
-
+            <span className="text-[10px] font-extrabold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded border border-emerald-300">
+              WBBSE & WBCHSE
+            </span>
           </div>
+
+          {/* Notice Board Filter Tabs */}
+          <div className="flex flex-wrap gap-1 bg-[#FAF7F0] p-1.5 rounded-xl border border-[#DFD7C7] text-[11px] font-bold">
+            {[
+              { id: 'all', label: 'SCHOOL NOTICES' },
+              { id: 'wbbse', label: 'WBBSE (V-X)' },
+              { id: 'wbchse', label: 'WBCHSE (XI-XII)' },
+              { id: 'schemes', label: 'SCHEMES' },
+              { id: 'tender', label: 'TENDERS' },
+            ].map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id as NoticeCategory)}
+                className={`px-2.5 py-1 rounded-lg transition-all cursor-pointer ${
+                  activeTab === tab.id
+                    ? 'bg-[#881337] text-white shadow-xs'
+                    : 'bg-white text-slate-700 hover:text-slate-900 border border-[#DFD7C7]'
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Notices Entries List */}
+          <div className="space-y-3 max-h-[310px] overflow-y-auto pr-1">
+            {filteredNotices.slice(0, 4).map((notice) => (
+              <div
+                key={notice.id}
+                onClick={() => onOpenPdfModal(notice)}
+                className="bg-[#FFFDF9] hover:bg-[#FAF7F0] p-3 rounded-2xl border border-[#DFD7C7] hover:border-[#881337]/50 transition-all cursor-pointer group flex items-start gap-3 shadow-2xs"
+              >
+                <div className="w-11 h-11 bg-[#881337] rounded-xl flex flex-col items-center justify-center shrink-0 text-center text-white shadow-xs">
+                  <span className="text-[9px] font-black uppercase leading-none text-amber-200">
+                    {notice.publishDate.split(' ')[1] || 'AUG'}
+                  </span>
+                  <span className="text-sm font-black leading-none mt-0.5">
+                    {notice.publishDate.split(' ')[0] || '22'}
+                  </span>
+                </div>
+
+                <div className="space-y-1 flex-1 min-w-0">
+                  <div className="flex items-center gap-1.5">
+                    {notice.isNew && (
+                      <span className="bg-rose-700 text-white text-[8px] font-black px-1.5 py-0.2 rounded uppercase animate-pulse">
+                        NEW
+                      </span>
+                    )}
+                    <span className="text-[10px] font-bold text-[#881337] uppercase">
+                      {notice.category.toUpperCase()}
+                    </span>
+                  </div>
+                  <h4 className="text-xs font-bold text-slate-900 group-hover:text-[#881337] transition-colors line-clamp-2 leading-snug">
+                    {notice.title}
+                  </h4>
+                </div>
+
+                <div className="shrink-0 pt-1 text-slate-400 group-hover:text-[#881337] transition-colors">
+                  <Download className="w-4 h-4" />
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Footer Archive Link */}
+          <div className="pt-2 border-t border-[#DFD7C7] flex justify-between items-center text-xs">
+            <a href="#notices" className="text-[#881337] hover:underline font-extrabold flex items-center gap-1">
+              <span>VIEW FULL NOTICE ARCHIVE &rarr;</span>
+            </a>
+            <span className="text-slate-500 text-[10px] font-mono font-bold">Session 2026-27</span>
+          </div>
+
         </div>
 
       </div>
