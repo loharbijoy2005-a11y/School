@@ -1,6 +1,7 @@
 import React from 'react';
 import { ShieldCheck, UserCheck, Heart, AlertTriangle, Users, BookOpen, MessageSquare, Compass, ExternalLink } from 'lucide-react';
 import { DigitalPortalItem } from '../types';
+import ScrollRevealCard from './ScrollRevealCard';
 
 export const DigitalPortals: React.FC = () => {
   const portals: DigitalPortalItem[] = [
@@ -109,38 +110,39 @@ export const DigitalPortals: React.FC = () => {
 
         {/* 8-Card Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {portals.map((portal) => (
-            <a
-              key={portal.id}
-              href={portal.targetUrl}
-              target={portal.targetUrl.startsWith('http') ? '_blank' : '_self'}
-              rel="noreferrer"
-              className="bg-white p-6 rounded-3xl border border-[#E8DFD0] hover:border-[#9D174D]/60 shadow-sm hover:shadow-md transition-all cursor-pointer group flex flex-col justify-between space-y-4 hover:-translate-y-1"
-            >
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <div className="w-12 h-12 rounded-2xl bg-[#FAF7F2] border border-[#E8DFD0] flex items-center justify-center group-hover:scale-110 transition-transform">
-                    {getIcon(portal.icon)}
+          {portals.map((portal, idx) => (
+            <ScrollRevealCard key={portal.id} delay={(idx % 4) * 90}>
+              <a
+                href={portal.targetUrl}
+                target={portal.targetUrl.startsWith('http') ? '_blank' : '_self'}
+                rel="noreferrer"
+                className="bg-white p-6 rounded-3xl border border-[#E8DFD0] hover:border-[#9D174D]/60 shadow-sm hover:shadow-md transition-all cursor-pointer group flex flex-col justify-between space-y-4 hover:-translate-y-1 h-full"
+              >
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div className="w-12 h-12 rounded-2xl bg-[#FAF7F2] border border-[#E8DFD0] flex items-center justify-center group-hover:scale-110 transition-transform">
+                      {getIcon(portal.icon)}
+                    </div>
+                    <span className="text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-amber-100 text-[#B45309] border border-amber-200 uppercase">
+                      {portal.badgeText}
+                    </span>
                   </div>
-                  <span className="text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-amber-100 text-[#B45309] border border-amber-200 uppercase">
-                    {portal.badgeText}
-                  </span>
+
+                  <h3 className="font-serif font-extrabold text-lg text-[#1E293B] group-hover:text-[#9D174D] transition-colors leading-snug">
+                    {portal.title}
+                  </h3>
+
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    {portal.description}
+                  </p>
                 </div>
 
-                <h3 className="font-serif font-extrabold text-lg text-[#1E293B] group-hover:text-[#9D174D] transition-colors leading-snug">
-                  {portal.title}
-                </h3>
-
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  {portal.description}
-                </p>
-              </div>
-
-              <div className="pt-3 border-t border-[#E8DFD0] flex items-center justify-between text-xs font-bold text-[#9D174D] group-hover:text-[#B45309] transition-colors">
-                <span>Access Portal</span>
-                <ExternalLink className="w-3.5 h-3.5" />
-              </div>
-            </a>
+                <div className="pt-3 border-t border-[#E8DFD0] flex items-center justify-between text-xs font-bold text-[#9D174D] group-hover:text-[#B45309] transition-colors">
+                  <span>Access Portal</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </div>
+              </a>
+            </ScrollRevealCard>
           ))}
         </div>
 

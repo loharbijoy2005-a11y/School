@@ -1,6 +1,7 @@
 import React from 'react';
 import { Award, Trophy, Star, Sparkles, Quote, GraduationCap } from 'lucide-react';
 import { StudentTopper } from '../types';
+import ScrollRevealCard from './ScrollRevealCard';
 
 export const StudentSuccess: React.FC = () => {
   const toppers: StudentTopper[] = [
@@ -53,45 +54,44 @@ export const StudentSuccess: React.FC = () => {
         </div>
 
         <div className="grid md:grid-cols-3 gap-6">
-          {toppers.map((topper) => (
-            <div
-              key={topper.id}
-              className="bg-white p-6 md:p-8 rounded-3xl border border-[#E8DFD0] hover:border-[#B45309]/50 shadow-sm hover:shadow-md space-y-5 transition-all group flex flex-col justify-between"
-            >
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <span className="bg-amber-100 text-[#B45309] font-extrabold text-xs px-3 py-1 rounded-full border border-amber-200">
-                    🏆 {topper.exam} Topper
-                  </span>
-                  <span className="font-extrabold text-2xl text-[#9D174D]">{topper.percentage}</span>
+          {toppers.map((topper, idx) => (
+            <ScrollRevealCard key={topper.id} delay={idx * 120}>
+              <div className="bg-white p-6 md:p-8 rounded-3xl border border-[#E8DFD0] hover:border-[#B45309]/50 shadow-sm hover:shadow-md space-y-5 transition-all group flex flex-col justify-between h-full">
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <span className="bg-amber-100 text-[#B45309] font-extrabold text-xs px-3 py-1 rounded-full border border-amber-200">
+                      🏆 {topper.exam} Topper
+                    </span>
+                    <span className="font-extrabold text-2xl text-[#9D174D]">{topper.percentage}</span>
+                  </div>
+
+                  <div className="flex items-center gap-4">
+                    <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-[#B45309] shrink-0 bg-slate-100 shadow-xs">
+                      <img src={topper.imageUrl} alt={topper.name} className="w-full h-full object-cover" />
+                    </div>
+                    <div>
+                      <h3 className="font-serif font-extrabold text-lg text-[#1E293B] group-hover:text-[#9D174D] transition-colors">
+                        {topper.name}
+                      </h3>
+                      <p className="text-xs font-bold text-[#B45309] mt-0.5">{topper.rank}</p>
+                      <p className="text-[11px] text-slate-500 mt-0.5">{topper.stream}</p>
+                    </div>
+                  </div>
+
+                  <div className="bg-[#FAF7F2] p-4 rounded-2xl border border-[#E8DFD0] relative">
+                    <Quote className="w-6 h-6 text-[#9D174D]/20 absolute right-3 top-3" />
+                    <p className="text-xs text-slate-700 italic leading-relaxed font-medium">
+                      {topper.testimonial}
+                    </p>
+                  </div>
                 </div>
 
-                <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-[#B45309] shrink-0 bg-slate-100 shadow-xs">
-                    <img src={topper.imageUrl} alt={topper.name} className="w-full h-full object-cover" />
-                  </div>
-                  <div>
-                    <h3 className="font-serif font-extrabold text-lg text-[#1E293B] group-hover:text-[#9D174D] transition-colors">
-                      {topper.name}
-                    </h3>
-                    <p className="text-xs font-bold text-[#B45309] mt-0.5">{topper.rank}</p>
-                    <p className="text-[11px] text-slate-500 mt-0.5">{topper.stream}</p>
-                  </div>
-                </div>
-
-                <div className="bg-[#FAF7F2] p-4 rounded-2xl border border-[#E8DFD0] relative">
-                  <Quote className="w-6 h-6 text-[#9D174D]/20 absolute right-3 top-3" />
-                  <p className="text-xs text-slate-700 italic leading-relaxed font-medium">
-                    {topper.testimonial}
-                  </p>
+                <div className="pt-3 border-t border-[#E8DFD0] text-[11px] text-slate-500 flex items-center justify-between">
+                  <span>Verified School Alumna</span>
+                  <span className="text-[#047857] font-bold">100% Academic Honor</span>
                 </div>
               </div>
-
-              <div className="pt-3 border-t border-[#E8DFD0] text-[11px] text-slate-500 flex items-center justify-between">
-                <span>Verified School Alumna</span>
-                <span className="text-[#047857] font-bold">100% Academic Honor</span>
-              </div>
-            </div>
+            </ScrollRevealCard>
           ))}
         </div>
 

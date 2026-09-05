@@ -1,6 +1,7 @@
 import React from 'react';
 import { HeartHandshake, ArrowRight, UserCheck, Bike, Tablet, Utensils } from 'lucide-react';
 import { SchemeDetail } from '../types';
+import ScrollRevealCard from './ScrollRevealCard';
 
 interface SchemesCornerProps {
   onOpenWelfareModal: (schemeId: string) => void;
@@ -70,35 +71,36 @@ export const SchemesCorner: React.FC<SchemesCornerProps> = ({ onOpenWelfareModal
 
         {/* Schemes Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {schemes.map((s) => (
-            <div
-              key={s.id}
-              className="bg-white rounded-2xl p-6 border border-emerald-100 hover:border-emerald-500 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
-            >
-              <div>
-                <div className="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center mb-4">
-                  {s.icon === 'UserCheck' && <UserCheck className="w-6 h-6" />}
-                  {s.icon === 'Bike' && <Bike className="w-6 h-6" />}
-                  {s.icon === 'Tablet' && <Tablet className="w-6 h-6" />}
-                  {s.icon === 'Utensils' && <Utensils className="w-6 h-6" />}
+          {schemes.map((s, idx) => (
+            <ScrollRevealCard key={s.id} delay={idx * 90}>
+              <div
+                className="bg-white rounded-2xl p-6 border border-emerald-100 hover:border-emerald-500 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between h-full"
+              >
+                <div>
+                  <div className="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center mb-4">
+                    {s.icon === 'UserCheck' && <UserCheck className="w-6 h-6" />}
+                    {s.icon === 'Bike' && <Bike className="w-6 h-6" />}
+                    {s.icon === 'Tablet' && <Tablet className="w-6 h-6" />}
+                    {s.icon === 'Utensils' && <Utensils className="w-6 h-6" />}
+                  </div>
+
+                  <h3 className="font-extrabold text-slate-900 text-lg mb-1">{s.title}</h3>
+                  <span className="text-xs font-bold text-emerald-600 uppercase block mb-3">{s.subTitle}</span>
+
+                  <p className="text-slate-600 text-sm mb-4 leading-relaxed line-clamp-4">
+                    {s.description}
+                  </p>
                 </div>
 
-                <h3 className="font-extrabold text-slate-900 text-lg mb-1">{s.title}</h3>
-                <span className="text-xs font-bold text-emerald-600 uppercase block mb-3">{s.subTitle}</span>
-
-                <p className="text-slate-600 text-sm mb-4 leading-relaxed line-clamp-4">
-                  {s.description}
-                </p>
+                <button
+                  onClick={() => onOpenWelfareModal(s.id)}
+                  className="text-emerald-700 hover:text-emerald-800 font-bold text-xs flex items-center gap-1.5 pt-4 border-t border-slate-100 group"
+                >
+                  <span>Eligibility & Rules</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </button>
               </div>
-
-              <button
-                onClick={() => onOpenWelfareModal(s.id)}
-                className="text-emerald-700 hover:text-emerald-800 font-bold text-xs flex items-center gap-1.5 pt-4 border-t border-slate-100 group"
-              >
-                <span>Eligibility & Rules</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </button>
-            </div>
+            </ScrollRevealCard>
           ))}
         </div>
 

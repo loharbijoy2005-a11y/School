@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Camera, Eye, X, Image as ImageIcon } from 'lucide-react';
 import { GalleryItem } from '../types';
+import ScrollRevealCard from './ScrollRevealCard';
 
 interface EventGalleryProps {
   galleryItems?: GalleryItem[];
@@ -64,34 +65,35 @@ export const EventGallery: React.FC<EventGalleryProps> = ({ galleryItems: propGa
 
         {/* Gallery Masonry Grid */}
         <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {filteredItems.map((item) => (
-            <div
-              key={item.id}
-              onClick={() => setSelectedPhoto(item)}
-              className="bg-white rounded-2xl border border-[#E8DFD0] overflow-hidden relative group cursor-pointer shadow-xs hover:shadow-md hover:border-[#9D174D]/50 transition-all"
-            >
-              <div className="h-48 overflow-hidden relative bg-slate-100">
-                <img
-                  src={item.imageUrl}
-                  alt={item.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-[#1E293B]/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                  <div className="w-10 h-10 rounded-full bg-[#B45309] text-white flex items-center justify-center font-bold shadow-md">
-                    <Eye className="w-5 h-5" />
+          {filteredItems.map((item, idx) => (
+            <ScrollRevealCard key={item.id} delay={(idx % 4) * 80} animation="zoom-in">
+              <div
+                onClick={() => setSelectedPhoto(item)}
+                className="bg-white rounded-2xl border border-[#E8DFD0] overflow-hidden relative group cursor-pointer shadow-xs hover:shadow-md hover:border-[#9D174D]/50 transition-all h-full"
+              >
+                <div className="h-48 overflow-hidden relative bg-slate-100">
+                  <img
+                    src={item.imageUrl}
+                    alt={item.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-[#1E293B]/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-full bg-[#B45309] text-white flex items-center justify-center font-bold shadow-md">
+                      <Eye className="w-5 h-5" />
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="p-3.5 space-y-1">
-                <span className="text-[10px] font-extrabold text-[#B45309] uppercase bg-amber-100/80 px-2 py-0.5 rounded">
-                  {item.category}
-                </span>
-                <h4 className="text-xs font-bold text-[#1E293B] group-hover:text-[#9D174D] transition-colors line-clamp-1">
-                  {item.title}
-                </h4>
+                <div className="p-3.5 space-y-1">
+                  <span className="text-[10px] font-extrabold text-[#B45309] uppercase bg-amber-100/80 px-2 py-0.5 rounded">
+                    {item.category}
+                  </span>
+                  <h4 className="text-xs font-bold text-[#1E293B] group-hover:text-[#9D174D] transition-colors line-clamp-1">
+                    {item.title}
+                  </h4>
+                </div>
               </div>
-            </div>
+            </ScrollRevealCard>
           ))}
         </div>
 

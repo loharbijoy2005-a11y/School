@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { BookOpen, GraduationCap, Microscope, Atom, FileText, CheckCircle2, ChevronRight, Award, Laptop } from 'lucide-react';
 import { AcademicStream } from '../types';
+import ScrollRevealCard from './ScrollRevealCard';
 
 export const AcademicSpectrum: React.FC = () => {
   const [activeWing, setActiveWing] = useState<'Secondary' | 'HS Arts' | 'HS Science' | 'Vocational'>('Secondary');
@@ -90,61 +91,65 @@ export const AcademicSpectrum: React.FC = () => {
             <React.Fragment key={stream.id}>
               
               {/* Left Column: Stream Overview */}
-              <div className="lg:col-span-6 bg-white p-8 rounded-3xl border border-[#E8DFD0] space-y-6 flex flex-col justify-between shadow-sm">
-                <div className="space-y-4">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 border border-amber-300 text-[#B45309] font-bold text-xs">
-                    <GraduationCap className="w-4 h-4" />
-                    <span>{stream.duration}</span>
+              <ScrollRevealCard delay={0} animation="slide-left" className="lg:col-span-6 flex flex-col">
+                <div className="bg-white p-8 rounded-3xl border border-[#E8DFD0] space-y-6 flex flex-col justify-between shadow-sm h-full">
+                  <div className="space-y-4">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 border border-amber-300 text-[#B45309] font-bold text-xs">
+                      <GraduationCap className="w-4 h-4" />
+                      <span>{stream.duration}</span>
+                    </div>
+                    
+                    <h3 className="font-serif font-extrabold text-2xl text-[#1E293B]">
+                      {stream.title}
+                    </h3>
+
+                    <p className="text-slate-600 text-xs leading-relaxed">
+                      {stream.description}
+                    </p>
                   </div>
-                  
-                  <h3 className="font-serif font-extrabold text-2xl text-[#1E293B]">
-                    {stream.title}
-                  </h3>
 
-                  <p className="text-slate-600 text-xs leading-relaxed">
-                    {stream.description}
-                  </p>
+                  <div className="bg-[#FAF7F2] p-4 rounded-2xl border border-[#E8DFD0] space-y-2">
+                    <span className="text-[10px] font-extrabold text-[#047857] uppercase tracking-wider">
+                      Expected Learning Outcome:
+                    </span>
+                    <p className="text-xs text-slate-800 font-medium leading-relaxed">
+                      {stream.outcomes}
+                    </p>
+                  </div>
                 </div>
-
-                <div className="bg-[#FAF7F2] p-4 rounded-2xl border border-[#E8DFD0] space-y-2">
-                  <span className="text-[10px] font-extrabold text-[#047857] uppercase tracking-wider">
-                    Expected Learning Outcome:
-                  </span>
-                  <p className="text-xs text-slate-800 font-medium leading-relaxed">
-                    {stream.outcomes}
-                  </p>
-                </div>
-              </div>
+              </ScrollRevealCard>
 
               {/* Right Column: Subject Combination List */}
-              <div className="lg:col-span-6 bg-white p-8 rounded-3xl border border-[#E8DFD0] space-y-6 shadow-sm">
-                <div className="border-b border-[#E8DFD0] pb-3 flex items-center justify-between">
-                  <h4 className="font-extrabold text-sm text-[#1E293B] uppercase tracking-wider flex items-center gap-2">
-                    <BookOpen className="w-4 h-4 text-[#9D174D]" />
-                    Subject Combination & Lab Practicals
-                  </h4>
-                  <span className="text-[10px] font-bold text-[#B45309]">Official Syllabus</span>
-                </div>
+              <ScrollRevealCard delay={150} animation="slide-right" className="lg:col-span-6 flex flex-col">
+                <div className="bg-white p-8 rounded-3xl border border-[#E8DFD0] space-y-6 shadow-sm h-full">
+                  <div className="border-b border-[#E8DFD0] pb-3 flex items-center justify-between">
+                    <h4 className="font-extrabold text-sm text-[#1E293B] uppercase tracking-wider flex items-center gap-2">
+                      <BookOpen className="w-4 h-4 text-[#9D174D]" />
+                      Subject Combination & Lab Practicals
+                    </h4>
+                    <span className="text-[10px] font-bold text-[#B45309]">Official Syllabus</span>
+                  </div>
 
-                <div className="grid sm:grid-cols-2 gap-3 text-xs">
-                  {stream.subjects.map((sub, idx) => (
-                    <div key={idx} className="bg-[#FAF7F2] p-3 rounded-xl border border-[#E8DFD0] flex items-center gap-2 text-slate-800">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#B45309] shrink-0" />
-                      <span>{sub}</span>
-                    </div>
-                  ))}
-                </div>
+                  <div className="grid sm:grid-cols-2 gap-3 text-xs">
+                    {stream.subjects.map((sub, idx) => (
+                      <div key={idx} className="bg-[#FAF7F2] p-3 rounded-xl border border-[#E8DFD0] flex items-center gap-2 text-slate-800">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#B45309] shrink-0" />
+                        <span>{sub}</span>
+                      </div>
+                    ))}
+                  </div>
 
-                <div className="pt-2 flex flex-wrap gap-3">
-                  <button
-                    onClick={() => alert(`Downloading Official WBBSE/WBCHSE Syllabus for ${stream.title}...`)}
-                    className="bg-[#B45309] hover:bg-[#92400E] text-white font-extrabold px-5 py-2.5 rounded-full text-xs transition-colors flex items-center gap-2 shadow-xs"
-                  >
-                    <FileText className="w-4 h-4" />
-                    <span>Download Full Syllabus PDF</span>
-                  </button>
+                  <div className="pt-2 flex flex-wrap gap-3">
+                    <button
+                      onClick={() => alert(`Downloading Official WBBSE/WBCHSE Syllabus for ${stream.title}...`)}
+                      className="bg-[#B45309] hover:bg-[#92400E] text-white font-extrabold px-5 py-2.5 rounded-full text-xs transition-colors flex items-center gap-2 shadow-xs"
+                    >
+                      <FileText className="w-4 h-4" />
+                      <span>Download Full Syllabus PDF</span>
+                    </button>
+                  </div>
                 </div>
-              </div>
+              </ScrollRevealCard>
 
             </React.Fragment>
           ))}

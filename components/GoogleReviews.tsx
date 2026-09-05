@@ -1,6 +1,7 @@
 import React from 'react';
 import { Star, Quote, CheckCircle2 } from 'lucide-react';
 import { GoogleReview } from '../types';
+import ScrollRevealCard from './ScrollRevealCard';
 
 export const GoogleReviews: React.FC = () => {
   const reviews: GoogleReview[] = [
@@ -51,36 +52,35 @@ export const GoogleReviews: React.FC = () => {
         </div>
 
         <div className="grid md:grid-cols-3 gap-6">
-          {reviews.map((rev) => (
-            <div
-              key={rev.id}
-              className="bg-white p-6 rounded-3xl border border-[#E8DFD0] shadow-xs space-y-4 hover:shadow-md transition-all flex flex-col justify-between"
-            >
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-1 text-amber-500">
-                    {[...Array(rev.rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
-                    ))}
+          {reviews.map((rev, idx) => (
+            <ScrollRevealCard key={rev.id} delay={idx * 120}>
+              <div className="bg-white p-6 rounded-3xl border border-[#E8DFD0] shadow-xs space-y-4 hover:shadow-md transition-all flex flex-col justify-between h-full">
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-1 text-amber-500">
+                      {[...Array(rev.rating)].map((_, i) => (
+                        <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
+                      ))}
+                    </div>
+                    <span className="text-[11px] text-slate-500">{rev.date}</span>
                   </div>
-                  <span className="text-[11px] text-slate-500">{rev.date}</span>
+
+                  <p className="text-xs text-slate-700 italic leading-relaxed font-medium">
+                    "{rev.comment}"
+                  </p>
                 </div>
 
-                <p className="text-xs text-slate-700 italic leading-relaxed font-medium">
-                  "{rev.comment}"
-                </p>
-              </div>
-
-              <div className="pt-3 border-t border-[#E8DFD0] flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-rose-100 text-[#9D174D] font-extrabold flex items-center justify-center border border-rose-200 shrink-0">
-                  {rev.authorAvatar}
-                </div>
-                <div>
-                  <h4 className="font-bold text-sm text-[#1E293B]">{rev.authorName}</h4>
-                  <p className="text-[11px] text-[#B45309] font-bold">{rev.role} • Verified Review</p>
+                <div className="pt-3 border-t border-[#E8DFD0] flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-rose-100 text-[#9D174D] font-extrabold flex items-center justify-center border border-rose-200 shrink-0">
+                    {rev.authorAvatar}
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-sm text-[#1E293B]">{rev.authorName}</h4>
+                    <p className="text-[11px] text-[#B45309] font-bold">{rev.role} • Verified Review</p>
+                  </div>
                 </div>
               </div>
-            </div>
+            </ScrollRevealCard>
           ))}
         </div>
 

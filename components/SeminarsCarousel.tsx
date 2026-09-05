@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Calendar, MapPin, Sparkles, ChevronLeft, ChevronRight, Award } from 'lucide-react';
 import { CulturalEvent } from '../types';
+import ScrollRevealCard from './ScrollRevealCard';
 
 export const SeminarsCarousel: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -90,61 +91,63 @@ export const SeminarsCarousel: React.FC = () => {
         </div>
 
         {/* Active Event Slide Card */}
-        <div className="bg-white rounded-3xl border border-[#E8DFD0] overflow-hidden shadow-md grid lg:grid-cols-12 items-center">
-          
-          <div className="lg:col-span-6 h-72 lg:h-96 relative bg-slate-100">
-            <img
-              src={activeEvent.imageUrl}
-              alt={activeEvent.title}
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute top-4 left-4">
-              <span className="bg-[#9D174D] text-white text-[11px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider shadow-md">
-                {activeEvent.badge}
-              </span>
-            </div>
-          </div>
-
-          <div className="lg:col-span-6 p-8 lg:p-10 space-y-6">
-            <div className="flex flex-wrap items-center gap-4 text-xs text-slate-600 font-bold">
-              <span className="flex items-center gap-1.5 text-[#B45309]">
-                <Calendar className="w-4 h-4" />
-                <span>{activeEvent.date}</span>
-              </span>
-              <span className="flex items-center gap-1.5 text-slate-700">
-                <MapPin className="w-4 h-4 text-[#9D174D]" />
-                <span>{activeEvent.venue}</span>
-              </span>
-            </div>
-
-            <h3 className="font-serif font-extrabold text-2xl lg:text-3xl text-[#1E293B] leading-snug">
-              {activeEvent.title}
-            </h3>
-
-            <p className="text-slate-600 text-sm leading-relaxed font-medium">
-              {activeEvent.description}
-            </p>
-
-            <div className="pt-2 flex items-center justify-between">
-              <span className="text-xs text-slate-500 font-mono">
-                Event {currentIndex + 1} of {events.length}
-              </span>
-
-              <div className="flex gap-1.5">
-                {events.map((_, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setCurrentIndex(idx)}
-                    className={`w-3 h-3 rounded-full transition-all ${
-                      currentIndex === idx ? 'bg-[#B45309] w-6' : 'bg-slate-200'
-                    }`}
-                  />
-                ))}
+        <ScrollRevealCard animation="fade-up">
+          <div className="bg-white rounded-3xl border border-[#E8DFD0] overflow-hidden shadow-md grid lg:grid-cols-12 items-center">
+            
+            <div className="lg:col-span-6 h-72 lg:h-96 relative bg-slate-100">
+              <img
+                src={activeEvent.imageUrl}
+                alt={activeEvent.title}
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute top-4 left-4">
+                <span className="bg-[#9D174D] text-white text-[11px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider shadow-md">
+                  {activeEvent.badge}
+                </span>
               </div>
             </div>
-          </div>
 
-        </div>
+            <div className="lg:col-span-6 p-8 lg:p-10 space-y-6">
+              <div className="flex flex-wrap items-center gap-4 text-xs text-slate-600 font-bold">
+                <span className="flex items-center gap-1.5 text-[#B45309]">
+                  <Calendar className="w-4 h-4" />
+                  <span>{activeEvent.date}</span>
+                </span>
+                <span className="flex items-center gap-1.5 text-slate-700">
+                  <MapPin className="w-4 h-4 text-[#9D174D]" />
+                  <span>{activeEvent.venue}</span>
+                </span>
+              </div>
+
+              <h3 className="font-serif font-extrabold text-2xl lg:text-3xl text-[#1E293B] leading-snug">
+                {activeEvent.title}
+              </h3>
+
+              <p className="text-slate-600 text-sm leading-relaxed font-medium">
+                {activeEvent.description}
+              </p>
+
+              <div className="pt-2 flex items-center justify-between">
+                <span className="text-xs text-slate-500 font-mono">
+                  Event {currentIndex + 1} of {events.length}
+                </span>
+
+                <div className="flex gap-1.5">
+                  {events.map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setCurrentIndex(idx)}
+                      className={`w-3 h-3 rounded-full transition-all ${
+                        currentIndex === idx ? 'bg-[#B45309] w-6' : 'bg-slate-200'
+                      }`}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </ScrollRevealCard>
 
       </div>
     </section>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { BookOpen, Laptop, Microscope, Sun, Utensils, HeartPulse, ShieldCheck, Dumbbell, Trophy, Wifi, Sparkles, Users, Droplets, Camera } from 'lucide-react';
 import { FacilityItem } from '../types';
+import ScrollRevealCard from './ScrollRevealCard';
 
 export const BentoGrid: React.FC = () => {
   const facilities: FacilityItem[] = [
@@ -111,40 +112,41 @@ export const BentoGrid: React.FC = () => {
 
         {/* 14+ Bento Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-          {facilities.map((fac) => (
-            <div
+          {facilities.map((fac, idx) => (
+            <ScrollRevealCard
               key={fac.id}
-              className={`bg-white p-5 rounded-3xl border border-[#E8DFD0] hover:border-[#B45309]/60 shadow-xs hover:shadow-md transition-all group flex flex-col justify-between space-y-4 ${
-                fac.isLarge ? 'sm:col-span-2' : ''
-              }`}
+              delay={(idx % 4) * 80}
+              className={`${fac.isLarge ? 'sm:col-span-2' : ''}`}
             >
-              <div className="space-y-3">
-                <div className="h-40 rounded-2xl overflow-hidden relative bg-slate-100">
-                  <img
-                    src={fac.imageUrl}
-                    alt={fac.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#1E293B]/70 via-transparent to-transparent opacity-80"></div>
-                  <span className="absolute bottom-3 left-3 bg-[#9D174D] text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full uppercase shadow-xs">
-                    Modern Facility
-                  </span>
+              <div className="bg-white p-5 rounded-3xl border border-[#E8DFD0] hover:border-[#B45309]/60 shadow-xs hover:shadow-md transition-all group flex flex-col justify-between space-y-4 h-full">
+                <div className="space-y-3">
+                  <div className="h-40 rounded-2xl overflow-hidden relative bg-slate-100">
+                    <img
+                      src={fac.imageUrl}
+                      alt={fac.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#1E293B]/70 via-transparent to-transparent opacity-80"></div>
+                    <span className="absolute bottom-3 left-3 bg-[#9D174D] text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full uppercase shadow-xs">
+                      Modern Facility
+                    </span>
+                  </div>
+
+                  <h3 className="font-serif font-extrabold text-lg text-[#1E293B] group-hover:text-[#9D174D] transition-colors leading-snug">
+                    {fac.title}
+                  </h3>
+
+                  <p className="text-xs text-slate-600 leading-relaxed font-medium">
+                    {fac.description}
+                  </p>
                 </div>
 
-                <h3 className="font-serif font-extrabold text-lg text-[#1E293B] group-hover:text-[#9D174D] transition-colors leading-snug">
-                  {fac.title}
-                </h3>
-
-                <p className="text-xs text-slate-600 leading-relaxed font-medium">
-                  {fac.description}
-                </p>
+                <div className="pt-2 border-t border-[#E8DFD0] text-[11px] text-[#047857] font-bold flex items-center justify-between">
+                  <span>Active Infrastructure</span>
+                  <span>MGGHS Campus</span>
+                </div>
               </div>
-
-              <div className="pt-2 border-t border-[#E8DFD0] text-[11px] text-[#047857] font-bold flex items-center justify-between">
-                <span>Active Infrastructure</span>
-                <span>MGGHS Campus</span>
-              </div>
-            </div>
+            </ScrollRevealCard>
           ))}
         </div>
 
