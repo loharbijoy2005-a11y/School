@@ -1,21 +1,51 @@
-import React, { useState } from 'react';
-import { Bell, Download, ExternalLink, Calendar, ChevronRight, Award, FileText, Camera, ShieldCheck, Sparkles } from 'lucide-react';
+'use client';
+
+import React, { useState, useEffect } from 'react';
+import { Bell, Download, ChevronRight, Camera, Sparkles, Laptop, GraduationCap, Users } from 'lucide-react';
 import { Notice, NoticeCategory } from '../types';
 
 interface HeroNoticeOverlayProps {
   onOpenAdmissionModal: () => void;
-  onDownloadRoutine: () => void;
-  onOpenPdfModal: (notice: Notice) => void;
+  onDownloadRoutine?: () => void;
+  onOpenPdfModal?: (notice: Notice) => void;
   notices?: Notice[];
 }
 
 export const HeroNoticeOverlay: React.FC<HeroNoticeOverlayProps> = ({
   onOpenAdmissionModal,
-  onDownloadRoutine,
-  onOpenPdfModal,
+  onDownloadRoutine = () => alert('Downloading Exam Schedule...'),
+  onOpenPdfModal = (notice) => alert(`Opening ${notice.title}`),
   notices: propNotices,
 }) => {
+  const [currentSlide, setCurrentSlide] = useState(0);
   const [activeTab, setActiveTab] = useState<NoticeCategory>('all');
+
+  const campusPhotos = [
+    {
+      url: '/assets/hero_campus.jpg',
+      title: 'School Heritage Gate & Historic Main Building (Estd. 1945)',
+    },
+    {
+      url: '/assets/school_hero.jpg',
+      title: 'Morning School Assembly & Uniformed Female Students',
+    },
+    {
+      url: '/assets/science_lab.jpg',
+      title: 'Physics & Chemistry Practical Demonstration Labs',
+    },
+    {
+      url: '/assets/library_smartclass.jpg',
+      title: 'Digital Smart Classrooms & Central Library Archives',
+    },
+  ];
+
+  // Auto-play carousel cycling every 4 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % campusPhotos.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [campusPhotos.length]);
 
   const defaultNotices: Notice[] = [
     {
@@ -67,86 +97,124 @@ export const HeroNoticeOverlay: React.FC<HeroNoticeOverlayProps> = ({
     : noticesList.filter((n) => n.category === activeTab);
 
   return (
-    <section id="home" className="relative bg-[#F5F1EA] text-[#292524] min-h-[580px] lg:min-h-[640px] flex items-center overflow-hidden border-b border-[#DFD7C7]">
+    <section id="home" className="relative bg-[#FAF7F2] text-[#292524] min-h-[600px] lg:min-h-[650px] flex items-center overflow-hidden border-b border-[#E8DFD0]">
       
-      {/* Background Image Carousel Layer */}
+      {/* Dynamic Full-Width Campus Photo Slider */}
       <div className="absolute inset-0 z-0">
-        <img
-          src="/assets/hero_campus.jpg"
-          alt="Mahishadal Gayeswari Girls' High School Campus"
-          className="w-full h-full object-cover opacity-20 scale-105 transition-transform duration-1000"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#F5F1EA] via-[#F5F1EA]/90 to-[#F5F1EA]/60"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#F5F1EA] via-transparent to-[#F5F1EA]/40"></div>
+        {campusPhotos.map((photo, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+              index === currentSlide ? 'opacity-100 scale-105' : 'opacity-0 scale-100'
+            }`}
+            style={{ transitionProperty: 'opacity, transform' }}
+          >
+            <img
+              src={photo.url}
+              alt={photo.title}
+              className="w-full h-full object-cover opacity-35"
+            />
+          </div>
+        ))}
+
+        {/* Soft Warm Vignette Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#FAF7F2] via-[#FAF7F2]/90 to-[#FAF7F2]/50 lg:via-[#FAF7F2]/85"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#FAF7F2] via-transparent to-[#FAF7F2]/50"></div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 py-12 w-full grid lg:grid-cols-12 gap-8 items-center">
         
-        {/* Left Hero Headlines & Institutional Pitch */}
+        {/* Left Column: Headlines, Institutional Pitch & Stats */}
         <div className="lg:col-span-7 space-y-6">
           
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#C58B24]/15 border border-[#C58B24]/40 text-[#701A1E] font-extrabold text-xs uppercase tracking-wider shadow-xs">
-            <Sparkles className="w-4 h-4 text-[#C58B24]" />
-            <span>Pioneer in Female Education Since 1945</span>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#881337]/10 border border-[#881337]/30 text-[#881337] font-extrabold text-xs uppercase tracking-wider shadow-xs">
+            <Sparkles className="w-4 h-4 text-[#D97706]" />
+            <span>PIONEER IN FEMALE EDUCATION SINCE 1945</span>
           </div>
 
-          <h2 className="font-serif font-extrabold text-3xl sm:text-4xl md:text-5xl text-[#292524] leading-tight">
+          <h1 className="font-serif font-extrabold text-3xl sm:text-4xl md:text-5xl text-[#1C1917] leading-tight">
             Empowering Young Girls, <br />
-            <span className="bg-gradient-to-r from-[#701A1E] via-[#C58B24] to-[#1B4332] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#881337] via-[#D97706] to-[#1B4332] bg-clip-text text-transparent">
               Inspiring Excellence Since 1945
             </span>
-          </h2>
+          </h1>
 
-          <p className="text-slate-700 text-sm md:text-base leading-relaxed max-w-2xl font-medium">
-            Mahishadal Gayeswari Girls' High School (H.S.) is a premier government-sponsored girls' high school in Mahishadal, Purba Medinipur. Affiliated to WBBSE and WBCHSE, we foster holistic academic brilliance, scientific temper, and leadership skills from Class V to Class XII.
+          <p className="text-[#334155] text-sm md:text-base leading-relaxed max-w-2xl font-medium">
+            Mahishadal Gayeswari Girls' High School (H.S.) is a premier government-sponsored girls' institution in Purba Medinipur. Affiliated to WBBSE & WBCHSE, we foster academic distinction, scientific practical temper, and leadership skills from Class V to Class XII.
           </p>
 
-          {/* Key Stat Pills */}
+          {/* Stats Row: 3 Glassmorphic Counter Tiles */}
           <div className="flex flex-wrap gap-4 pt-2">
-            <div className="bg-white border border-[#DFD7C7] px-4 py-2.5 rounded-2xl shadow-xs">
-              <p className="text-[#C58B24] font-extrabold text-lg">100% Pass</p>
-              <p className="text-[11px] text-slate-600 uppercase font-bold">Madhyamik & H.S. Exam</p>
+            <div className="bg-white/90 backdrop-blur-sm border border-[#E8DFD0] px-4 py-3 rounded-2xl shadow-xs">
+              <p className="text-[#D97706] font-extrabold text-lg flex items-center gap-1">
+                <GraduationCap className="w-5 h-5 text-[#D97706]" />
+                100% Pass
+              </p>
+              <p className="text-[11px] text-[#334155] uppercase font-bold mt-0.5">Madhyamik & H.S.</p>
             </div>
-            <div className="bg-white border border-[#DFD7C7] px-4 py-2.5 rounded-2xl shadow-xs">
-              <p className="text-[#701A1E] font-extrabold text-lg">1,850+ Girls</p>
-              <p className="text-[11px] text-slate-600 uppercase font-bold">Enrolled Students</p>
+            
+            <div className="bg-white/90 backdrop-blur-sm border border-[#E8DFD0] px-4 py-3 rounded-2xl shadow-xs">
+              <p className="text-[#881337] font-extrabold text-lg flex items-center gap-1">
+                <Users className="w-5 h-5 text-[#881337]" />
+                2,200+ Girls
+              </p>
+              <p className="text-[11px] text-[#334155] uppercase font-bold mt-0.5">Enrolled Students</p>
             </div>
-            <div className="bg-white border border-[#DFD7C7] px-4 py-2.5 rounded-2xl shadow-xs">
-              <p className="text-[#1B4332] font-extrabold text-lg">30+ PCs</p>
-              <p className="text-[11px] text-slate-600 uppercase font-bold">ICT Computer Lab</p>
+            
+            <div className="bg-white/90 backdrop-blur-sm border border-[#E8DFD0] px-4 py-3 rounded-2xl shadow-xs">
+              <p className="text-[#1B4332] font-extrabold text-lg flex items-center gap-1">
+                <Laptop className="w-5 h-5 text-[#1B4332]" />
+                30+ Systems
+              </p>
+              <p className="text-[11px] text-[#334155] uppercase font-bold mt-0.5">ICT Computer Lab</p>
             </div>
           </div>
 
-          {/* Action Call To Actions */}
+          {/* CTA Buttons */}
           <div className="flex flex-wrap gap-3 pt-4">
             <button
               onClick={onOpenAdmissionModal}
-              className="bg-[#701A1E] hover:bg-[#501215] text-white font-extrabold px-6 py-3 rounded-full text-xs shadow-md transition-all flex items-center gap-2"
+              className="bg-[#881337] hover:bg-[#6b0f2b] text-white font-extrabold px-6 py-3.5 rounded-full text-xs shadow-md transition-all flex items-center gap-2 transform hover:-translate-y-0.5 cursor-pointer"
             >
-              <span>Online Admission Inquiry 2026</span>
+              <span>Online Admission 2026</span>
               <ChevronRight className="w-4 h-4" />
             </button>
 
             <a
               href="#gallery"
-              className="bg-white hover:bg-slate-50 text-[#292524] border border-[#DFD7C7] font-bold px-5 py-3 rounded-full text-xs transition-colors flex items-center gap-2 shadow-xs"
+              className="bg-white hover:bg-amber-50/50 text-[#1C1917] border border-[#E8DFD0] hover:border-[#D97706] font-bold px-6 py-3.5 rounded-full text-xs transition-colors flex items-center gap-2 shadow-xs cursor-pointer"
             >
-              <Camera className="w-4 h-4 text-[#C58B24]" />
-              <span>Campus Photo Tour</span>
+              <Camera className="w-4 h-4 text-[#D97706]" />
+              <span>Explore Campus Tour</span>
             </a>
+          </div>
+
+          {/* Carousel Slide Indicators */}
+          <div className="flex items-center gap-2 pt-2">
+            <span className="text-[11px] text-[#334155] font-semibold mr-1">Campus View:</span>
+            {campusPhotos.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setCurrentSlide(idx)}
+                className={`h-2 rounded-full transition-all cursor-pointer ${
+                  idx === currentSlide ? 'w-6 bg-[#881337]' : 'w-2 bg-slate-300 hover:bg-slate-400'
+                }`}
+                aria-label={`Slide ${idx + 1}`}
+              />
+            ))}
           </div>
 
         </div>
 
-        {/* Right Floating Notice Board Hub Widget (Authentic Off-White Paper Card) */}
+        {/* Right Floating Notice Board Hub */}
         <div className="lg:col-span-5">
-          <div className="bg-[#FAF7F0] border border-[#DFD7C7] rounded-3xl p-6 shadow-md space-y-5">
+          <div className="bg-white border border-[#DFD7C7] rounded-3xl p-6 shadow-lg space-y-5">
             
             {/* Notice Board Header */}
-            <div className="flex items-center justify-between border-b border-[#DFD7C7] pb-3">
+            <div className="flex items-center justify-between border-b border-[#E8DFD0] pb-3">
               <div className="flex items-center gap-2">
-                <Bell className="w-5 h-5 text-[#701A1E] animate-bounce" />
-                <h3 className="font-serif font-extrabold text-lg text-[#292524]">
+                <Bell className="w-5 h-5 text-[#881337] animate-bounce" />
+                <h3 className="font-serif font-extrabold text-lg text-[#1C1917]">
                   Notice Board Hub
                 </h3>
               </div>
@@ -155,22 +223,22 @@ export const HeroNoticeOverlay: React.FC<HeroNoticeOverlayProps> = ({
               </span>
             </div>
 
-            {/* Filter Tabs */}
-            <div className="flex flex-wrap gap-1 bg-[#F5F1EA] p-1 rounded-xl border border-[#DFD7C7] text-[11px] font-bold">
+            {/* Switchable Notice Tabs */}
+            <div className="flex flex-wrap gap-1 bg-[#FAF7F2] p-1.5 rounded-2xl border border-[#E8DFD0] text-[11px] font-bold">
               {[
-                { id: 'all', label: 'SCHOOL NOTICES' },
-                { id: 'wbbse', label: 'WBBSE' },
-                { id: 'wbchse', label: 'WBCHSE' },
-                { id: 'schemes', label: 'SCHEMES' },
-                { id: 'tender', label: 'TENDER' },
+                { id: 'all', label: 'School Notices' },
+                { id: 'wbbse', label: 'WBBSE (V-X)' },
+                { id: 'wbchse', label: 'WBCHSE (XI-XII)' },
+                { id: 'schemes', label: 'Schemes' },
+                { id: 'tender', label: 'Tenders/SMC' },
               ].map((tab) => (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as NoticeCategory)}
-                  className={`px-2.5 py-1 rounded-lg transition-all ${
+                  className={`px-2.5 py-1.5 rounded-xl transition-all cursor-pointer ${
                     activeTab === tab.id
-                      ? 'bg-[#701A1E] text-white shadow-xs'
-                      : 'bg-white text-[#334155] hover:text-[#292524] border border-[#DFD7C7]'
+                      ? 'bg-[#881337] text-white shadow-xs'
+                      : 'bg-white text-[#334155] hover:text-[#1C1917] border border-[#E8DFD0]'
                   }`}
                 >
                   {tab.label}
@@ -178,16 +246,16 @@ export const HeroNoticeOverlay: React.FC<HeroNoticeOverlayProps> = ({
               ))}
             </div>
 
-            {/* Notice Entries List (Light Paper Tiles) */}
+            {/* Notice Items Display */}
             <div className="space-y-3 max-h-[280px] overflow-y-auto pr-1">
               {filteredNotices.slice(0, 4).map((notice) => (
                 <div
                   key={notice.id}
                   onClick={() => onOpenPdfModal(notice)}
-                  className="bg-white hover:bg-[#F5F1EA] p-3.5 rounded-2xl border border-[#DFD7C7] hover:border-[#C58B24]/60 transition-all cursor-pointer group flex items-start gap-3 shadow-2xs"
+                  className="bg-[#FFFDF9] hover:bg-[#FAF7F2] p-3.5 rounded-2xl border border-[#E2D7C3] hover:border-[#D97706]/60 transition-all cursor-pointer group flex items-start gap-3 shadow-2xs"
                 >
-                  {/* Calendar Date Badge (Maroon Square Block with White Text) */}
-                  <div className="w-11 h-11 bg-[#701A1E] border border-[#501215] rounded-xl flex flex-col items-center justify-center shrink-0 text-center text-white shadow-xs">
+                  {/* Calendar Date Badge (Maroon Square with White Text) */}
+                  <div className="w-11 h-11 bg-[#881337] border border-[#6b0f2b] rounded-xl flex flex-col items-center justify-center shrink-0 text-center text-white shadow-xs">
                     <span className="text-[10px] font-extrabold uppercase leading-none text-amber-200">
                       {notice.publishDate.split(' ')[1] || 'AUG'}
                     </span>
@@ -199,20 +267,20 @@ export const HeroNoticeOverlay: React.FC<HeroNoticeOverlayProps> = ({
                   <div className="space-y-1 flex-1 min-w-0">
                     <div className="flex items-center gap-1.5">
                       {notice.isNew && (
-                        <span className="bg-[#701A1E] text-white text-[9px] font-extrabold px-1.5 py-0.2 rounded uppercase animate-pulse">
+                        <span className="bg-[#881337] text-white text-[9px] font-extrabold px-1.5 py-0.2 rounded uppercase animate-pulse">
                           NEW
                         </span>
                       )}
-                      <span className="text-[10px] font-bold text-[#C58B24] uppercase">
+                      <span className="text-[10px] font-bold text-[#D97706] uppercase">
                         {notice.category.toUpperCase()}
                       </span>
                     </div>
-                    <h4 className="text-xs font-bold text-[#292524] group-hover:text-[#701A1E] transition-colors line-clamp-2 leading-snug">
+                    <h4 className="text-xs font-bold text-[#1C1917] group-hover:text-[#881337] transition-colors line-clamp-2 leading-snug">
                       {notice.title}
                     </h4>
                   </div>
 
-                  <div className="shrink-0 pt-1 text-slate-400 group-hover:text-[#701A1E] transition-colors">
+                  <div className="shrink-0 pt-1 text-slate-400 group-hover:text-[#881337] transition-colors">
                     <Download className="w-4 h-4" />
                   </div>
                 </div>
@@ -220,9 +288,9 @@ export const HeroNoticeOverlay: React.FC<HeroNoticeOverlayProps> = ({
             </div>
 
             {/* Bottom Archive Link */}
-            <div className="pt-2 border-t border-[#DFD7C7] flex justify-between items-center text-xs">
-              <a href="#notices" className="text-[#C58B24] hover:underline font-bold flex items-center gap-1">
-                <span>View Full Notice Archive &rarr;</span>
+            <div className="pt-2 border-t border-[#E8DFD0] flex justify-between items-center text-xs">
+              <a href="#notices" className="text-[#D97706] hover:underline font-bold flex items-center gap-1">
+                <span>VIEW FULL NOTICE ARCHIVE &rarr;</span>
               </a>
               <span className="text-slate-500 text-[11px] font-mono">Updated Today</span>
             </div>
