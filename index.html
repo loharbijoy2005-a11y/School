@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mahishadal Gayatri Balika Vidyalaya | Girls' Higher Secondary School & College</title>
+  <meta name="description" content="Official website of Mahishadal Gayatri Balika Vidyalaya, Purba Medinipur, West Bengal. Empowering female students through quality education, science, sports, and cultural values since 1956.">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpg" href="assets/logo.jpg">
+  
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ==========================================================================
+       TOP UTILITY BAR
+       ========================================================================== -->
+  <div class="top-bar">
+    <div class="container top-bar-content">
+      <div class="top-info">
+        <span class="top-info-item">
+          <i class="fa-solid fa-phone"></i>
+          <span data-i18n="phoneText">+91 3228 240211</span>
+        </span>
+        <span class="top-info-item">
+          <i class="fa-solid fa-envelope"></i>
+          <span data-i18n="emailText">contact@mgbvschool.ac.in</span>
+        </span>
+        <span class="school-id-badge" data-i18n="schoolId">Banglar Shiksha ID: WB-1954-MGBV</span>
+      </div>
+      <div class="top-actions">
+        <button id="langToggleBtn" class="lang-toggle-btn" title="Toggle Language (English / Bengali)">
+          <i class="fa-solid fa-globe"></i>
+          <span id="currentLangLabel" data-i18n="langToggle">বাংলা</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MAIN NAVIGATION BAR
+       ========================================================================== -->
+  <header class="header-nav">
+    <div class="container nav-container">
+      <a href="#" class="brand-logo-group">
+        <img src="assets/logo.jpg" alt="MGBV Emblem Logo" class="logo-img">
+        <div class="brand-titles">
+          <h1>Mahishadal Gayatri Balika Vidyalaya</h1>
+          <p>Girls' Higher Secondary & Cultural Center | Estd. 1956</p>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#home" class="nav-link" data-i18n="navHome">Home</a></li>
+          <li><a href="#desk" class="nav-link" data-i18n="navAbout">About Us</a></li>
+          <li><a href="#academics" class="nav-link" data-i18n="navAcademics">Academics</a></li>
+          <li><a href="#notices" class="nav-link" data-i18n="navNotices">Live Notices</a></li>
+          <li><a href="#facilities" class="nav-link" data-i18n="navFacilities">Facilities</a></li>
+          <li><a href="#gallery" class="nav-link" data-i18n="navGallery">Gallery</a></li>
+          <li><a href="#admission" class="btn btn-primary" data-i18n="btnApply"><i class="fa-solid fa-graduation-cap"></i> Apply / Admission Query</a></li>
+        </ul>
+      </nav>
+
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Navigation">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       HERO SECTION
+       ========================================================================== -->
+  <section class="hero-section" id="home">
+    <div class="hero-bg-shapes">
+      <div class="shape-blob-1"></div>
+      <div class="shape-blob-2"></div>
+    </div>
+
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="badge-tag">
+          <i class="fa-solid fa-award"></i>
+          <span data-i18n="heroBadge">Empowering Female Education Since 1956</span>
+        </div>
+        <h1 class="hero-title" data-i18n="heroTitle">
+          Empowering Young Women Through <span>Quality Education</span> & Values
+        </h1>
+        <p class="hero-description" data-i18n="heroDesc">
+          Mahishadal Gayatri Balika Vidyalaya is a premier girls' institution in Purba Medinipur dedicated to fostering academic excellence, moral integrity, STEM literacy, and leadership skills in a safe and nurturing environment.
+        </p>
+
+        <div class="hero-cta-group">
+          <button class="btn btn-primary" onclick="downloadProspectus()">
+            <i class="fa-solid fa-file-arrow-down"></i>
+            <span data-i18n="btnProspectus">Download Prospectus 2026</span>
+          </button>
+          <a href="#notices" class="btn btn-outline">
+            <i class="fa-solid fa-bullhorn"></i>
+            <span data-i18n="btnViewNotices">View Latest Notices</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-img-wrapper">
+          <img src="assets/hero_campus.jpg" alt="Mahishadal Gayatri Balika Vidyalaya Campus">
+        </div>
+
+        <!-- Floating Badge 1 -->
+        <div class="floating-stat-card stat-card-1">
+          <div class="stat-icon-box">
+            <i class="fa-solid fa-user-graduate"></i>
+          </div>
+          <div class="stat-info">
+            <h4 data-i18n="statStudents">1,200+</h4>
+            <p data-i18n="statStudentsSub">Female Students Enrolled</p>
+          </div>
+        </div>
+
+        <!-- Floating Badge 2 -->
+        <div class="floating-stat-card stat-card-2">
+          <div class="stat-icon-box" style="background: #E0F2FE; color: #0284C7;">
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <div class="stat-info">
+            <h4 data-i18n="statPassRate">100%</h4>
+            <p data-i18n="statPassRateSub">Madhyamik & HS Pass Rate</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       LIVE NOTICE & CIRCULARS BOARD
+       ========================================================================== -->
+  <section class="section-padding notice-section" id="notices">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge-tag"><i class="fa-solid fa-bell"></i> Live Notice Board</span>
+        <h2 class="section-title" data-i18n="noticeHeaderTitle">Official Notice Board & Circulars</h2>
+        <p class="section-subtitle" data-i18n="noticeHeaderSub">Real-time updates regarding admissions, examination schedules, and government scholarship notifications.</p>
+      </div>
+
+      <div class="glass-card notice-board-container">
+        <div class="notice-top-bar">
+          <div class="notice-tabs">
+            <button class="tab-btn active" data-filter="all">All Notices</button>
+            <button class="tab-btn" data-filter="admission">Admission 2026</button>
+            <button class="tab-btn" data-filter="exam">Examinations</button>
+            <button class="tab-btn" data-filter="scholarship">Kanyashree / Govt</button>
+          </div>
+
+          <div class="notice-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="noticeSearchInput" placeholder="Search circulars or topics...">
+          </div>
+        </div>
+
+        <div class="notice-grid" id="noticeGrid">
+          <!-- Notice 1 -->
+          <div class="notice-card" data-category="admission">
+            <div>
+              <div class="notice-card-header">
+                <span class="notice-date"><i class="fa-regular fa-calendar"></i> 05 Sep 2026</span>
+                <span class="pulse-new"><i class="fa-solid fa-bolt"></i> NEW</span>
+              </div>
+              <h3 class="notice-title">Class XI Admission & Stream Choice Counseling (Session 2026-27)</h3>
+              <p class="notice-desc">All eligible Madhyamik qualified students are advised to check the provisional merit list and attend counseling at School Auditorium.</p>
+            </div>
+            <div class="notice-footer">
+              <span class="notice-category">Admission</span>
+              <button class="btn-pdf" onclick="openNoticePdfModal('Class XI Admission & Stream Choice Counseling', '05 Sep 2026', 'Admission')">
+                <i class="fa-solid fa-file-pdf"></i> View & Download PDF
+              </button>
+            </div>
+          </div>
+
+          <!-- Notice 2 -->
+          <div class="notice-card" data-category="exam">
+            <div>
+              <div class="notice-card-header">
+                <span class="notice-date"><i class="fa-regular fa-calendar"></i> 02 Sep 2026</span>
+                <span class="pulse-new"><i class="fa-solid fa-bolt"></i> NEW</span>
+              </div>
+              <h3 class="notice-title">Higher Secondary Pre-Test Exam Routine 2026-27</h3>
+              <p class="notice-desc">Published examination timetable for Science & Arts streams Class XII students. Practical exams start from 20th September.</p>
+            </div>
+            <div class="notice-footer">
+              <span class="notice-category">Examinations</span>
+              <button class="btn-pdf" onclick="openNoticePdfModal('Higher Secondary Pre-Test Exam Routine', '02 Sep 2026', 'Examinations')">
+                <i class="fa-solid fa-file-pdf"></i> View & Download PDF
+              </button>
+            </div>
+          </div>
+
+          <!-- Notice 3 -->
+          <div class="notice-card" data-category="scholarship">
+            <div>
+              <div class="notice-card-header">
+                <span class="notice-date"><i class="fa-regular fa-calendar"></i> 28 Aug 2026</span>
+              </div>
+              <h3 class="notice-title">Kanyashree Prakalpa K1 & K2 Application Renewal Notice</h3>
+              <p class="notice-desc">Eligible female students born between 01-04-2008 and 31-03-2009 must submit bank passbook & Aadhaar copies to the office desk.</p>
+            </div>
+            <div class="notice-footer">
+              <span class="notice-category">Scholarship</span>
+              <button class="btn-pdf" onclick="openNoticePdfModal('Kanyashree Prakalpa K1 & K2 Application Renewal', '28 Aug 2026', 'Scholarship')">
+                <i class="fa-solid fa-file-pdf"></i> View & Download PDF
+              </button>
+            </div>
+          </div>
+
+          <!-- Notice 4 -->
+          <div class="notice-card" data-category="exam">
+            <div>
+              <div class="notice-card-header">
+                <span class="notice-date"><i class="fa-regular fa-calendar"></i> 20 Aug 2026</span>
+              </div>
+              <h3 class="notice-title">Annual Science Exhibition & Robotics Fair 2026</h3>
+              <p class="notice-desc">Students interested in submitting working models for the district science congress are invited to submit abstracts by 10th September.</p>
+            </div>
+            <div class="notice-footer">
+              <span class="notice-category">Academic</span>
+              <button class="btn-pdf" onclick="openNoticePdfModal('Annual Science Exhibition 2026 Announcement', '20 Aug 2026', 'Academic')">
+                <i class="fa-solid fa-file-pdf"></i> View & Download PDF
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       HEADMISTRESS DESK MESSAGE
+       ========================================================================== -->
+  <section class="section-padding desk-section" id="desk">
+    <div class="container desk-grid">
+      <div class="desk-image-col">
+        <div class="desk-img-frame">
+          <img src="assets/headmistress.jpg" alt="Dr. Aditi Banerjee - Headmistress">
+        </div>
+        <div class="desk-title-tag">
+          <h3 class="desk-name" data-i18n="deskName">Dr. Aditi Banerjee</h3>
+          <p class="desk-role" data-i18n="deskRole">Headmistress, M.Sc., Ph.D., B.Ed.</p>
+        </div>
+      </div>
+
+      <div class="desk-quote-box">
+        <i class="fa-solid fa-quote-left quote-icon"></i>
+        <h2 class="desk-heading" data-i18n="deskTitle">From the Headmistress's Desk</h2>
+        <p class="desk-text" data-i18n="deskMsg1">
+          Welcome to Mahishadal Gayatri Balika Vidyalaya. Our institution has stood as a beacon of female empowerment, knowledge, and moral discipline for over seven decades.
+        </p>
+        <p class="desk-text" data-i18n="deskMsg2">
+          We believe that educating a girl transforms an entire generation. Through state-of-the-art smart classrooms, advanced science laboratories, sports, and Kanyashree Prakalpa support, we groom our young women to excel in national competitive fields while staying rooted in our rich cultural values.
+        </p>
+
+        <div class="desk-highlights">
+          <div class="highlight-item">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>100% Safe & CCTV Monitored Campus</span>
+          </div>
+          <div class="highlight-item">
+            <i class="fa-solid fa-laptop-code"></i>
+            <span>Smart Classroom & Digital Literacy</span>
+          </div>
+          <div class="highlight-item">
+            <i class="fa-solid fa-hand-fist"></i>
+            <span>Self-Defense & NCC Training</span>
+          </div>
+          <div class="highlight-item">
+            <i class="fa-solid fa-hand-holding-heart"></i>
+            <span>100% Kanyashree & Sabooj Sathi Support</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       ACADEMIC STREAMS & FACILITIES SHOWCASE
+       ========================================================================== -->
+  <section class="section-padding" id="academics">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge-tag"><i class="fa-solid fa-book-open-reader"></i> Academic Spectrum</span>
+        <h2 class="section-title">Academic Streams Offered</h2>
+        <p class="section-subtitle">Comprehensive curriculum affiliated with WBBSE and WBCHSE designed for future career paths.</p>
+      </div>
+
+      <div class="academics-grid">
+        <!-- Science Stream -->
+        <div class="academic-card">
+          <div class="stream-icon">
+            <i class="fa-solid fa-flask-vial"></i>
+          </div>
+          <h3 class="stream-title">Higher Secondary Science</h3>
+          <p class="stream-desc">Rigorous STEM curriculum preparing students for NEET, JEE, WBJEE, and university science research careers.</p>
+          <div class="subjects-list">
+            <span class="subject-tag">Physics</span>
+            <span class="subject-tag">Chemistry</span>
+            <span class="subject-tag">Mathematics</span>
+            <span class="subject-tag">Biological Science</span>
+            <span class="subject-tag">Computer Science</span>
+          </div>
+        </div>
+
+        <!-- Arts Stream -->
+        <div class="academic-card">
+          <div class="stream-icon" style="background: #FEF3C7; color: #D97706;">
+            <i class="fa-solid fa-landmark"></i>
+          </div>
+          <h3 class="stream-title">Higher Secondary Arts</h3>
+          <p class="stream-desc">Deep humanities and social science foundation preparing students for Civil Services, Law, Teaching, and Journalism.</p>
+          <div class="subjects-list">
+            <span class="subject-tag">Bengali</span>
+            <span class="subject-tag">English</span>
+            <span class="subject-tag">Political Science</span>
+            <span class="subject-tag">History</span>
+            <span class="subject-tag">Education</span>
+            <span class="subject-tag">Geography</span>
+          </div>
+        </div>
+
+        <!-- Secondary Curriculum -->
+        <div class="academic-card">
+          <div class="stream-icon" style="background: #E0F2FE; color: #0284C7;">
+            <i class="fa-solid fa-school"></i>
+          </div>
+          <h3 class="stream-title">Secondary (Classes V to X)</h3>
+          <p class="stream-desc">Foundational holistic education following West Bengal Board of Secondary Education (WBBSE) syllabus with smart learning tools.</p>
+          <div class="subjects-list">
+            <span class="subject-tag">Languages</span>
+            <span class="subject-tag">Physical Science</span>
+            <span class="subject-tag">Life Science</span>
+            <span class="subject-tag">Math</span>
+            <span class="subject-tag">Social Sciences</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Facilities Showcase Grid -->
+      <div class="section-header" id="facilities" style="margin-top: 5rem;">
+        <span class="badge-tag"><i class="fa-solid fa-building-columns"></i> World-Class Infrastructure</span>
+        <h2 class="section-title">Campus Facilities Showcase</h2>
+        <p class="section-subtitle">Modern facilities designed to nurture all-round excellence in academics, sports, and safety.</p>
+      </div>
+
+      <div class="facilities-grid">
+        <!-- Facility 1 -->
+        <div class="facility-card">
+          <div class="facility-img-box">
+            <img src="assets/science_lab.jpg" alt="Science & Computer Labs">
+            <span class="facility-badge">STEM Labs</span>
+          </div>
+          <div class="facility-content">
+            <h3 class="facility-title">Modern Science & Computer Labs</h3>
+            <p class="facility-desc">Fully equipped Physics, Chemistry, Biology, and Computer Science laboratories with high-speed internet and experimental apparatus.</p>
+          </div>
+        </div>
+
+        <!-- Facility 2 -->
+        <div class="facility-card">
+          <div class="facility-img-box">
+            <img src="assets/library.jpg" alt="Digital Library & Resource Center">
+            <span class="facility-badge">Knowledge Hub</span>
+          </div>
+          <div class="facility-content">
+            <h3 class="facility-title">Central Library & Reading Hall</h3>
+            <p class="facility-desc">Over 10,000+ academic books, competitive exam guides, national journals, e-books, and quiet digital study area.</p>
+          </div>
+        </div>
+
+        <!-- Facility 3 -->
+        <div class="facility-card">
+          <div class="facility-img-box">
+            <img src="assets/ncc_defense.jpg" alt="NCC & Self Defense Training">
+            <span class="facility-badge">Empowerment</span>
+          </div>
+          <div class="facility-content">
+            <h3 class="facility-title">NCC Cadets & Martial Arts Training</h3>
+            <p class="facility-desc">Active National Cadet Corps (NCC) battalion wing and compulsory Karate self-defense classes to build bravery and leadership.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       INTERACTIVE ADMISSION INQUIRY FORM
+       ========================================================================== -->
+  <section class="section-padding admission-section" id="admission">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge-tag"><i class="fa-solid fa-paper-plane"></i> Admissions 2026-27</span>
+        <h2 class="section-title" data-i18n="formTitle">Interactive Admission Inquiry Form</h2>
+        <p class="section-subtitle" data-i18n="formSub">Fill out the form below to submit an inquiry or book an admission counseling appointment.</p>
+      </div>
+
+      <div class="glass-card form-wrapper">
+        <form id="admissionForm">
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label" for="studentName">Student's Full Name *</label>
+              <input type="text" id="studentName" class="form-control" placeholder="e.g. Priya Roy" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="guardianName">Guardian / Parent Name *</label>
+              <input type="text" id="guardianName" class="form-control" placeholder="e.g. Subrata Roy" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="applyClass">Class / Stream Applying For *</label>
+              <select id="applyClass" class="form-control" required>
+                <option value="" disabled selected>Select Target Class</option>
+                <option value="Class V">Class V Admission</option>
+                <option value="Class VI - IX">Class VI - IX Transfer Admission</option>
+                <option value="Class XI Science">Class XI - Science Stream (WBCHSE)</option>
+                <option value="Class XI Arts">Class XI - Arts Stream (WBCHSE)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="phoneNum">Mobile / WhatsApp Number *</label>
+              <input type="tel" id="phoneNum" class="form-control" placeholder="e.g. 9876543210" pattern="[0-9]{10}" required>
+            </div>
+
+            <div class="form-group full-width">
+              <label class="form-label" for="address">Residential Address & Village/P.O. *</label>
+              <input type="text" id="address" class="form-control" placeholder="e.g. Vill- Mahishadal, P.O.- Mahishadal, Purba Medinipur, PIN-721628" required>
+            </div>
+
+            <div class="form-group full-width">
+              <label class="form-label" for="message">Additional Query / Remarks (Optional)</label>
+              <textarea id="message" class="form-control" placeholder="Write any specific query about hostel, bus transport, or stream choice..."></textarea>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary form-submit-btn">
+            <i class="fa-solid fa-paper-plane"></i>
+            <span data-i18n="btnSubmitInquiry">Submit Admission Inquiry</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       PHOTO & EVENT GALLERY
+       ========================================================================== -->
+  <section class="section-padding" id="gallery">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge-tag"><i class="fa-solid fa-camera-retro"></i> Life at MGBV</span>
+        <h2 class="section-title">Photo & Cultural Event Gallery</h2>
+        <p class="section-subtitle">Glimpses of vibrant celebrations, annual athletic meets, academic exhibitions, and award ceremonies.</p>
+      </div>
+
+      <div class="gallery-grid">
+        <!-- Item 1 -->
+        <div class="gallery-item">
+          <img src="assets/saraswati_puja.jpg" alt="Saraswati Puja Celebrations">
+          <div class="gallery-overlay">
+            <h4 class="gallery-item-title">Saraswati Puja Festival</h4>
+            <span class="gallery-item-cat">Cultural Event</span>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="gallery-item">
+          <img src="assets/sports_day.jpg" alt="Annual Sports Meet">
+          <div class="gallery-overlay">
+            <h4 class="gallery-item-title">Annual Athletic Track & Field Meet</h4>
+            <span class="gallery-item-cat">Sports & Physical Fitness</span>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="gallery-item">
+          <img src="assets/science_exhibition.jpg" alt="Science Exhibition Fair">
+          <div class="gallery-overlay">
+            <h4 class="gallery-item-title">District Science Fair & Models</h4>
+            <span class="gallery-item-cat">STEM Innovation</span>
+          </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="gallery-item">
+          <img src="assets/prize_distribution.jpg" alt="Annual Prize Ceremony">
+          <div class="gallery-overlay">
+            <h4 class="gallery-item-title">Annual Excellence Prize Distribution</h4>
+            <span class="gallery-item-cat">Academic Toppers Award</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>Mahishadal Gayatri Balika Vidyalaya</h3>
+          <p>Affiliated to West Bengal Board of Secondary Education (WBBSE) and West Bengal Council of Higher Secondary Education (WBCHSE).</p>
+          <div style="display: flex; gap: 0.8rem; margin-top: 1rem;">
+            <a href="#" style="color: #FFFFFF; font-size: 1.2rem;" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#" style="color: #FFFFFF; font-size: 1.2rem;" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" style="color: #FFFFFF; font-size: 1.2rem;" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="#home">Home Page</a></li>
+            <li><a href="#desk">Headmistress Message</a></li>
+            <li><a href="#academics">Higher Secondary Streams</a></li>
+            <li><a href="#notices">Notice Board</a></li>
+            <li><a href="#admission">Admission Portal</a></li>
+            <li><a href="#gallery">Event Photo Gallery</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Govt. Portals</h4>
+          <ul class="footer-links">
+            <li><a href="https://banglarshiksha.gov.in" target="_blank" rel="noopener">Banglar Shiksha Portal</a></li>
+            <li><a href="https://wbchse.wb.gov.in" target="_blank" rel="noopener">WBCHSE Official</a></li>
+            <li><a href="https://wbbse.wb.gov.in" target="_blank" rel="noopener">WBBSE Official</a></li>
+            <li><a href="https://wbkanyashree.gov.in" target="_blank" rel="noopener">Kanyashree Prakalpa</a></li>
+            <li><a href="https://wb.gov.in" target="_blank" rel="noopener">West Bengal Govt. Portal</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Contact Office</h4>
+          <ul class="contact-list">
+            <li>
+              <i class="fa-solid fa-location-dot"></i>
+              <span>Mahishadal Gayatri Balika Vidyalaya<br>P.O. & P.S.- Mahishadal<br>Purba Medinipur, West Bengal - 721628</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-phone"></i>
+              <span>+91 3228 240211 / +91 94341 82910</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-envelope"></i>
+              <span>contact@mgbvschool.ac.in</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Mahishadal Gayatri Balika Vidyalaya. All Rights Reserved. Designed & Developed with Excellence.</p>
+        <p>Banglar Shiksha School Code: 19192400104</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       MODAL DIALOGS
+       ========================================================================== -->
+  <!-- 1. Confirmation Modal -->
+  <div class="modal-backdrop" id="confirmationModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title">Submission Confirmation</h3>
+        <button class="modal-close" onclick="closeModal('confirmationModal')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body" id="confirmationModalBody"></div>
+    </div>
+  </div>
+
+  <!-- 2. Notice PDF Viewer Modal -->
+  <div class="modal-backdrop" id="noticePdfModal">
+    <div class="modal-box" style="max-width: 720px;">
+      <div class="modal-header">
+        <h3 class="modal-title" id="noticePdfModalTitle">Official Notice Document</h3>
+        <button class="modal-close" onclick="closeModal('noticePdfModal')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body" id="noticePdfModalBody"></div>
+    </div>
+  </div>
+
+  <!-- 3. Gallery Lightbox Modal -->
+  <div class="modal-backdrop" id="lightboxModal">
+    <div class="modal-box" style="max-width: 800px; background: transparent; box-shadow: none;">
+      <div class="modal-header" style="border: none;">
+        <div></div>
+        <button class="modal-close" onclick="closeModal('lightboxModal')" style="background: rgba(255,255,255,0.9);"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body" id="lightboxModalBody" style="padding: 0;"></div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="js/main.js"></script>
+</body>
+</html>
