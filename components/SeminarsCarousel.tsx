@@ -8,21 +8,21 @@ export const SeminarsCarousel: React.FC = () => {
       date: '10 Nov 2026',
       tag: 'STEM Seminar',
       desc: 'District level working model presentation by Class IX to XII science students.',
-      img: 'assets/science_exhibition.jpg',
+      img: '/assets/science_exhibition.jpg',
     },
     {
       title: 'Rabindra Jayanti & Cultural Evening',
       date: '09 May 2026',
       tag: 'Cultural Heritage',
       desc: 'Tagore songs, recitations, and Bengali drama performances by school students.',
-      img: 'assets/saraswati_puja.jpg',
+      img: '/assets/saraswati_puja.jpg',
     },
     {
       title: 'Karate & Self-Defense Training Workshop',
       date: '15 Aug 2026',
       tag: 'Girls Empowerment',
       desc: 'Compulsory self-defense techniques and mental bravery training for female students.',
-      img: 'assets/ncc_defense.jpg',
+      img: '/assets/ncc_defense.jpg',
     },
   ];
 

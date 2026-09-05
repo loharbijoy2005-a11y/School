@@ -36,7 +36,7 @@ export const AboutDesk: React.FC = () => {
           <div className="flex flex-col sm:flex-row items-center gap-6">
             <div className="w-36 h-36 rounded-full p-1 bg-gradient-to-r from-rose-500 to-amber-500 shrink-0 shadow-lg">
               <img
-                src="assets/headmistress.jpg"
+                src="/assets/headmistress.jpg"
                 alt="Headmistress Smt. Kalyani Maity"
                 className="w-full h-full object-cover rounded-full border-2 border-slate-950"
               />

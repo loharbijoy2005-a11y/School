@@ -11,7 +11,7 @@ export const StudentSuccess: React.FC = () => {
       percentage: '98.4%',
       rank: 'District 1st Rank',
       stream: 'WBBSE Secondary',
-      imageUrl: 'assets/prize_distribution.jpg',
+      imageUrl: '/assets/prize_distribution.jpg',
       testimonial: 'The dedicated guidance of our teachers and regular mock unit tests at MGGHS helped me achieve top marks in WBBSE Madhyamik.',
     },
     {
@@ -21,7 +21,7 @@ export const StudentSuccess: React.FC = () => {
       percentage: '97.8%',
       rank: 'State Top 10',
       stream: 'WBCHSE Science',
-      imageUrl: 'assets/headmistress.jpg',
+      imageUrl: '/assets/headmistress.jpg',
       testimonial: 'The well-equipped science laboratories and smart classroom lectures laid the foundation for my success in WBCHSE HS & NEET.',
     },
   ];

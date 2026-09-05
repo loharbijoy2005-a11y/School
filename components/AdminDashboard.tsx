@@ -87,8 +87,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ user, onLogout }
 
   // Media Manager State
   const [galleryItems, setGalleryItems] = useState<GalleryItem[]>([
-    { id: '1', title: 'Saraswati Puja Celebration', category: 'Cultural', imageUrl: 'assets/saraswati_puja.jpg', assignedSection: 'events' },
-    { id: '2', title: 'Annual Athletic Meet', category: 'Sports', imageUrl: 'assets/sports_day.jpg', assignedSection: 'events' },
+    { id: '1', title: 'Saraswati Puja Celebration', category: 'Cultural', imageUrl: '/assets/saraswati_puja.jpg', assignedSection: 'events' },
+    { id: '2', title: 'Annual Athletic Meet', category: 'Sports', imageUrl: '/assets/sports_day.jpg', assignedSection: 'events' },
   ]);
   const [newPhotoTitle, setNewPhotoTitle] = useState('');
   const [newPhotoSection, setNewPhotoSection] = useState<'hero' | 'events' | 'facilities'>('events');
@@ -124,7 +124,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ user, onLogout }
       id: str(Date.now()),
       title: newPhotoTitle,
       category: newPhotoSection.toUpperCase(),
-      imageUrl: 'assets/science_exhibition.jpg',
+      imageUrl: '/assets/science_exhibition.jpg',
       assignedSection: newPhotoSection,
     };
     setGalleryItems([item, ...galleryItems]);
@@ -160,7 +160,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ user, onLogout }
         {/* Top Admin Header Bar */}
         <div className="flex flex-wrap justify-between items-center bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl gap-4">
           <div className="flex items-center gap-4">
-            <img src="assets/school_logo.jpg" alt="Logo" className="w-12 h-12 rounded-full border-2 border-rose-500" />
+            <img src="/assets/school_logo.jpg" alt="Logo" className="w-12 h-12 rounded-full border-2 border-rose-500" />
             <div>
               <h1 className="font-serif font-extrabold text-2xl text-white">
                 Headmistress & Admin Control Center

@@ -8,25 +8,25 @@ export const EventGallery: React.FC = () => {
       id: '1',
       title: 'Saraswati Puja Celebration',
       category: 'Cultural Festival',
-      imageUrl: 'assets/saraswati_puja.jpg',
+      imageUrl: '/assets/saraswati_puja.jpg',
     },
     {
       id: '2',
       title: 'Annual Athletic Track Meet',
       category: 'Sports & Fitness',
-      imageUrl: 'assets/sports_day.jpg',
+      imageUrl: '/assets/sports_day.jpg',
     },
     {
       id: '3',
       title: 'Annual Science Exhibition',
       category: 'STEM Innovation',
-      imageUrl: 'assets/science_exhibition.jpg',
+      imageUrl: '/assets/science_exhibition.jpg',
     },
     {
       id: '4',
       title: 'Prize Distribution Ceremony',
       category: 'Academic Excellence',
-      imageUrl: 'assets/prize_distribution.jpg',
+      imageUrl: '/assets/prize_distribution.jpg',
     },
   ];
 

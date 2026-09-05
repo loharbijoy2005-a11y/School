@@ -63,7 +63,7 @@ export const HeroNoticeOverlay: React.FC<HeroNoticeOverlayProps> = ({
       {/* Background Campus Banner with Overlay */}
       <div className="absolute inset-0 z-0">
         <img
-          src="assets/school_hero.jpg"
+          src="/assets/school_hero.jpg"
           alt="Mahishadal Gayeswari Campus Banner"
           className="w-full h-full object-cover opacity-25 scale-105"
         />
