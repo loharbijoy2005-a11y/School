@@ -94,17 +94,17 @@ export const BentoGrid: React.FC = () => {
   ];
 
   return (
-    <section id="facilities" className="py-20 bg-slate-900 text-white relative">
+    <section id="facilities" className="py-20 bg-[#FAF7F2] text-slate-800 relative border-b border-[#E8DFD0]">
       <div className="max-w-7xl mx-auto px-4 space-y-12">
         
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <span className="text-xs font-bold text-amber-400 uppercase tracking-widest bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">
+          <span className="text-xs font-bold text-[#B45309] uppercase tracking-widest bg-amber-100/60 px-3 py-1 rounded-full border border-amber-300/60">
             World-Class Infrastructure
           </span>
-          <h2 className="font-serif font-extrabold text-3xl md:text-4xl text-white">
+          <h2 className="font-serif font-extrabold text-3xl md:text-4xl text-[#1E293B]">
             Campus Facilities Grid (14+ Bento-Cards)
           </h2>
-          <p className="text-xs text-slate-400">
+          <p className="text-xs text-slate-600">
             Modern educational facilities engineered to nurture every female student's academic and personal growth.
           </p>
         </div>
@@ -114,33 +114,33 @@ export const BentoGrid: React.FC = () => {
           {facilities.map((fac) => (
             <div
               key={fac.id}
-              className={`bg-slate-950 p-5 rounded-3xl border border-slate-800 hover:border-amber-500/60 shadow-xl transition-all group flex flex-col justify-between space-y-4 ${
+              className={`bg-white p-5 rounded-3xl border border-[#E8DFD0] hover:border-[#B45309]/60 shadow-xs hover:shadow-md transition-all group flex flex-col justify-between space-y-4 ${
                 fac.isLarge ? 'sm:col-span-2' : ''
               }`}
             >
               <div className="space-y-3">
-                <div className="h-40 rounded-2xl overflow-hidden relative">
+                <div className="h-40 rounded-2xl overflow-hidden relative bg-slate-100">
                   <img
                     src={fac.imageUrl}
                     alt={fac.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80"></div>
-                  <span className="absolute bottom-3 left-3 bg-rose-600 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full uppercase">
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#1E293B]/70 via-transparent to-transparent opacity-80"></div>
+                  <span className="absolute bottom-3 left-3 bg-[#9D174D] text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full uppercase shadow-xs">
                     Modern Facility
                   </span>
                 </div>
 
-                <h3 className="font-serif font-extrabold text-lg text-white group-hover:text-amber-400 transition-colors leading-snug">
+                <h3 className="font-serif font-extrabold text-lg text-[#1E293B] group-hover:text-[#9D174D] transition-colors leading-snug">
                   {fac.title}
                 </h3>
 
-                <p className="text-xs text-slate-400 leading-relaxed">
+                <p className="text-xs text-slate-600 leading-relaxed font-medium">
                   {fac.description}
                 </p>
               </div>
 
-              <div className="pt-2 border-t border-slate-800 text-[11px] text-emerald-400 font-bold flex items-center justify-between">
+              <div className="pt-2 border-t border-[#E8DFD0] text-[11px] text-[#047857] font-bold flex items-center justify-between">
                 <span>Active Infrastructure</span>
                 <span>MGGHS Campus</span>
               </div>

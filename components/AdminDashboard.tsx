@@ -245,18 +245,18 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     : facultyList.filter(f => f.category === staffCategoryFilter);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 p-4 md:p-8 font-sans">
+    <div className="min-h-screen bg-[#FAF7F2] text-slate-800 p-4 md:p-8 font-sans">
       <div className="max-w-7xl mx-auto space-y-8">
         
         {/* Top Admin Header Bar */}
-        <div className="flex flex-wrap justify-between items-center bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl gap-4">
+        <div className="flex flex-wrap justify-between items-center bg-white border border-[#E8DFD0] p-6 rounded-2xl shadow-sm gap-4">
           <div className="flex items-center gap-4">
-            <img src="/assets/school_logo.jpg" alt="Logo" className="w-12 h-12 rounded-full border-2 border-rose-500 p-0.5 bg-white" />
+            <img src="/assets/school_logo.jpg" alt="Logo" className="w-12 h-12 rounded-full border-2 border-[#9D174D] p-0.5 bg-white" />
             <div>
-              <h1 className="font-serif font-extrabold text-2xl text-white">
+              <h1 className="font-serif font-extrabold text-2xl text-[#1E293B]">
                 Headmistress & Admin Control Console
               </h1>
-              <p className="text-xs text-rose-400 font-bold uppercase tracking-wider">
+              <p className="text-xs text-[#9D174D] font-bold uppercase tracking-wider">
                 Authenticated as: {user.username} ({user.role}) | localStorage Persisted
               </p>
             </div>
@@ -264,7 +264,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
           <button
             onClick={onLogout}
-            className="bg-rose-600/20 hover:bg-rose-600 text-rose-400 hover:text-white border border-rose-500/40 px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 transition-all"
+            className="bg-rose-50 hover:bg-rose-100 text-[#9D174D] border border-rose-300 px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 transition-all shadow-xs"
           >
             <LogOut className="w-4 h-4" />
             <span>Logout Dashboard</span>
@@ -272,11 +272,11 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         </div>
 
         {/* Dashboard Navigation Tabs */}
-        <div className="flex flex-wrap gap-2 border-b border-slate-800 pb-3">
+        <div className="flex flex-wrap gap-2 border-b border-[#E8DFD0] pb-3">
           <button
             onClick={() => setActiveTab('overview')}
             className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all ${
-              activeTab === 'overview' ? 'bg-rose-600 text-white shadow-lg' : 'bg-slate-900 text-slate-400 hover:bg-slate-800'
+              activeTab === 'overview' ? 'bg-[#9D174D] text-white shadow-xs' : 'bg-white text-slate-700 hover:bg-slate-100 border border-[#E8DFD0]'
             }`}
           >
             Overview HUD
@@ -285,7 +285,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           <button
             onClick={() => setActiveTab('notices')}
             className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all ${
-              activeTab === 'notices' ? 'bg-rose-600 text-white shadow-lg' : 'bg-slate-900 text-slate-400 hover:bg-slate-800'
+              activeTab === 'notices' ? 'bg-[#9D174D] text-white shadow-xs' : 'bg-white text-slate-700 hover:bg-slate-100 border border-[#E8DFD0]'
             }`}
           >
             Notice Manager ({notices.length})
@@ -294,7 +294,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           <button
             onClick={() => setActiveTab('ticker')}
             className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all ${
-              activeTab === 'ticker' ? 'bg-rose-600 text-white shadow-lg' : 'bg-slate-900 text-slate-400 hover:bg-slate-800'
+              activeTab === 'ticker' ? 'bg-[#9D174D] text-white shadow-xs' : 'bg-white text-slate-700 hover:bg-slate-100 border border-[#E8DFD0]'
             }`}
           >
             Live Marquee Controller
@@ -303,7 +303,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           <button
             onClick={() => setActiveTab('staff')}
             className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all ${
-              activeTab === 'staff' ? 'bg-rose-600 text-white shadow-lg' : 'bg-slate-900 text-slate-400 hover:bg-slate-800'
+              activeTab === 'staff' ? 'bg-[#9D174D] text-white shadow-xs' : 'bg-white text-slate-700 hover:bg-slate-100 border border-[#E8DFD0]'
             }`}
           >
             Staff & Faculty Roster ({facultyList.length})
@@ -312,7 +312,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           <button
             onClick={() => setActiveTab('gallery')}
             className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all ${
-              activeTab === 'gallery' ? 'bg-rose-600 text-white shadow-lg' : 'bg-slate-900 text-slate-400 hover:bg-slate-800'
+              activeTab === 'gallery' ? 'bg-[#9D174D] text-white shadow-xs' : 'bg-white text-slate-700 hover:bg-slate-100 border border-[#E8DFD0]'
             }`}
           >
             Photo Gallery Uploader ({galleryItems.length})
@@ -321,7 +321,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           <button
             onClick={() => setActiveTab('inquiries')}
             className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all ${
-              activeTab === 'inquiries' ? 'bg-rose-600 text-white shadow-lg' : 'bg-slate-900 text-slate-400 hover:bg-slate-800'
+              activeTab === 'inquiries' ? 'bg-[#9D174D] text-white shadow-xs' : 'bg-white text-slate-700 hover:bg-slate-100 border border-[#E8DFD0]'
             }`}
           >
             Parent Inquiries ({inquiries.length})
@@ -332,39 +332,39 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         {activeTab === 'overview' && (
           <div className="space-y-8">
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-2">
+              <div className="bg-white p-6 rounded-2xl border border-[#E8DFD0] space-y-2 shadow-xs">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs text-slate-400 font-bold uppercase">Staff & Teachers</span>
-                  <Users className="w-5 h-5 text-rose-500" />
+                  <span className="text-xs text-slate-500 font-bold uppercase">Staff & Teachers</span>
+                  <Users className="w-5 h-5 text-[#9D174D]" />
                 </div>
-                <div className="text-3xl font-extrabold text-white">{facultyList.length}</div>
+                <div className="text-3xl font-extrabold text-[#1E293B]">{facultyList.length}</div>
                 <p className="text-[11px] text-slate-500">Active Sirs, Madams & Office Roster</p>
               </div>
 
-              <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-2">
+              <div className="bg-white p-6 rounded-2xl border border-[#E8DFD0] space-y-2 shadow-xs">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs text-slate-400 font-bold uppercase">Active Notices</span>
-                  <Bell className="w-5 h-5 text-amber-400" />
+                  <span className="text-xs text-slate-500 font-bold uppercase">Active Notices</span>
+                  <Bell className="w-5 h-5 text-[#B45309]" />
                 </div>
-                <div className="text-3xl font-extrabold text-white">{notices.length}</div>
+                <div className="text-3xl font-extrabold text-[#1E293B]">{notices.length}</div>
                 <p className="text-[11px] text-slate-500">Published WBBSE & WBCHSE circulars</p>
               </div>
 
-              <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-2">
+              <div className="bg-white p-6 rounded-2xl border border-[#E8DFD0] space-y-2 shadow-xs">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs text-slate-400 font-bold uppercase">Admission Leads</span>
-                  <MessageSquare className="w-5 h-5 text-emerald-400" />
+                  <span className="text-xs text-slate-500 font-bold uppercase">Admission Leads</span>
+                  <MessageSquare className="w-5 h-5 text-[#047857]" />
                 </div>
-                <div className="text-3xl font-extrabold text-white">{inquiries.length}</div>
+                <div className="text-3xl font-extrabold text-[#1E293B]">{inquiries.length}</div>
                 <p className="text-[11px] text-slate-500">Parent admission forms submitted</p>
               </div>
 
-              <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-2">
+              <div className="bg-white p-6 rounded-2xl border border-[#E8DFD0] space-y-2 shadow-xs">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs text-slate-400 font-bold uppercase">Gallery Media</span>
-                  <ImageIcon className="w-5 h-5 text-blue-400" />
+                  <span className="text-xs text-slate-500 font-bold uppercase">Gallery Media</span>
+                  <ImageIcon className="w-5 h-5 text-blue-600" />
                 </div>
-                <div className="text-3xl font-extrabold text-white">{galleryItems.length}</div>
+                <div className="text-3xl font-extrabold text-[#1E293B]">{galleryItems.length}</div>
                 <p className="text-[11px] text-slate-500">High-res campus event photos</p>
               </div>
             </div>
@@ -373,17 +373,17 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
         {/* TAB 2: MARQUEE TICKER CONTROLLER */}
         {activeTab === 'ticker' && (
-          <div className="bg-slate-900 p-6 md:p-8 rounded-2xl border border-slate-800 space-y-6">
-            <div className="flex items-center gap-2 border-b border-slate-800 pb-4">
-              <Megaphone className="w-5 h-5 text-amber-400" />
-              <h3 className="font-serif font-bold text-lg text-white">
+          <div className="bg-white p-6 md:p-8 rounded-2xl border border-[#E8DFD0] space-y-6 shadow-xs">
+            <div className="flex items-center gap-2 border-b border-[#E8DFD0] pb-4">
+              <Megaphone className="w-5 h-5 text-[#B45309]" />
+              <h3 className="font-serif font-bold text-lg text-[#1E293B]">
                 Live Homepage Breaking Marquee Announcement Controller
               </h3>
             </div>
 
             <form onSubmit={handleSaveTicker} className="space-y-4">
               <div>
-                <label className="block text-xs font-bold text-slate-400 uppercase mb-1">
+                <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
                   Marquee Announcement Text (Appears in continuous header ticker)
                 </label>
                 <textarea
@@ -391,13 +391,13 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   required
                   value={liveTickerInput}
                   onChange={(e) => setLiveTickerInput(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-amber-300 font-bold focus:outline-none focus:border-amber-500"
+                  className="w-full bg-[#FAF7F2] border border-[#E8DFD0] rounded-xl p-3 text-xs text-[#9D174D] font-bold focus:outline-none focus:border-[#9D174D]"
                 />
               </div>
 
               <button
                 type="submit"
-                className="bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold px-6 py-2.5 rounded-xl text-xs shadow-lg transition-all"
+                className="bg-[#B45309] hover:bg-[#92400E] text-white font-extrabold px-6 py-2.5 rounded-xl text-xs shadow-md transition-all"
               >
                 Save & Update Live Marquee Text
               </button>
@@ -408,67 +408,67 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         {/* TAB 3: STAFF & FACULTY ROSTER */}
         {activeTab === 'staff' && (
           <div className="space-y-8">
-            <div className="bg-slate-900 p-6 md:p-8 rounded-2xl border border-slate-800 space-y-6">
-              <div className="flex items-center gap-2 border-b border-slate-800 pb-4">
-                <UserPlus className="w-5 h-5 text-rose-500" />
-                <h3 className="font-serif font-bold text-lg text-white">
+            <div className="bg-white p-6 md:p-8 rounded-2xl border border-[#E8DFD0] space-y-6 shadow-xs">
+              <div className="flex items-center gap-2 border-b border-[#E8DFD0] pb-4">
+                <UserPlus className="w-5 h-5 text-[#9D174D]" />
+                <h3 className="font-serif font-bold text-lg text-[#1E293B]">
                   Add New Teacher or Staff Member
                 </h3>
               </div>
 
-              <form onSubmit={handleAddStaffSubmit} className="grid md:grid-cols-3 gap-4">
+              <form onSubmit={handleAddStaffSubmit} className="grid md:grid-cols-3 gap-4 text-xs">
                 <div>
-                  <label className="block text-xs font-bold text-slate-400 uppercase mb-1">Full Name</label>
+                  <label className="block font-bold text-slate-700 uppercase mb-1">Full Name</label>
                   <input
                     type="text"
                     required
                     placeholder="e.g. Smt. Sumita Sen / Sri Bikram Ray"
                     value={newStaffName}
                     onChange={(e) => setNewStaffName(e.target.value)}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-rose-500"
+                    className="w-full bg-[#FAF7F2] border border-[#E8DFD0] rounded-xl px-3 py-2 text-slate-900 focus:outline-none focus:border-[#9D174D]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-400 uppercase mb-1">Designation</label>
+                  <label className="block font-bold text-slate-700 uppercase mb-1">Designation</label>
                   <input
                     type="text"
                     required
                     placeholder="e.g. Assistant Teacher / Head Clerk / Peon"
                     value={newStaffDesignation}
                     onChange={(e) => setNewStaffDesignation(e.target.value)}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-rose-500"
+                    className="w-full bg-[#FAF7F2] border border-[#E8DFD0] rounded-xl px-3 py-2 text-slate-900 focus:outline-none focus:border-[#9D174D]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-400 uppercase mb-1">Qualification</label>
+                  <label className="block font-bold text-slate-700 uppercase mb-1">Qualification</label>
                   <input
                     type="text"
                     placeholder="e.g. M.Sc. (Physics), B.Ed. / B.Com"
                     value={newStaffQualification}
                     onChange={(e) => setNewStaffQualification(e.target.value)}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-rose-500"
+                    className="w-full bg-[#FAF7F2] border border-[#E8DFD0] rounded-xl px-3 py-2 text-slate-900 focus:outline-none focus:border-[#9D174D]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-400 uppercase mb-1">Subject / Work Scope</label>
+                  <label className="block font-bold text-slate-700 uppercase mb-1">Subject / Work Scope</label>
                   <input
                     type="text"
                     placeholder="e.g. Mathematics / Banglar Shiksha / Library"
                     value={newStaffSubject}
                     onChange={(e) => setNewStaffSubject(e.target.value)}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-rose-500"
+                    className="w-full bg-[#FAF7F2] border border-[#E8DFD0] rounded-xl px-3 py-2 text-slate-900 focus:outline-none focus:border-[#9D174D]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-400 uppercase mb-1">Staff Category</label>
+                  <label className="block font-bold text-slate-700 uppercase mb-1">Staff Category</label>
                   <select
                     value={newStaffCategory}
                     onChange={(e) => setNewStaffCategory(e.target.value as StaffCategory)}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-rose-500"
+                    className="w-full bg-[#FAF7F2] border border-[#E8DFD0] rounded-xl px-3 py-2 text-slate-900 focus:outline-none focus:border-[#9D174D]"
                   >
                     <option value="teaching">Teaching Faculty (Sirs & Madams)</option>
                     <option value="non_teaching">Non-Teaching Staff (Office & Clerical)</option>
@@ -477,11 +477,11 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-400 uppercase mb-1">Department Wing</label>
+                  <label className="block font-bold text-slate-700 uppercase mb-1">Department Wing</label>
                   <select
                     value={newStaffDepartment}
                     onChange={(e) => setNewStaffDepartment(e.target.value as any)}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-rose-500"
+                    className="w-full bg-[#FAF7F2] border border-[#E8DFD0] rounded-xl px-3 py-2 text-slate-900 focus:outline-none focus:border-[#9D174D]"
                   >
                     <option value="Languages">Languages (Bengali/English/Sanskrit)</option>
                     <option value="Science & Math">Science & Math</option>
@@ -495,7 +495,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 <div className="md:col-span-3 flex justify-end">
                   <button
                     type="submit"
-                    className="bg-rose-600 hover:bg-rose-500 text-white font-bold px-6 py-2.5 rounded-xl text-xs flex items-center gap-2 shadow-lg transition-all"
+                    className="bg-[#9D174D] hover:bg-[#881337] text-white font-bold px-6 py-2.5 rounded-xl text-xs flex items-center gap-2 shadow-md transition-all"
                   >
                     <Plus className="w-4 h-4" />
                     <span>Save & Publish Staff Member</span>
@@ -504,13 +504,13 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               </form>
             </div>
 
-            <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-4">
-              <h3 className="font-serif font-bold text-lg text-white">
+            <div className="bg-white p-6 rounded-2xl border border-[#E8DFD0] space-y-4 shadow-xs">
+              <h3 className="font-serif font-bold text-lg text-[#1E293B]">
                 Active Staff Roster ({filteredAdminFaculty.length})
               </h3>
               <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs text-slate-300">
-                  <thead className="bg-slate-950 text-slate-400 font-bold uppercase border-b border-slate-800">
+                <table className="w-full text-left text-xs text-slate-800">
+                  <thead className="bg-[#FAF7F2] text-slate-700 font-bold uppercase border-b border-[#E8DFD0]">
                     <tr>
                       <th className="p-3">Staff Name</th>
                       <th className="p-3">Designation</th>
@@ -519,17 +519,17 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                       <th className="p-3 text-right">Action</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-800">
+                  <tbody className="divide-y divide-[#E8DFD0]">
                     {filteredAdminFaculty.map((staff) => (
-                      <tr key={staff.id} className="hover:bg-slate-950/50">
-                        <td className="p-3 font-bold text-white">{staff.name}</td>
-                        <td className="p-3 text-amber-400">{staff.designation}</td>
-                        <td className="p-3 text-slate-400">{staff.qualification}</td>
+                      <tr key={staff.id} className="hover:bg-[#FAF7F2]">
+                        <td className="p-3 font-bold text-[#1E293B]">{staff.name}</td>
+                        <td className="p-3 text-[#B45309] font-medium">{staff.designation}</td>
+                        <td className="p-3 text-slate-600">{staff.qualification}</td>
                         <td className="p-3">{staff.subject}</td>
                         <td className="p-3 text-right">
                           <button
                             onClick={() => onDeleteFaculty(staff.id)}
-                            className="bg-rose-500/20 text-rose-400 p-1.5 rounded-lg"
+                            className="bg-rose-100 hover:bg-rose-200 text-[#9D174D] p-1.5 rounded-lg transition-colors"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
                           </button>
@@ -546,8 +546,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         {/* TAB 4: NOTICES MANAGER */}
         {activeTab === 'notices' && (
           <div className="space-y-6">
-            <form onSubmit={handleAddNotice} className="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-4">
-              <h3 className="font-serif font-bold text-base text-white">Publish New Notice (Saved to localStorage)</h3>
+            <form onSubmit={handleAddNotice} className="bg-white p-6 rounded-2xl border border-[#E8DFD0] space-y-4 shadow-xs text-xs">
+              <h3 className="font-serif font-bold text-base text-[#1E293B]">Publish New Notice (Saved to localStorage)</h3>
               <div className="grid md:grid-cols-2 gap-4">
                 <input
                   type="text"
@@ -555,12 +555,12 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   placeholder="Notice Title"
                   value={newNoticeTitle}
                   onChange={(e) => setNewNoticeTitle(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white"
+                  className="w-full bg-[#FAF7F2] border border-[#E8DFD0] rounded-xl px-3 py-2 text-slate-900"
                 />
                 <select
                   value={newNoticeCategory}
                   onChange={(e) => setNewNoticeCategory(e.target.value as any)}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white"
+                  className="w-full bg-[#FAF7F2] border border-[#E8DFD0] rounded-xl px-3 py-2 text-slate-900"
                 >
                   <option value="wbbse">WBBSE Madhyamik</option>
                   <option value="wbchse">WBCHSE Higher Secondary</option>
@@ -573,22 +573,22 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 placeholder="Description / Notice Content"
                 value={newNoticeDesc}
                 onChange={(e) => setNewNoticeDesc(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white h-20"
+                className="w-full bg-[#FAF7F2] border border-[#E8DFD0] rounded-xl px-3 py-2 text-slate-900 h-20"
               />
-              <button type="submit" className="bg-rose-600 text-white font-bold px-4 py-2 rounded-xl text-xs">
+              <button type="submit" className="bg-[#9D174D] text-white font-bold px-4 py-2 rounded-xl text-xs">
                 Publish Notice
               </button>
             </form>
 
-            <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-3">
-              <h3 className="font-serif font-bold text-base text-white">Published Notices ({notices.length})</h3>
+            <div className="bg-white p-6 rounded-2xl border border-[#E8DFD0] space-y-3 shadow-xs">
+              <h3 className="font-serif font-bold text-base text-[#1E293B]">Published Notices ({notices.length})</h3>
               {notices.map((notice) => (
-                <div key={notice.id} className="flex items-center justify-between bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs">
+                <div key={notice.id} className="flex items-center justify-between bg-[#FAF7F2] p-4 rounded-xl border border-[#E8DFD0] text-xs">
                   <div>
-                    <h4 className="font-bold text-white">{notice.title}</h4>
-                    <p className="text-slate-400 text-[11px]">{notice.publishDate} | {notice.category.toUpperCase()}</p>
+                    <h4 className="font-bold text-[#1E293B]">{notice.title}</h4>
+                    <p className="text-slate-600 text-[11px]">{notice.publishDate} | {notice.category.toUpperCase()}</p>
                   </div>
-                  <button onClick={() => handleDeleteNotice(notice.id)} className="text-rose-400 p-2 hover:bg-rose-950 rounded-lg">
+                  <button onClick={() => handleDeleteNotice(notice.id)} className="text-[#9D174D] p-2 hover:bg-rose-100 rounded-lg">
                     <Trash2 className="w-4 h-4" />
                   </button>
                 </div>
@@ -600,8 +600,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         {/* TAB 5: PHOTO GALLERY UPLOADER */}
         {activeTab === 'gallery' && (
           <div className="space-y-6">
-            <form onSubmit={handleAddPhotoSubmit} className="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-4">
-              <h3 className="font-serif font-bold text-base text-white">Upload / Add New Photo to Gallery</h3>
+            <form onSubmit={handleAddPhotoSubmit} className="bg-white p-6 rounded-2xl border border-[#E8DFD0] space-y-4 shadow-xs text-xs">
+              <h3 className="font-serif font-bold text-base text-[#1E293B]">Upload / Add New Photo to Gallery</h3>
               <div className="grid md:grid-cols-3 gap-4">
                 <input
                   type="text"
@@ -609,12 +609,12 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   placeholder="Photo Title (e.g. Sports Day 2026)"
                   value={newPhotoTitle}
                   onChange={(e) => setNewPhotoTitle(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white"
+                  className="w-full bg-[#FAF7F2] border border-[#E8DFD0] rounded-xl px-3 py-2 text-slate-900"
                 />
                 <select
                   value={newPhotoCategory}
                   onChange={(e) => setNewPhotoCategory(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white"
+                  className="w-full bg-[#FAF7F2] border border-[#E8DFD0] rounded-xl px-3 py-2 text-slate-900"
                 >
                   <option value="Cultural">Cultural</option>
                   <option value="Sports">Sports</option>
@@ -628,21 +628,21 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   placeholder="Image URL (/assets/... or https://...)"
                   value={newPhotoUrl}
                   onChange={(e) => setNewPhotoUrl(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white"
+                  className="w-full bg-[#FAF7F2] border border-[#E8DFD0] rounded-xl px-3 py-2 text-slate-900"
                 />
               </div>
-              <button type="submit" className="bg-rose-600 text-white font-bold px-4 py-2 rounded-xl text-xs">
+              <button type="submit" className="bg-[#9D174D] text-white font-bold px-4 py-2 rounded-xl text-xs">
                 Upload to Gallery Reel
               </button>
             </form>
 
-            <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-4">
-              <h3 className="font-serif font-bold text-base text-white">Campus Gallery Media ({galleryItems.length})</h3>
+            <div className="bg-white p-6 rounded-2xl border border-[#E8DFD0] space-y-4 shadow-xs">
+              <h3 className="font-serif font-bold text-base text-[#1E293B]">Campus Gallery Media ({galleryItems.length})</h3>
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {galleryItems.map((item) => (
-                  <div key={item.id} className="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-2">
+                  <div key={item.id} className="bg-[#FAF7F2] p-3 rounded-xl border border-[#E8DFD0] space-y-2">
                     <img src={item.imageUrl} alt={item.title} className="w-full h-32 object-cover rounded-lg" />
-                    <h4 className="font-bold text-xs text-white">{item.title}</h4>
+                    <h4 className="font-bold text-xs text-[#1E293B]">{item.title}</h4>
                   </div>
                 ))}
               </div>
@@ -652,21 +652,21 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
         {/* TAB 6: INQUIRIES */}
         {activeTab === 'inquiries' && (
-          <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-4">
+          <div className="bg-white p-6 rounded-2xl border border-[#E8DFD0] space-y-4 shadow-xs">
             <div className="flex justify-between items-center">
-              <h3 className="font-serif font-bold text-base text-white">Parent Admission Inquiries</h3>
-              <button onClick={exportInquiriesCSV} className="bg-emerald-600 text-white font-bold px-3 py-1.5 rounded-lg text-xs flex items-center gap-1.5">
+              <h3 className="font-serif font-bold text-base text-[#1E293B]">Parent Admission Inquiries</h3>
+              <button onClick={exportInquiriesCSV} className="bg-[#047857] text-white font-bold px-3 py-1.5 rounded-lg text-xs flex items-center gap-1.5">
                 <FileSpreadsheet className="w-3.5 h-3.5" /> Export to CSV
               </button>
             </div>
             <div className="space-y-3">
               {inquiries.map((inq) => (
-                <div key={inq.id} className="bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs space-y-1">
-                  <div className="flex justify-between font-bold text-white">
+                <div key={inq.id} className="bg-[#FAF7F2] p-4 rounded-xl border border-[#E8DFD0] text-xs space-y-1">
+                  <div className="flex justify-between font-bold text-[#1E293B]">
                     <span>{inq.studentName} (Guardian: {inq.guardianName})</span>
-                    <span className="text-amber-400">{inq.targetClass}</span>
+                    <span className="text-[#B45309]">{inq.targetClass}</span>
                   </div>
-                  <p className="text-slate-400">Phone: {inq.phoneNumber} | Address: {inq.address}</p>
+                  <p className="text-slate-600">Phone: {inq.phoneNumber} | Address: {inq.address}</p>
                 </div>
               ))}
             </div>

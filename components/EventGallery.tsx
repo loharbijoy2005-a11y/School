@@ -28,18 +28,18 @@ export const EventGallery: React.FC<EventGalleryProps> = ({ galleryItems: propGa
     : items.filter(item => item.category.toLowerCase() === activeCategory.toLowerCase());
 
   return (
-    <section id="gallery" className="py-20 bg-slate-900 text-white relative">
+    <section id="gallery" className="py-20 bg-[#FAF7F2] text-slate-800 relative border-b border-[#E8DFD0]">
       <div className="max-w-7xl mx-auto px-4 space-y-12">
         
-        <div className="flex flex-wrap justify-between items-end gap-4 border-b border-slate-800 pb-6">
+        <div className="flex flex-wrap justify-between items-end gap-4 border-b border-[#E8DFD0] pb-6">
           <div>
-            <span className="text-xs font-bold text-rose-400 uppercase tracking-widest bg-rose-500/10 px-3 py-1 rounded-full border border-rose-500/30 mb-2 inline-block">
+            <span className="text-xs font-bold text-[#9D174D] uppercase tracking-widest bg-rose-100/60 px-3 py-1 rounded-full border border-rose-300/60 mb-2 inline-block">
               Campus Photo Reel
             </span>
-            <h2 className="font-serif font-extrabold text-3xl md:text-4xl text-white">
+            <h2 className="font-serif font-extrabold text-3xl md:text-4xl text-[#1E293B]">
               Campus Life Gallery & Event Archives
             </h2>
-            <p className="text-xs text-slate-400 mt-1">
+            <p className="text-xs text-slate-600 mt-1">
               Click on any photograph to launch high-resolution full-screen lightbox preview.
             </p>
           </div>
@@ -52,8 +52,8 @@ export const EventGallery: React.FC<EventGalleryProps> = ({ galleryItems: propGa
                 onClick={() => setActiveCategory(cat)}
                 className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all ${
                   activeCategory === cat
-                    ? 'bg-rose-600 text-white shadow-md'
-                    : 'bg-slate-950 text-slate-400 hover:text-white border border-slate-800'
+                    ? 'bg-[#9D174D] text-white shadow-xs'
+                    : 'bg-white text-slate-700 hover:bg-rose-50 border border-[#E8DFD0]'
                 }`}
               >
                 {cat === 'all' ? 'All Photos' : cat}
@@ -68,26 +68,26 @@ export const EventGallery: React.FC<EventGalleryProps> = ({ galleryItems: propGa
             <div
               key={item.id}
               onClick={() => setSelectedPhoto(item)}
-              className="bg-slate-950 rounded-2xl border border-slate-800 overflow-hidden relative group cursor-pointer shadow-lg hover:border-amber-500/50 transition-all"
+              className="bg-white rounded-2xl border border-[#E8DFD0] overflow-hidden relative group cursor-pointer shadow-xs hover:shadow-md hover:border-[#9D174D]/50 transition-all"
             >
-              <div className="h-48 overflow-hidden relative">
+              <div className="h-48 overflow-hidden relative bg-slate-100">
                 <img
                   src={item.imageUrl}
                   alt={item.title}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-slate-950/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                  <div className="w-10 h-10 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center font-bold shadow-lg">
+                <div className="absolute inset-0 bg-[#1E293B]/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-full bg-[#B45309] text-white flex items-center justify-center font-bold shadow-md">
                     <Eye className="w-5 h-5" />
                   </div>
                 </div>
               </div>
 
               <div className="p-3.5 space-y-1">
-                <span className="text-[10px] font-extrabold text-amber-400 uppercase bg-amber-400/10 px-2 py-0.5 rounded">
+                <span className="text-[10px] font-extrabold text-[#B45309] uppercase bg-amber-100/80 px-2 py-0.5 rounded">
                   {item.category}
                 </span>
-                <h4 className="text-xs font-bold text-white group-hover:text-amber-400 transition-colors line-clamp-1">
+                <h4 className="text-xs font-bold text-[#1E293B] group-hover:text-[#9D174D] transition-colors line-clamp-1">
                   {item.title}
                 </h4>
               </div>
@@ -100,10 +100,10 @@ export const EventGallery: React.FC<EventGalleryProps> = ({ galleryItems: propGa
       {/* Lightbox Modal */}
       {selectedPhoto && (
         <div className="modal-backdrop-luxury">
-          <div className="bg-slate-900 rounded-3xl max-w-3xl w-full p-6 border border-slate-700 shadow-2xl relative space-y-4 animate-in fade-in zoom-in duration-200">
+          <div className="bg-white rounded-3xl max-w-3xl w-full p-6 border border-[#E8DFD0] shadow-2xl relative space-y-4 animate-in fade-in zoom-in duration-200 text-slate-900">
             <button
               onClick={() => setSelectedPhoto(null)}
-              className="absolute right-4 top-4 w-9 h-9 rounded-full bg-slate-800 hover:bg-rose-600 text-white flex items-center justify-center transition-colors"
+              className="absolute right-4 top-4 w-9 h-9 rounded-full bg-slate-100 hover:bg-rose-100 text-slate-700 hover:text-[#9D174D] flex items-center justify-center transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
@@ -118,12 +118,12 @@ export const EventGallery: React.FC<EventGalleryProps> = ({ galleryItems: propGa
 
             <div className="flex justify-between items-center text-xs">
               <div>
-                <h3 className="font-serif font-extrabold text-lg text-white">{selectedPhoto.title}</h3>
-                <span className="text-amber-400 font-bold uppercase">{selectedPhoto.category} Archive</span>
+                <h3 className="font-serif font-extrabold text-lg text-[#1E293B]">{selectedPhoto.title}</h3>
+                <span className="text-[#B45309] font-bold uppercase">{selectedPhoto.category} Archive</span>
               </div>
               <button
                 onClick={() => setSelectedPhoto(null)}
-                className="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-xl font-bold"
+                className="bg-[#1E293B] hover:bg-[#0F172A] text-white px-4 py-2 rounded-xl font-bold"
               >
                 Close Preview
               </button>

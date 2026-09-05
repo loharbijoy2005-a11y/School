@@ -5,47 +5,31 @@
 @tailwind utilities;
 
 /* ==========================================================================
-   MAHISHADAL GAYESWARI GIRLS' HIGH SCHOOL (H.S.) - 10X ULTRA-LUXURIOUS STYLESHEET
-   Theme: Royal Alabaster (#FAF9F6), Imperial Navy (#0A192F), Temple Gold (#D97706), Deep Crimson (#881337)
-   Features: Bengali Alpana Terracotta Watermark, Floating Edge Flaps, 3D Bento Glass cards, Lightbox
+   MAHISHADAL GAYESWARI GIRLS' HIGH SCHOOL (H.S.) - LIGHT THEME OVERHAUL
+   Theme: Warm Parchment & Ivory (#FAF7F2), Crisp White (#FFFFFF), Deep Imperial Charcoal (#1E293B),
+          Royal Amber Gold (#B45309), Deep Crimson (#881337), Rose-Plum (#9D174D)
    ========================================================================== */
 
 :root {
-  /* Royal Alabaster & Imperial Palette Tokens */
-  --clr-alabaster: #FAF9F6;
-  --clr-navy-deep: #0A192F;
-  --clr-navy-light: #1E3A8A;
-  --clr-temple-gold: #D97706;
-  --clr-gold-light: #FEF3C7;
+  --clr-parchment: #FAF7F2;
+  --clr-ivory-light: #FDFBF7;
+  --clr-charcoal: #1E293B;
+  --clr-navy-dark: #0F172A;
+  --clr-amber-gold: #B45309;
+  --clr-amber-bright: #D97706;
   --clr-crimson: #881337;
-  --clr-crimson-light: #FFE4E6;
-  --clr-emerald: #059669;
-  --clr-surface-white: #FFFFFF;
-  --clr-text-main: #0F172A;
-  --clr-text-muted: #475569;
-  --clr-border-gold: rgba(217, 119, 6, 0.25);
-
-  /* Glassmorphism & Shadow Tokens */
-  --glass-bg: rgba(255, 255, 255, 0.88);
-  --glass-border: rgba(217, 119, 6, 0.2);
-  --glass-blur: blur(16px);
-  --shadow-gold: 0 10px 30px -5px rgba(217, 119, 6, 0.15);
-  --shadow-navy: 0 20px 40px -10px rgba(10, 25, 47, 0.2);
-
-  /* Typography */
+  --clr-rose-plum: #9D174D;
+  --clr-emerald: #047857;
+  --clr-border-warm: #E8DFD0;
+  --clr-border-subtle: #E2D9CC;
+  
   --ff-sans: 'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif;
   --ff-heading: 'Playfair Display', 'Cinzel', Georgia, serif;
   --ff-bengali: 'Noto Sans Bengali', sans-serif;
 
-  /* Radii & Timing */
-  --radius-sm: 8px;
-  --radius-md: 16px;
-  --radius-lg: 24px;
-  --radius-full: 9999px;
-  --transition-smooth: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Reset & Microscopic Bengali Terracotta/Alpana Vector Watermark */
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -57,12 +41,12 @@ html {
 
 body {
   font-family: var(--ff-sans);
-  background-color: var(--clr-alabaster);
+  background-color: var(--clr-parchment);
   background-image: 
-    radial-gradient(rgba(217, 119, 6, 0.04) 1px, transparent 0),
-    url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23D97706' fill-opacity='0.035'%3E%3Cpath d='M40 0l40 40-40 40L0 40zM40 10L10 40l30 30 30-30z'/%3E%3Ccircle cx='40' cy='40' r='8'/%3E%3C/g%3E%3C/svg%3E");
+    radial-gradient(rgba(180, 83, 9, 0.035) 1px, transparent 0),
+    url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23B45309' fill-opacity='0.025'%3E%3Cpath d='M40 0l40 40-40 40L0 40zM40 10L10 40l30 30 30-30z'/%3E%3Ccircle cx='40' cy='40' r='8'/%3E%3C/g%3E%3C/svg%3E");
   background-size: 40px 40px, 80px 80px;
-  color: var(--clr-text-main);
+  color: var(--clr-charcoal);
   line-height: 1.6;
   overflow-x: hidden;
 }
@@ -106,11 +90,11 @@ img {
 }
 
 .edge-flap-btn {
-  background: var(--clr-navy-deep);
+  background: var(--clr-rose-plum);
   color: #FFFFFF;
-  border: 1px solid rgba(217, 119, 6, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-left: none;
-  padding: 0.75rem 0.5rem;
+  padding: 0.75rem 0.6rem;
   border-radius: 0 12px 12px 0;
   writing-mode: vertical-rl;
   text-orientation: mixed;
@@ -119,7 +103,7 @@ img {
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  box-shadow: 0 8px 24px rgba(10, 25, 47, 0.25);
+  box-shadow: 0 8px 20px rgba(157, 23, 77, 0.25);
   transition: var(--transition-smooth);
   cursor: pointer;
 }
@@ -137,26 +121,26 @@ img {
   z-index: 40;
 }
 
-/* Glassmorphic Card Overlay Utility */
+/* Light Card & Glassmorphic Overlay Utility */
 .glass-card-luxury {
-  background: var(--glass-bg);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--clr-border-warm);
   border-radius: 1.25rem;
-  box-shadow: 0 12px 32px rgba(10, 25, 47, 0.06);
+  box-shadow: 0 10px 30px rgba(180, 83, 9, 0.06);
 }
 
 .glass-card-luxury:hover {
-  border-color: rgba(217, 119, 6, 0.5);
-  box-shadow: var(--shadow-gold);
+  border-color: rgba(180, 83, 9, 0.4);
+  box-shadow: 0 14px 35px rgba(180, 83, 9, 0.12);
 }
 
-/* Marquee Continuous Banner */
+/* Marquee Continuous Banner (Burgundy Ribbon) */
 .ticker-container {
-  background: var(--clr-navy-deep);
-  border-top: 1px solid rgba(217, 119, 6, 0.3);
-  border-bottom: 1px solid rgba(217, 119, 6, 0.3);
+  background: var(--clr-crimson);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   color: #FFFFFF;
 }
 
@@ -164,33 +148,33 @@ img {
   display: inline-block;
   width: 8px;
   height: 8px;
-  background-color: #EF4444;
+  background-color: #FBBF24;
   border-radius: 50%;
-  box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+  box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.7);
   animation: pulse-radar 1.5s infinite;
 }
 
 @keyframes pulse-radar {
   0% {
     transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+    box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.7);
   }
   70% {
     transform: scale(1.1);
-    box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+    box-shadow: 0 0 0 10px rgba(251, 191, 36, 0);
   }
   100% {
     transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+    box-shadow: 0 0 0 0 rgba(251, 191, 36, 0);
   }
 }
 
-/* Custom Modal Backdrop */
+/* Modal Backdrop */
 .modal-backdrop-luxury {
   position: fixed;
   inset: 0;
   z-index: 60;
-  background: rgba(10, 25, 47, 0.85);
+  background: rgba(30, 41, 59, 0.75);
   backdrop-filter: blur(8px);
   display: flex;
   align-items: center;

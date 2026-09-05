@@ -80,29 +80,29 @@ export const DigitalPortals: React.FC = () => {
 
   const getIcon = (iconName: string) => {
     switch (iconName) {
-      case 'ShieldCheck': return <ShieldCheck className="w-6 h-6 text-amber-400" />;
-      case 'UserCheck': return <UserCheck className="w-6 h-6 text-rose-400" />;
-      case 'Heart': return <Heart className="w-6 h-6 text-rose-500" />;
-      case 'AlertTriangle': return <AlertTriangle className="w-6 h-6 text-amber-400" />;
-      case 'Users': return <Users className="w-6 h-6 text-blue-400" />;
-      case 'BookOpen': return <BookOpen className="w-6 h-6 text-emerald-400" />;
-      case 'MessageSquare': return <MessageSquare className="w-6 h-6 text-amber-400" />;
-      default: return <Compass className="w-6 h-6 text-rose-400" />;
+      case 'ShieldCheck': return <ShieldCheck className="w-6 h-6 text-[#B45309]" />;
+      case 'UserCheck': return <UserCheck className="w-6 h-6 text-[#9D174D]" />;
+      case 'Heart': return <Heart className="w-6 h-6 text-rose-600" />;
+      case 'AlertTriangle': return <AlertTriangle className="w-6 h-6 text-[#B45309]" />;
+      case 'Users': return <Users className="w-6 h-6 text-blue-700" />;
+      case 'BookOpen': return <BookOpen className="w-6 h-6 text-[#047857]" />;
+      case 'MessageSquare': return <MessageSquare className="w-6 h-6 text-[#B45309]" />;
+      default: return <Compass className="w-6 h-6 text-[#9D174D]" />;
     }
   };
 
   return (
-    <section className="py-20 bg-slate-950 text-white relative">
+    <section className="py-20 bg-[#FAF7F2] text-slate-800 relative border-b border-[#E8DFD0]">
       <div className="max-w-7xl mx-auto px-4 space-y-12">
         
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <span className="text-xs font-bold text-rose-400 uppercase tracking-widest bg-rose-500/10 px-3 py-1 rounded-full border border-rose-500/30">
+          <span className="text-xs font-bold text-[#9D174D] uppercase tracking-widest bg-rose-100/60 px-3 py-1 rounded-full border border-rose-300/60">
             Digital Governance & Services
           </span>
-          <h2 className="font-serif font-extrabold text-3xl md:text-4xl text-white">
+          <h2 className="font-serif font-extrabold text-3xl md:text-4xl text-[#1E293B]">
             Digital School Portals (High-Density 8-Card Grid)
           </h2>
-          <p className="text-xs text-slate-400">
+          <p className="text-xs text-slate-600">
             Instant 1-click access to government student welfare portals, academic report cards, and safety helplines.
           </p>
         </div>
@@ -115,28 +115,28 @@ export const DigitalPortals: React.FC = () => {
               href={portal.targetUrl}
               target={portal.targetUrl.startsWith('http') ? '_blank' : '_self'}
               rel="noreferrer"
-              className="bg-slate-900 p-6 rounded-3xl border border-slate-800 hover:border-amber-500/60 shadow-xl transition-all cursor-pointer group flex flex-col justify-between space-y-4 hover:-translate-y-1"
+              className="bg-white p-6 rounded-3xl border border-[#E8DFD0] hover:border-[#9D174D]/60 shadow-sm hover:shadow-md transition-all cursor-pointer group flex flex-col justify-between space-y-4 hover:-translate-y-1"
             >
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <div className="w-12 h-12 rounded-2xl bg-slate-950 border border-slate-800 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <div className="w-12 h-12 rounded-2xl bg-[#FAF7F2] border border-[#E8DFD0] flex items-center justify-center group-hover:scale-110 transition-transform">
                     {getIcon(portal.icon)}
                   </div>
-                  <span className="text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/30 uppercase">
+                  <span className="text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-amber-100 text-[#B45309] border border-amber-200 uppercase">
                     {portal.badgeText}
                   </span>
                 </div>
 
-                <h3 className="font-serif font-extrabold text-lg text-white group-hover:text-amber-400 transition-colors leading-snug">
+                <h3 className="font-serif font-extrabold text-lg text-[#1E293B] group-hover:text-[#9D174D] transition-colors leading-snug">
                   {portal.title}
                 </h3>
 
-                <p className="text-xs text-slate-400 leading-relaxed">
+                <p className="text-xs text-slate-600 leading-relaxed">
                   {portal.description}
                 </p>
               </div>
 
-              <div className="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs font-bold text-rose-400 group-hover:text-amber-400 transition-colors">
+              <div className="pt-3 border-t border-[#E8DFD0] flex items-center justify-between text-xs font-bold text-[#9D174D] group-hover:text-[#B45309] transition-colors">
                 <span>Access Portal</span>
                 <ExternalLink className="w-3.5 h-3.5" />
               </div>

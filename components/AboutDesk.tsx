@@ -25,19 +25,19 @@ export const AboutDesk: React.FC<AboutDeskProps> = ({ facultyList }) => {
   const headmistress = facultyList.find(f => f.designation.toLowerCase().includes('headmistress')) || facultyList[0];
 
   return (
-    <section id="desk" className="py-20 bg-slate-900 text-white relative">
+    <section id="desk" className="py-20 bg-[#FAF7F2] text-slate-800 relative border-b border-[#E8DFD0]">
       <div className="max-w-7xl mx-auto px-4 space-y-16">
         
         {/* SECTION 4: SCHOOL ADMINISTRATION SPLIT-VIEW */}
         <div className="space-y-6">
           <div className="text-center max-w-3xl mx-auto space-y-2">
-            <span className="text-xs font-bold text-amber-400 uppercase tracking-widest bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">
+            <span className="text-xs font-bold text-[#B45309] uppercase tracking-widest bg-amber-100/60 px-3 py-1 rounded-full border border-amber-300/60">
               Institutional Governance
             </span>
-            <h2 className="font-serif font-extrabold text-3xl md:text-4xl text-white">
+            <h2 className="font-serif font-extrabold text-3xl md:text-4xl text-[#1E293B]">
               School Administration & Executive Desk
             </h2>
-            <p className="text-xs text-slate-400">
+            <p className="text-xs text-slate-600">
               Meet the leadership team and administrative departments guiding Mahishadal Gayeswari Girls' High School (H.S.).
             </p>
           </div>
@@ -45,7 +45,7 @@ export const AboutDesk: React.FC<AboutDeskProps> = ({ facultyList }) => {
           <div className="grid lg:grid-cols-12 gap-8 items-start">
             
             {/* Left Navigation Panel (Split-View Interactive Tabs) */}
-            <div className="lg:col-span-4 bg-slate-950 p-4 rounded-3xl border border-slate-800 space-y-2 shadow-xl">
+            <div className="lg:col-span-4 bg-white p-4 rounded-3xl border border-[#E8DFD0] space-y-2 shadow-sm">
               {[
                 { id: 'hm', label: "Headmistress's Desk", icon: ShieldCheck, sub: 'Principal Executive & Academic Head' },
                 { id: 'smc', label: 'School Managing Committee (SMC)', icon: Building2, sub: 'Government Nominated Governing Body' },
@@ -60,14 +60,14 @@ export const AboutDesk: React.FC<AboutDeskProps> = ({ facultyList }) => {
                     onClick={() => setActiveAdminTab(tab.id as AdminDeskTab)}
                     className={`w-full p-4 rounded-2xl text-left transition-all flex items-start gap-3.5 ${
                       activeAdminTab === tab.id
-                        ? 'bg-gradient-to-r from-rose-900/90 to-amber-900/90 text-white border border-amber-500/50 shadow-lg'
-                        : 'bg-slate-900/60 text-slate-400 hover:bg-slate-900 hover:text-white border border-slate-800'
+                        ? 'bg-[#9D174D] text-white shadow-md'
+                        : 'bg-[#FAF7F2] text-slate-700 hover:bg-slate-100 border border-[#E8DFD0]'
                     }`}
                   >
-                    <IconComponent className={`w-5 h-5 mt-0.5 shrink-0 ${activeAdminTab === tab.id ? 'text-amber-400' : 'text-slate-500'}`} />
+                    <IconComponent className={`w-5 h-5 mt-0.5 shrink-0 ${activeAdminTab === tab.id ? 'text-amber-300' : 'text-[#B45309]'}`} />
                     <div>
-                      <h4 className="font-extrabold text-sm text-white leading-snug">{tab.label}</h4>
-                      <p className="text-[11px] text-slate-400 mt-0.5">{tab.sub}</p>
+                      <h4 className="font-extrabold text-sm leading-snug">{tab.label}</h4>
+                      <p className={`text-[11px] mt-0.5 ${activeAdminTab === tab.id ? 'text-rose-100' : 'text-slate-500'}`}>{tab.sub}</p>
                     </div>
                   </button>
                 );
@@ -75,30 +75,30 @@ export const AboutDesk: React.FC<AboutDeskProps> = ({ facultyList }) => {
             </div>
 
             {/* Right Active Card Display */}
-            <div className="lg:col-span-8 bg-slate-950 p-8 rounded-3xl border border-slate-800 shadow-2xl relative space-y-6">
+            <div className="lg:col-span-8 bg-white p-8 rounded-3xl border border-[#E8DFD0] shadow-md relative space-y-6">
               
               {activeAdminTab === 'hm' && (
                 <div className="space-y-6">
                   <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
-                    <div className="w-36 h-36 rounded-full p-1 bg-gradient-to-r from-rose-500 to-amber-500 shrink-0 shadow-xl">
+                    <div className="w-36 h-36 rounded-full p-1 bg-gradient-to-r from-[#9D174D] to-[#B45309] shrink-0 shadow-md">
                       <img
                         src={headmistress.imageUrl || "/assets/headmistress.jpg"}
                         alt={headmistress.name}
-                        className="w-full h-full object-cover rounded-full border-2 border-slate-950"
+                        className="w-full h-full object-cover rounded-full border-2 border-white"
                       />
                     </div>
                     <div className="space-y-2 text-center sm:text-left">
-                      <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-bold text-xs border border-emerald-500/30">
+                      <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-emerald-100 text-[#047857] font-bold text-xs border border-emerald-300">
                         <CheckCircle2 className="w-3.5 h-3.5" />
                         <span>Verified Headmistress Desk</span>
                       </div>
-                      <h3 className="font-serif font-extrabold text-2xl md:text-3xl text-white">{headmistress.name}</h3>
-                      <p className="text-amber-400 font-bold text-xs uppercase">{headmistress.designation}, {headmistress.qualification}</p>
+                      <h3 className="font-serif font-extrabold text-2xl md:text-3xl text-[#1E293B]">{headmistress.name}</h3>
+                      <p className="text-[#B45309] font-extrabold text-xs uppercase">{headmistress.designation}, {headmistress.qualification}</p>
                       
                       {/* Core Values Pills */}
                       <div className="flex flex-wrap gap-2 pt-2 justify-center sm:justify-start">
                         {['Discipline', 'Digital Literacy', 'Girl Empowerment', 'Moral Ethics'].map((pill) => (
-                          <span key={pill} className="bg-slate-900 text-slate-300 border border-slate-800 text-[10px] font-bold px-2.5 py-1 rounded-full">
+                          <span key={pill} className="bg-[#FAF7F2] text-slate-800 border border-[#E8DFD0] text-[10px] font-bold px-2.5 py-1 rounded-full">
                             ✨ {pill}
                           </span>
                         ))}
@@ -106,12 +106,12 @@ export const AboutDesk: React.FC<AboutDeskProps> = ({ facultyList }) => {
                     </div>
                   </div>
 
-                  <div className="space-y-3 bg-slate-900/80 p-5 rounded-2xl border border-slate-800">
-                    <Quote className="w-8 h-8 text-rose-500/30 mb-1" />
-                    <p className="text-slate-200 text-sm leading-relaxed italic">
+                  <div className="space-y-3 bg-[#FAF7F2] p-5 rounded-2xl border border-[#E8DFD0]">
+                    <Quote className="w-8 h-8 text-[#9D174D]/30 mb-1" />
+                    <p className="text-slate-800 text-sm leading-relaxed italic font-medium">
                       "{headmistress.bio || "Welcome to Mahishadal Gayeswari Girls' High School (H.S.). Since 1945, our school has been dedicated to moulding young girls into confident, moral, and educated citizens."}"
                     </p>
-                    <p className="text-xs text-slate-400 leading-relaxed pt-2 border-t border-slate-800/80">
+                    <p className="text-xs text-slate-600 leading-relaxed pt-2 border-t border-[#E8DFD0]">
                       Through government initiatives like Kanyashree Prakalpa, Sabooj Sathi, ICT Computer Laboratory, and dedicated Sirs and Madams, we nurture scientific curiosity, leadership, and integrity in every female student.
                     </p>
                   </div>
@@ -120,21 +120,21 @@ export const AboutDesk: React.FC<AboutDeskProps> = ({ facultyList }) => {
 
               {activeAdminTab === 'smc' && (
                 <div className="space-y-4">
-                  <div className="border-b border-slate-800 pb-3">
-                    <h3 className="font-serif font-extrabold text-xl text-white">School Managing Committee (SMC)</h3>
-                    <p className="text-xs text-amber-400">Government Nominated Executive Body (WBBSE & WBCHSE Regulations)</p>
+                  <div className="border-b border-[#E8DFD0] pb-3">
+                    <h3 className="font-serif font-extrabold text-xl text-[#1E293B]">School Managing Committee (SMC)</h3>
+                    <p className="text-xs text-[#B45309] font-bold">Government Nominated Executive Body (WBBSE & WBCHSE Regulations)</p>
                   </div>
-                  <p className="text-xs text-slate-300 leading-relaxed">
+                  <p className="text-xs text-slate-700 leading-relaxed">
                     The School Managing Committee oversees infrastructural expansion, civil tenders, mid-day meal operations, staff recruitment compliance, and student welfare activities.
                   </p>
                   <div className="grid sm:grid-cols-2 gap-3 text-xs">
-                    <div className="bg-slate-900 p-4 rounded-xl border border-slate-800">
-                      <p className="font-bold text-white">President, SMC</p>
-                      <p className="text-slate-400 text-[11px]">Local Government Educationist Representative</p>
+                    <div className="bg-[#FAF7F2] p-4 rounded-xl border border-[#E8DFD0]">
+                      <p className="font-bold text-slate-900">President, SMC</p>
+                      <p className="text-slate-600 text-[11px]">Local Government Educationist Representative</p>
                     </div>
-                    <div className="bg-slate-900 p-4 rounded-xl border border-slate-800">
-                      <p className="font-bold text-white">Member Secretary</p>
-                      <p className="text-slate-400 text-[11px]">Smt. Kalyani Maity (Headmistress)</p>
+                    <div className="bg-[#FAF7F2] p-4 rounded-xl border border-[#E8DFD0]">
+                      <p className="font-bold text-slate-900">Member Secretary</p>
+                      <p className="text-slate-600 text-[11px]">Smt. Kalyani Maity (Headmistress)</p>
                     </div>
                   </div>
                 </div>
@@ -142,28 +142,28 @@ export const AboutDesk: React.FC<AboutDeskProps> = ({ facultyList }) => {
 
               {activeAdminTab === 'office' && (
                 <div className="space-y-4">
-                  <div className="border-b border-slate-800 pb-3">
-                    <h3 className="font-serif font-extrabold text-xl text-white">Office Administration & Accounts Wing</h3>
-                    <p className="text-xs text-amber-400">Banglar Shiksha Nodal Desk & Clerical Services</p>
+                  <div className="border-b border-[#E8DFD0] pb-3">
+                    <h3 className="font-serif font-extrabold text-xl text-[#1E293B]">Office Administration & Accounts Wing</h3>
+                    <p className="text-xs text-[#B45309] font-bold">Banglar Shiksha Nodal Desk & Clerical Services</p>
                   </div>
-                  <p className="text-xs text-slate-300 leading-relaxed">
+                  <p className="text-xs text-slate-700 leading-relaxed">
                     Responsible for student registration, Banglar Shiksha e-portal data entry, Kanyashree K1/K2 scholarship application processing, marksheets, and leaving certificate issuance.
                   </p>
-                  <div className="bg-slate-900 p-4 rounded-xl border border-slate-800 text-xs space-y-2">
-                    <p className="font-bold text-white">Office Helpdesk Timings:</p>
-                    <p className="text-slate-400">Monday - Friday: 10:30 AM to 4:30 PM | Saturday: 10:30 AM to 2:00 PM</p>
-                    <p className="text-amber-400 font-bold">Contact Email: mgghschool1945@gmail.com</p>
+                  <div className="bg-[#FAF7F2] p-4 rounded-xl border border-[#E8DFD0] text-xs space-y-2">
+                    <p className="font-bold text-slate-900">Office Helpdesk Timings:</p>
+                    <p className="text-slate-600">Monday - Friday: 10:30 AM to 4:30 PM | Saturday: 10:30 AM to 2:00 PM</p>
+                    <p className="text-[#9D174D] font-bold">Contact Email: mgghschool1945@gmail.com</p>
                   </div>
                 </div>
               )}
 
               {activeAdminTab === 'library' && (
                 <div className="space-y-4">
-                  <div className="border-b border-slate-800 pb-3">
-                    <h3 className="font-serif font-extrabold text-xl text-white">Central Library & Learning Resource Center</h3>
-                    <p className="text-xs text-amber-400">12,000+ Books, Competitive Guides & Reading Room</p>
+                  <div className="border-b border-[#E8DFD0] pb-3">
+                    <h3 className="font-serif font-extrabold text-xl text-[#1E293B]">Central Library & Learning Resource Center</h3>
+                    <p className="text-xs text-[#B45309] font-bold">12,000+ Books, Competitive Guides & Reading Room</p>
                   </div>
-                  <p className="text-xs text-slate-300 leading-relaxed">
+                  <p className="text-xs text-slate-700 leading-relaxed">
                     Managed by full-time librarian Smt. Sumitra Sasmal (M.Lib.Sc.). Provides lending services, career guidance journals, reference encyclopedias, and quiet study space for students.
                   </p>
                 </div>
@@ -171,11 +171,11 @@ export const AboutDesk: React.FC<AboutDeskProps> = ({ facultyList }) => {
 
               {activeAdminTab === 'support' && (
                 <div className="space-y-4">
-                  <div className="border-b border-slate-800 pb-3">
-                    <h3 className="font-serif font-extrabold text-xl text-white">Support Staff & Campus Security</h3>
-                    <p className="text-xs text-amber-400">Laboratory Attendants, Night Guards & Maintenance Team</p>
+                  <div className="border-b border-[#E8DFD0] pb-3">
+                    <h3 className="font-serif font-extrabold text-xl text-[#1E293B]">Support Staff & Campus Security</h3>
+                    <p className="text-xs text-[#B45309] font-bold">Laboratory Attendants, Night Guards & Maintenance Team</p>
                   </div>
-                  <p className="text-xs text-slate-300 leading-relaxed">
+                  <p className="text-xs text-slate-700 leading-relaxed">
                     Ensuring 24/7 campus security, CCTV surveillance, science laboratory safety, mid-day meal hygiene, and clean eco-friendly environment for our female students.
                   </p>
                 </div>
@@ -187,14 +187,14 @@ export const AboutDesk: React.FC<AboutDeskProps> = ({ facultyList }) => {
         </div>
 
         {/* SECTION 5: GUIDING SPIRIT & INSTITUTIONAL PHILOSOPHY */}
-        <div className="bg-slate-950 p-8 md:p-10 rounded-3xl border border-slate-800 shadow-2xl space-y-8">
+        <div className="bg-white p-8 md:p-10 rounded-3xl border border-[#E8DFD0] shadow-md space-y-8">
           
           {/* Motto Badge Strip */}
           <div className="text-center space-y-3">
-            <span className="text-xs font-bold text-rose-400 uppercase tracking-widest">
+            <span className="text-xs font-bold text-[#9D174D] uppercase tracking-widest">
               Institutional Core Values
             </span>
-            <h3 className="font-serif font-extrabold text-2xl md:text-3xl text-white">
+            <h3 className="font-serif font-extrabold text-2xl md:text-3xl text-[#1E293B]">
               "Our Motto" & Guiding Pillars
             </h3>
             
@@ -202,7 +202,7 @@ export const AboutDesk: React.FC<AboutDeskProps> = ({ facultyList }) => {
               {['Sincerity', 'Honesty', 'Punctuality', 'Accountability', 'Integrity', 'Cleanliness'].map((motto) => (
                 <span
                   key={motto}
-                  className="bg-slate-900 text-amber-300 border border-amber-500/30 px-4 py-1.5 rounded-full font-extrabold text-xs shadow-md uppercase tracking-wider"
+                  className="bg-[#FAF7F2] text-[#B45309] border border-[#E8DFD0] px-4 py-1.5 rounded-full font-extrabold text-xs shadow-xs uppercase tracking-wider"
                 >
                   ⭐ {motto}
                 </span>
@@ -211,24 +211,24 @@ export const AboutDesk: React.FC<AboutDeskProps> = ({ facultyList }) => {
           </div>
 
           {/* CATEGORIZED TEACHERS & STAFF DIRECTORY (SIRS & MADAMS ROSTER) */}
-          <div className="pt-8 border-t border-slate-800 space-y-6">
+          <div className="pt-8 border-t border-[#E8DFD0] space-y-6">
             <div className="flex flex-col gap-6">
               <div className="flex flex-wrap justify-between items-center gap-4">
                 <div>
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/20 border border-rose-500/40 text-rose-300 font-bold text-xs uppercase mb-2">
-                    <GraduationCap className="w-4 h-4 text-rose-400" />
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-100 border border-rose-300 text-[#9D174D] font-bold text-xs uppercase mb-2">
+                    <GraduationCap className="w-4 h-4" />
                     <span>Faculty & Personnel Roster</span>
                   </div>
-                  <h3 className="font-serif font-extrabold text-2xl text-white">
+                  <h3 className="font-serif font-extrabold text-2xl text-[#1E293B]">
                     School Teachers & Staff Directory (Sir & Madam Roster)
                   </h3>
-                  <p className="text-xs text-slate-400 mt-1">
+                  <p className="text-xs text-slate-600 mt-1">
                     Click on any card to view detailed bio, academic qualifications, subject specializations, and welcome messages.
                   </p>
                 </div>
 
                 {/* Main Category Tabs */}
-                <div className="flex flex-wrap gap-2 bg-slate-900 p-1.5 rounded-2xl border border-slate-800">
+                <div className="flex flex-wrap gap-2 bg-[#FAF7F2] p-1.5 rounded-2xl border border-[#E8DFD0]">
                   {[
                     { id: 'all', label: 'All Staff', count: facultyList.length },
                     { id: 'teaching', label: 'Teaching Faculty (Sirs & Madams)', count: facultyList.filter(f => f.category === 'teaching').length },
@@ -243,8 +243,8 @@ export const AboutDesk: React.FC<AboutDeskProps> = ({ facultyList }) => {
                       }}
                       className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
                         activeCategory === tab.id
-                          ? 'bg-gradient-to-r from-rose-600 to-amber-600 text-white shadow-lg'
-                          : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                          ? 'bg-[#9D174D] text-white shadow-xs'
+                          : 'text-slate-700 hover:bg-white'
                       }`}
                     >
                       {tab.label} ({tab.count})
@@ -260,24 +260,24 @@ export const AboutDesk: React.FC<AboutDeskProps> = ({ facultyList }) => {
                 <div
                   key={staff.id}
                   onClick={() => setSelectedStaff(staff)}
-                  className="bg-slate-900 p-5 rounded-2xl border border-slate-800 hover:border-amber-500/60 shadow-md hover:shadow-xl transition-all cursor-pointer group flex flex-col justify-between"
+                  className="bg-[#FAF7F2] p-5 rounded-2xl border border-[#E8DFD0] hover:border-[#9D174D] shadow-xs hover:shadow-md transition-all cursor-pointer group flex flex-col justify-between"
                 >
                   <div>
                     <div className="flex items-center justify-between mb-3">
                       <span className={`text-[10px] font-extrabold px-2.5 py-0.5 rounded-full uppercase ${
                         staff.gender === 'Sir' 
-                          ? 'bg-blue-500/20 text-blue-300 border border-blue-500/30' 
-                          : 'bg-rose-500/20 text-rose-300 border border-rose-500/30'
+                          ? 'bg-blue-100 text-blue-800 border border-blue-200' 
+                          : 'bg-rose-100 text-[#9D174D] border border-rose-200'
                       }`}>
                         {staff.gender}
                       </span>
-                      <span className="text-[10px] font-bold text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded">
+                      <span className="text-[10px] font-bold text-[#B45309] bg-amber-100/80 px-2 py-0.5 rounded">
                         {staff.subject}
                       </span>
                     </div>
 
                     <div className="flex items-center gap-3 mb-3">
-                      <div className="w-12 h-12 rounded-full overflow-hidden bg-slate-800 border border-slate-700 shrink-0 flex items-center justify-center text-amber-400 font-bold text-lg">
+                      <div className="w-12 h-12 rounded-full overflow-hidden bg-white border border-[#E8DFD0] shrink-0 flex items-center justify-center text-[#B45309] font-bold text-lg shadow-xs">
                         {staff.imageUrl ? (
                           <img src={staff.imageUrl} alt={staff.name} className="w-full h-full object-cover" />
                         ) : (
@@ -285,22 +285,22 @@ export const AboutDesk: React.FC<AboutDeskProps> = ({ facultyList }) => {
                         )}
                       </div>
                       <div>
-                        <h4 className="font-extrabold text-sm text-white group-hover:text-amber-400 transition-colors leading-tight">
+                        <h4 className="font-extrabold text-sm text-[#1E293B] group-hover:text-[#9D174D] transition-colors leading-tight">
                           {staff.name}
                         </h4>
-                        <p className="text-[11px] font-bold text-rose-400 mt-0.5">{staff.designation}</p>
+                        <p className="text-[11px] font-bold text-[#B45309] mt-0.5">{staff.designation}</p>
                       </div>
                     </div>
 
-                    <p className="text-[11px] text-slate-400 italic line-clamp-1">{staff.qualification}</p>
+                    <p className="text-[11px] text-slate-600 italic line-clamp-1">{staff.qualification}</p>
                   </div>
 
-                  <div className="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-500">
-                    <span className="flex items-center gap-1 text-emerald-400 font-medium">
+                  <div className="pt-3 mt-3 border-t border-[#E8DFD0] flex items-center justify-between text-[11px] text-slate-500">
+                    <span className="flex items-center gap-1 text-[#047857] font-medium">
                       <UserCheck className="w-3 h-3" />
                       <span>{staff.category === 'teaching' ? 'Faculty' : staff.category === 'non_teaching' ? 'Office' : 'Support'}</span>
                     </span>
-                    <span className="font-bold text-slate-400 group-hover:text-amber-400 transition-colors">
+                    <span className="font-bold text-[#9D174D] group-hover:underline transition-colors">
                       Click details &rarr;
                     </span>
                   </div>
@@ -316,18 +316,18 @@ export const AboutDesk: React.FC<AboutDeskProps> = ({ facultyList }) => {
       {/* STAFF DETAIL MODAL POPUP */}
       {selectedStaff && (
         <div className="modal-backdrop-luxury">
-          <div className="bg-slate-900 text-white rounded-3xl max-w-lg w-full p-6 md:p-8 shadow-2xl border border-slate-700 relative animate-in fade-in zoom-in duration-200 space-y-6">
+          <div className="bg-white text-slate-900 rounded-3xl max-w-lg w-full p-6 md:p-8 shadow-2xl border border-[#E8DFD0] relative animate-in fade-in zoom-in duration-200 space-y-6">
             
             <button
               onClick={() => setSelectedStaff(null)}
-              className="absolute right-5 top-5 w-9 h-9 rounded-full bg-slate-800 hover:bg-rose-600 text-slate-300 hover:text-white flex items-center justify-center transition-colors"
+              className="absolute right-5 top-5 w-9 h-9 rounded-full bg-slate-100 hover:bg-rose-100 text-slate-600 hover:text-[#9D174D] flex items-center justify-center transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
 
             <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5">
-              <div className="w-24 h-24 rounded-full p-1 bg-gradient-to-r from-rose-500 to-amber-500 shrink-0 shadow-lg">
-                <div className="w-full h-full rounded-full overflow-hidden bg-slate-950 flex items-center justify-center text-amber-400 font-extrabold text-2xl border border-slate-800">
+              <div className="w-24 h-24 rounded-full p-1 bg-gradient-to-r from-[#9D174D] to-[#B45309] shrink-0 shadow-md">
+                <div className="w-full h-full rounded-full overflow-hidden bg-white flex items-center justify-center text-[#B45309] font-extrabold text-2xl border border-white">
                   {selectedStaff.imageUrl ? (
                     <img src={selectedStaff.imageUrl} alt={selectedStaff.name} className="w-full h-full object-cover" />
                   ) : (
@@ -340,54 +340,54 @@ export const AboutDesk: React.FC<AboutDeskProps> = ({ facultyList }) => {
                 <div className="flex flex-wrap justify-center sm:justify-start gap-1.5 mb-1">
                   <span className={`text-[10px] font-extrabold px-2.5 py-0.5 rounded-full uppercase ${
                     selectedStaff.gender === 'Sir' 
-                      ? 'bg-blue-500/20 text-blue-300 border border-blue-500/30' 
-                      : 'bg-rose-500/20 text-rose-300 border border-rose-500/30'
+                      ? 'bg-blue-100 text-blue-800 border border-blue-200' 
+                      : 'bg-rose-100 text-[#9D174D] border border-rose-200'
                   }`}>
                     {selectedStaff.gender}
                   </span>
-                  <span className="text-[10px] font-extrabold px-2.5 py-0.5 rounded-full uppercase bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                  <span className="text-[10px] font-extrabold px-2.5 py-0.5 rounded-full uppercase bg-amber-100 text-[#B45309] border border-amber-200">
                     {selectedStaff.department}
                   </span>
                 </div>
 
-                <h3 className="font-serif font-extrabold text-xl md:text-2xl text-white">
+                <h3 className="font-serif font-extrabold text-xl md:text-2xl text-[#1E293B]">
                   {selectedStaff.name}
                 </h3>
-                <p className="text-amber-400 font-bold text-xs uppercase">
+                <p className="text-[#B45309] font-bold text-xs uppercase">
                   {selectedStaff.designation}
                 </p>
-                <p className="text-xs text-slate-300 font-medium">
+                <p className="text-xs text-slate-600 font-medium">
                   Academic Qualification: {selectedStaff.qualification}
                 </p>
               </div>
             </div>
 
-            <div className="bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-3">
-              <div className="flex items-center justify-between text-xs border-b border-slate-800 pb-2">
-                <span className="text-slate-400 font-bold uppercase">Subject / Scope of Work:</span>
-                <span className="text-rose-400 font-extrabold">{selectedStaff.subject}</span>
+            <div className="bg-[#FAF7F2] p-4 rounded-2xl border border-[#E8DFD0] space-y-3">
+              <div className="flex items-center justify-between text-xs border-b border-[#E8DFD0] pb-2">
+                <span className="text-slate-600 font-bold uppercase">Subject / Scope of Work:</span>
+                <span className="text-[#9D174D] font-extrabold">{selectedStaff.subject}</span>
               </div>
-              <div className="flex items-center justify-between text-xs border-b border-slate-800 pb-2">
-                <span className="text-slate-400 font-bold uppercase">Cadre / Category:</span>
-                <span className="text-emerald-400 font-bold capitalize">
+              <div className="flex items-center justify-between text-xs border-b border-[#E8DFD0] pb-2">
+                <span className="text-slate-600 font-bold uppercase">Cadre / Category:</span>
+                <span className="text-[#047857] font-bold capitalize">
                   {selectedStaff.category === 'teaching' ? 'Teaching Faculty' : selectedStaff.category === 'non_teaching' ? 'Non-Teaching Office Staff' : 'Support & Group-D Staff'}
                 </span>
               </div>
             </div>
 
             <div className="space-y-2">
-              <h4 className="text-xs font-bold text-amber-400 uppercase tracking-wider flex items-center gap-1.5">
-                <Quote className="w-3.5 h-3.5 text-rose-500" />
+              <h4 className="text-xs font-bold text-[#B45309] uppercase tracking-wider flex items-center gap-1.5">
+                <Quote className="w-3.5 h-3.5 text-[#9D174D]" />
                 Welcome Message & Staff Profile
               </h4>
-              <p className="text-xs text-slate-300 leading-relaxed italic bg-slate-950/60 p-4 rounded-xl border border-slate-800">
+              <p className="text-xs text-slate-700 leading-relaxed italic bg-[#FAF7F2] p-4 rounded-xl border border-[#E8DFD0]">
                 "{selectedStaff.bio || `Welcome to Mahishadal Gayeswari Girls' High School (H.S.). As part of ${selectedStaff.department}, I am dedicated to serving our students and institution with excellence, guidance, and commitment since 1945.`}"
               </p>
             </div>
 
             <button
               onClick={() => setSelectedStaff(null)}
-              className="w-full bg-rose-600 hover:bg-rose-500 text-white font-bold py-2.5 rounded-xl text-xs transition-colors"
+              className="w-full bg-[#9D174D] hover:bg-[#881337] text-white font-bold py-2.5 rounded-xl text-xs transition-colors"
             >
               Close Profile Window
             </button>

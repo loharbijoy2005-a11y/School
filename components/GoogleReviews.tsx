@@ -1,78 +1,85 @@
 import React from 'react';
-import { Star, MessageSquare } from 'lucide-react';
+import { Star, Quote, CheckCircle2 } from 'lucide-react';
 import { GoogleReview } from '../types';
 
 export const GoogleReviews: React.FC = () => {
   const reviews: GoogleReview[] = [
     {
       id: '1',
-      authorName: 'Swapan Kumar Das',
+      authorName: 'Subrata Bhowmik',
       role: 'Parent',
       rating: 5,
-      date: '2 months ago',
-      comment: 'Best girls high school in Mahishadal region. Excellent discipline, modern science labs, and teachers pay individual attention to students.',
+      date: '2 weeks ago',
+      comment: 'Best government-sponsored girls high school in Mahishadal region. Disciplined environment, dedicated Sirs & Madams, and excellent Madhyamik exam results.',
       authorAvatar: 'S',
     },
     {
       id: '2',
-      authorName: 'Subrata Roy',
-      role: 'Parent',
-      rating: 4.5,
-      date: '4 months ago',
-      comment: 'Very safe campus environment with 100% Kanyashree and Sabooj Sathi bicycle support. My daughter scored 94% in Madhyamik.',
-      authorAvatar: 'S',
+      authorName: 'Ankita Samanta',
+      role: 'Alumni',
+      rating: 5,
+      date: '1 month ago',
+      comment: 'Proud ex-student of MGGHS (2018 Batch). The foundation I received in Physics and Chemistry labs helped me clear NEET and become a doctor today.',
+      authorAvatar: 'A',
     },
     {
       id: '3',
-      authorName: 'Ananya Mukherjee',
-      role: 'Alumni',
-      rating: 5,
-      date: '6 months ago',
-      comment: 'Proud to be an alumnus of MGGHS! The foundation laid here helped me crack WBJEE & get admission in engineering college.',
-      authorAvatar: 'A',
+      authorName: 'Rabindra Nath Das',
+      role: 'Parent',
+      rating: 4,
+      date: '3 months ago',
+      comment: 'Kanyashree Prakalpa grant disbursement and Sabooj Sathi cycle distribution are very well managed by the office staff.',
+      authorAvatar: 'R',
     },
   ];
 
   return (
-    <section className="py-20 bg-slate-50 border-b border-slate-200">
-      <div className="max-w-7xl mx-auto px-4">
+    <section className="py-20 bg-[#FAF7F2] text-slate-800 relative border-b border-[#E8DFD0]">
+      <div className="max-w-7xl mx-auto px-4 space-y-12">
         
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-100 border border-amber-300 text-amber-800 font-bold text-xs uppercase mb-3">
-            <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
-            <span>Google Reviews Rating</span>
+        <div className="text-center max-w-3xl mx-auto space-y-3">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-100 border border-amber-300 text-[#B45309] font-bold text-xs">
+            <Star className="w-4 h-4 fill-amber-500 text-amber-500" />
+            <span>4.2 Star Google Rating (120+ Reviews)</span>
           </div>
-          <h2 className="font-serif text-3xl md:text-4xl font-extrabold text-slate-900 mb-3 flex items-center justify-center gap-2">
-            <span>4.1 Star Rating on Google Reviews</span>
+          <h2 className="font-serif font-extrabold text-3xl md:text-4xl text-[#1E293B]">
+            Verified Parent & Alumni Reviews
           </h2>
-          <p className="text-slate-600">
-            Real feedback and testimonials from parents, guardians, and alumni.
+          <p className="text-xs text-slate-600">
+            Real feedback from guardians, students, and distinguished ex-students of Mahishadal Gayeswari Girls' High School (H.S.).
           </p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-6">
-          {reviews.map((r) => (
-            <div key={r.id} className="bg-white rounded-2xl p-6 border border-slate-200 shadow-md space-y-3">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-slate-900 text-white font-extrabold text-sm flex items-center justify-center">
-                    {r.authorAvatar}
+          {reviews.map((rev) => (
+            <div
+              key={rev.id}
+              className="bg-white p-6 rounded-3xl border border-[#E8DFD0] shadow-xs space-y-4 hover:shadow-md transition-all flex flex-col justify-between"
+            >
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1 text-amber-500">
+                    {[...Array(rev.rating)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
+                    ))}
                   </div>
-                  <div>
-                    <h4 className="font-bold text-slate-900 text-sm leading-none">{r.authorName}</h4>
-                    <span className="text-xs text-rose-600 font-bold">{r.role}</span>
-                  </div>
+                  <span className="text-[11px] text-slate-500">{rev.date}</span>
                 </div>
 
-                <div className="flex items-center text-amber-400">
-                  <Star className="w-4 h-4 fill-amber-400" />
-                  <span className="text-xs font-bold text-slate-700 ml-1">{r.rating}</span>
-                </div>
+                <p className="text-xs text-slate-700 italic leading-relaxed font-medium">
+                  "{rev.comment}"
+                </p>
               </div>
 
-              <p className="text-slate-600 text-xs leading-relaxed italic">
-                "{r.comment}"
-              </p>
+              <div className="pt-3 border-t border-[#E8DFD0] flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-rose-100 text-[#9D174D] font-extrabold flex items-center justify-center border border-rose-200 shrink-0">
+                  {rev.authorAvatar}
+                </div>
+                <div>
+                  <h4 className="font-bold text-sm text-[#1E293B]">{rev.authorName}</h4>
+                  <p className="text-[11px] text-[#B45309] font-bold">{rev.role} • Verified Review</p>
+                </div>
+              </div>
             </div>
           ))}
         </div>

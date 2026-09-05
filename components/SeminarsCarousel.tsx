@@ -55,18 +55,18 @@ export const SeminarsCarousel: React.FC = () => {
   const activeEvent = events[currentIndex];
 
   return (
-    <section className="py-20 bg-slate-950 text-white relative">
+    <section className="py-20 bg-[#FAF7F2] text-slate-800 relative border-b border-[#E8DFD0]">
       <div className="max-w-7xl mx-auto px-4 space-y-12">
         
-        <div className="flex flex-wrap justify-between items-end gap-4 border-b border-slate-800 pb-6">
+        <div className="flex flex-wrap justify-between items-end gap-4 border-b border-[#E8DFD0] pb-6">
           <div>
-            <span className="text-xs font-bold text-amber-400 uppercase tracking-widest bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30 mb-2 inline-block">
+            <span className="text-xs font-bold text-[#B45309] uppercase tracking-widest bg-amber-100/60 px-3 py-1 rounded-full border border-amber-300/60 mb-2 inline-block">
               Co-Curricular Excellence
             </span>
-            <h2 className="font-serif font-extrabold text-3xl md:text-4xl text-white">
+            <h2 className="font-serif font-extrabold text-3xl md:text-4xl text-[#1E293B]">
               Cultural Wings, Seminars & Workshops
             </h2>
-            <p className="text-xs text-slate-400 mt-1">
+            <p className="text-xs text-slate-600 mt-1">
               Building holistic personality, scientific curiosity, artistic expression, and self-defense skills.
             </p>
           </div>
@@ -74,14 +74,14 @@ export const SeminarsCarousel: React.FC = () => {
           <div className="flex items-center gap-2">
             <button
               onClick={handlePrev}
-              className="w-10 h-10 rounded-full bg-slate-900 hover:bg-slate-800 text-white border border-slate-700 flex items-center justify-center transition-colors"
+              className="w-10 h-10 rounded-full bg-white hover:bg-slate-100 text-slate-700 border border-[#E8DFD0] flex items-center justify-center transition-colors shadow-xs"
               aria-label="Previous Event"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button
               onClick={handleNext}
-              className="w-10 h-10 rounded-full bg-slate-900 hover:bg-slate-800 text-white border border-slate-700 flex items-center justify-center transition-colors"
+              className="w-10 h-10 rounded-full bg-white hover:bg-slate-100 text-slate-700 border border-[#E8DFD0] flex items-center justify-center transition-colors shadow-xs"
               aria-label="Next Event"
             >
               <ChevronRight className="w-5 h-5" />
@@ -90,38 +90,38 @@ export const SeminarsCarousel: React.FC = () => {
         </div>
 
         {/* Active Event Slide Card */}
-        <div className="bg-slate-900 rounded-3xl border border-slate-800 overflow-hidden shadow-2xl grid lg:grid-cols-12 items-center">
+        <div className="bg-white rounded-3xl border border-[#E8DFD0] overflow-hidden shadow-md grid lg:grid-cols-12 items-center">
           
-          <div className="lg:col-span-6 h-72 lg:h-96 relative">
+          <div className="lg:col-span-6 h-72 lg:h-96 relative bg-slate-100">
             <img
               src={activeEvent.imageUrl}
               alt={activeEvent.title}
               className="w-full h-full object-cover"
             />
             <div className="absolute top-4 left-4">
-              <span className="bg-rose-600 text-white text-[11px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider shadow-lg">
+              <span className="bg-[#9D174D] text-white text-[11px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider shadow-md">
                 {activeEvent.badge}
               </span>
             </div>
           </div>
 
           <div className="lg:col-span-6 p-8 lg:p-10 space-y-6">
-            <div className="flex flex-wrap items-center gap-4 text-xs text-slate-400 font-bold">
-              <span className="flex items-center gap-1.5 text-amber-400">
+            <div className="flex flex-wrap items-center gap-4 text-xs text-slate-600 font-bold">
+              <span className="flex items-center gap-1.5 text-[#B45309]">
                 <Calendar className="w-4 h-4" />
                 <span>{activeEvent.date}</span>
               </span>
-              <span className="flex items-center gap-1.5 text-slate-300">
-                <MapPin className="w-4 h-4 text-rose-400" />
+              <span className="flex items-center gap-1.5 text-slate-700">
+                <MapPin className="w-4 h-4 text-[#9D174D]" />
                 <span>{activeEvent.venue}</span>
               </span>
             </div>
 
-            <h3 className="font-serif font-extrabold text-2xl lg:text-3xl text-white leading-snug">
+            <h3 className="font-serif font-extrabold text-2xl lg:text-3xl text-[#1E293B] leading-snug">
               {activeEvent.title}
             </h3>
 
-            <p className="text-slate-300 text-sm leading-relaxed">
+            <p className="text-slate-600 text-sm leading-relaxed font-medium">
               {activeEvent.description}
             </p>
 
@@ -136,7 +136,7 @@ export const SeminarsCarousel: React.FC = () => {
                     key={idx}
                     onClick={() => setCurrentIndex(idx)}
                     className={`w-3 h-3 rounded-full transition-all ${
-                      currentIndex === idx ? 'bg-amber-400 w-6' : 'bg-slate-800'
+                      currentIndex === idx ? 'bg-[#B45309] w-6' : 'bg-slate-200'
                     }`}
                   />
                 ))}
