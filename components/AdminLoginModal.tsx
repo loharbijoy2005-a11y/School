@@ -27,9 +27,12 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({
       return;
     }
 
-    if (username === 'headmistress' && password === 'mgghs1945') {
+    const isHeadmistress = username === 'headmistress' && password === 'mgghs1945';
+    const isAdmin = (username === 'admin' || username === 'headmistress') && (password === 'admin123' || password === 'mgghs1945');
+
+    if (isAdmin || isHeadmistress) {
       const adminUser: AdminUser = {
-        username: 'headmistress',
+        username: username || 'admin',
         role: 'headmistress',
         token: 'mock-jwt-token-mgghs-2026',
       };
@@ -40,7 +43,7 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({
       setErrorMsg('');
     } else {
       setAttempts((prev) => prev + 1);
-      setErrorMsg('Invalid Headmistress / Admin credentials. (Hint: username: headmistress, pass: mgghs1945)');
+      setErrorMsg('Invalid login! Username: admin or headmistress | Password: admin123 or mgghs1945');
     }
   };
 
@@ -116,6 +119,19 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({
             <ShieldCheck className="w-4 h-4 text-amber-400" />
             <span>Authenticate & Access Portal</span>
           </button>
+
+          <div className="pt-2 text-center">
+            <button
+              type="button"
+              onClick={() => {
+                setUsername('admin');
+                setPassword('admin123');
+              }}
+              className="text-xs font-bold text-rose-600 hover:underline inline-flex items-center gap-1"
+            >
+              <span>⚡ Click to Auto-fill Demo Credentials (admin / admin123)</span>
+            </button>
+          </div>
         </form>
 
       </div>
