@@ -17,10 +17,10 @@ export const Navbar: React.FC<NavbarProps> = ({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const tickerItems = [
-    'Admission Open for Class V to XI (Session 2026-27)',
-    'WBBSE Madhyamik & WBCHSE Higher Secondary Exam Routine Published',
+    'Class XI Admission Open 2026-27 | Madhyamik & HS Practical Schedules Published',
     'Kanyashree K1 & K2 Annual Grant Verification Desk Active at Office',
     'Taruner Swapna Class XII ₹10,000 Tab Scheme Account Validation Open',
+    'Admission Open for Class V to IX (Session 2026-27)',
   ];
 
   return (
@@ -28,39 +28,41 @@ export const Navbar: React.FC<NavbarProps> = ({
       {/* Top Utility Bar */}
       <div className="bg-slate-950 text-slate-300 text-xs py-2 border-b border-slate-800">
         <div className="max-w-7xl mx-auto px-4 flex flex-wrap justify-between items-center gap-2">
-          <div className="flex items-center gap-3 flex-wrap">
-            <span className="bg-amber-500/20 text-amber-300 border border-amber-500/40 px-2.5 py-0.5 rounded font-bold">
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="bg-rose-500/20 text-rose-300 border border-rose-500/40 px-2 py-0.5 rounded font-bold text-[11px]">
+              UDISE: 19190806002
+            </span>
+            <span className="bg-amber-500/20 text-amber-300 border border-amber-500/40 px-2 py-0.5 rounded font-bold text-[11px]">
               Banglar Shiksha ID: WB-1945-MGGHS
             </span>
-            <span className="bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 px-2.5 py-0.5 rounded font-bold">
+            <span className="bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 px-2 py-0.5 rounded font-bold text-[11px]">
               WBBSE: E1-042 | WBCHSE: 105084
             </span>
-            <span className="flex items-center gap-1">
-              <Phone className="w-3.5 h-3.5 text-amber-400" />
+            <span className="hidden xl:flex items-center gap-1 text-[11px]">
+              <Phone className="w-3 h-3 text-amber-400" />
               +91 3228 240211
-            </span>
-            <span className="flex items-center gap-1">
-              <Mail className="w-3.5 h-3.5 text-amber-400" />
-              mgghschool1945@gmail.com
             </span>
           </div>
 
-          <div className="flex items-center gap-2 flex-wrap">
+          <div className="flex items-center gap-1.5 flex-wrap">
             {/* Quick Action Pills */}
-            <a href="#academics" className="bg-slate-800 hover:bg-slate-700 text-slate-200 px-2.5 py-0.5 rounded text-[11px] font-bold flex items-center gap-1 transition-colors">
-              <BookOpen className="w-3 h-3 text-rose-400" /> DEPARTMENTS
+            <a href="#academics" className="bg-slate-800 hover:bg-slate-700 text-slate-200 px-2 py-0.5 rounded text-[10px] font-bold flex items-center gap-1 transition-colors">
+              <BookOpen className="w-3 h-3 text-rose-400" /> CURRICULUM (V-XII)
             </a>
-            <a href="#notices" className="bg-slate-800 hover:bg-slate-700 text-slate-200 px-2.5 py-0.5 rounded text-[11px] font-bold flex items-center gap-1 transition-colors">
-              <Bell className="w-3 h-3 text-amber-400" /> PUBLICATIONS
+            <a href="#facilities" className="bg-slate-800 hover:bg-slate-700 text-slate-200 px-2 py-0.5 rounded text-[10px] font-bold flex items-center gap-1 transition-colors">
+              <BookOpen className="w-3 h-3 text-amber-400" /> MID-DAY MEAL
             </a>
-            <a href="#welfare" className="bg-slate-800 hover:bg-slate-700 text-slate-200 px-2.5 py-0.5 rounded text-[11px] font-bold flex items-center gap-1 transition-colors">
-              <CreditCard className="w-3 h-3 text-emerald-400" /> FEES & PORTAL
+            <a href="#welfare" className="bg-slate-800 hover:bg-slate-700 text-slate-200 px-2 py-0.5 rounded text-[10px] font-bold flex items-center gap-1 transition-colors">
+              <CreditCard className="w-3 h-3 text-emerald-400" /> GOVT SCHEMES
             </a>
-            <button onClick={onOpenAdminLoginModal} className="bg-amber-500/20 hover:bg-amber-500 text-amber-300 hover:text-slate-950 border border-amber-500/40 px-2.5 py-0.5 rounded text-[11px] font-bold flex items-center gap-1 transition-all">
+            <a href="#welfare" className="bg-slate-800 hover:bg-slate-700 text-slate-200 px-2 py-0.5 rounded text-[10px] font-bold flex items-center gap-1 transition-colors">
+              <UserCheck className="w-3 h-3 text-cyan-400" /> KANYASHREE STATUS
+            </a>
+            <button onClick={onOpenAdminLoginModal} className="bg-amber-500/20 hover:bg-amber-500 text-amber-300 hover:text-slate-950 border border-amber-500/40 px-2 py-0.5 rounded text-[10px] font-bold flex items-center gap-1 transition-all">
               <ShieldCheck className="w-3 h-3" /> ADMIN PORTAL
             </button>
-            <button onClick={onToggleLang} className="bg-white/10 hover:bg-rose-600 text-white px-2.5 py-0.5 rounded-full text-xs font-bold transition-all flex items-center gap-1">
-              <Globe className="w-3.5 h-3.5" />
+            <button onClick={onToggleLang} className="bg-white/10 hover:bg-rose-600 text-white px-2 py-0.5 rounded-full text-xs font-bold transition-all flex items-center gap-1">
+              <Globe className="w-3 h-3" />
               <span>{currentLang === 'en' ? 'বাংলা' : 'English'}</span>
             </button>
           </div>

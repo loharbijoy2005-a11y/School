@@ -145,7 +145,7 @@ export const HeroNoticeOverlay: React.FC<HeroNoticeOverlayProps> = ({
               href="#notices"
               className="text-xs font-bold text-amber-400 hover:text-amber-300 flex items-center gap-1"
             >
-              <span>VIEW FULL BOARD</span>
+              <span>VIEW FULL NOTICE BOARD</span>
               <ArrowRight className="w-3 h-3" />
             </a>
           </div>
