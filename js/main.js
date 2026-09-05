@@ -1,6 +1,6 @@
 /**
  * MAHISHADAL GAYESWARI GIRLS' HIGH SCHOOL (H.S.)
- * Official JS Controller
+ * Ultra-Modern Animation & JS Controller
  */
 
 // Bilingual Translation Dictionary
@@ -21,17 +21,15 @@ const i18n = {
     navFacilities: "Facilities",
     navGallery: "Gallery",
     btnApply: "New Admission Inquiry",
-    heroTitle: "Nurturing Knowledge, Discipline, and Girls' Empowerment",
-    heroDesc: "Mahishadal Gayeswari Girls' High School (H.S.) is a government-sponsored premier girls' high school in Mahishadal, Purba Medinipur. Affiliated to WBBSE and WBCHSE, we provide free, inclusive, and modern STEM & humanities education from Class V to Class XII.",
-    btnAdmission: "New Admission Form (Classes V - XI)",
-    btnRoutine: "Download Madhyamik & H.S. Routine",
-    statClasses: "Classes V to XII",
-    statClassesSub: "Secondary & Higher Secondary",
+    heroTitle: "Empowering Young Minds, Inspiring Excellence Since 1945",
+    heroDesc: "Mahishadal Gayeswari Girls' High School (H.S.) is a premier government-sponsored girls' high school in Mahishadal, Purba Medinipur. Affiliated to WBBSE and WBCHSE, we foster holistic academic brilliance, scientific temper, and leadership skills from Class V to Class XII.",
+    btnAdmission: "Online Admission 2026",
+    btnExplore: "Explore Campus",
+    statClasses: "1000+ Girls Enrolled",
+    statClassesSub: "Classes V to XII",
     statPass: "100% Madhyamik Pass",
     statPassSub: "WBBSE & WBCHSE Excellence",
-    statGovt: "Govt Sponsored",
-    statGovtSub: "Estd. 1945 Mahishadal",
-    noticeHeaderTitle: "Official Notice Board & Circulars",
+    noticeHeaderTitle: "Live Notice & Examination Board",
     noticeHeaderSub: "Real-time updates regarding school exams, unit test routines, H.S. practicals, and holiday notifications.",
     deskTitle: "Headmistress's Desk",
     deskName: "Smt. Kalyani Maity",
@@ -58,16 +56,14 @@ const i18n = {
     navFacilities: "সুযোগ-সুবিধা",
     navGallery: "গ্যালারি",
     btnApply: "অনলাইন ভর্তি তথ্য",
-    heroTitle: "জ্ঞান চর্চা, শৃঙ্খলা ও কন্যাদের সমৃদ্ধির পথপ্রদর্শক",
+    heroTitle: "১৯৪৫ সাল থেকে জ্ঞান চর্চা ও কন্যাদের সমৃদ্ধির পথপ্রদর্শক",
     heroDesc: "মহিষাদল গায়েশ্বরী বালিকা উচ্চ বিদ্যালয় (উঃ মাঃ) পূর্ব মেদিনীপুরের এক ঐতিহ্যবাহী সরকারি সাহায্যপ্রাপ্ত বালিকা বিদ্যালয়। পঞ্চম থেকে দ্বাদশ শ্রেণী পর্যন্ত বিজ্ঞান, কলা ও বৃত্তিমূলক শিক্ষায় আমরা অঙ্গীকারবদ্ধ।",
-    btnAdmission: "নতুন ভর্তি ফর্ম (পঞ্চম - একাদশ)",
-    btnRoutine: "পরীক্ষার রুটিন ডাউনলোড",
-    statClasses: "পঞ্চম থেকে দ্বাদশ",
-    statClassesSub: "মাধ্যমিক ও উচ্চ মাধ্যমিক",
-    statPass: "১০০% পাস রেকর্ড",
-    statPassSub: "পর্ষদ ও সংসদ সাফল্য",
-    statGovt: "সরকারি সাহায্যপ্রাপ্ত",
-    statGovtSub: "স্থাপিত ১৯৪৫, মহিষাদল",
+    btnAdmission: "অনলাইন ভর্তি ২০২৬",
+    btnExplore: "বিদ্যালয় চত্বর দেখুন",
+    statClasses: "১০০০+ ছাত্রী নিবন্ধিত",
+    statClassesSub: "পঞ্চম থেকে দ্বাদশ শ্রেণী",
+    statPass: "১০০% পাস সাফল্য",
+    statPassSub: "মাধ্যমিক ও উচ্চ মাধ্যমিক",
     noticeHeaderTitle: "অফিসিয়াল নোটিশ ও পরীক্ষার সময়সূচী",
     noticeHeaderSub: "বিদ্যালয়ের ইউনিট টেস্ট, উচ্চ মাধ্যমিক প্রাক্টিক্যাল ও ছুটির তালিকা সংক্রান্ত আপডেট।",
     deskTitle: "প্রধান শিক্ষিকার বার্তা",
@@ -84,24 +80,77 @@ const i18n = {
 let currentLanguage = 'en';
 
 document.addEventListener('DOMContentLoaded', () => {
+  initScrollReveals();
+  init3DTiltEffect();
   initNoticeBoard();
   initLanguageToggle();
   initFormHandler();
   initGalleryLightbox();
   initMobileMenu();
+  initBackToTop();
 });
 
-// Notice Board Logic
+// 1. Scroll-Triggered Reveal Engine (IntersectionObserver)
+function initScrollReveals() {
+  const revealElements = document.querySelectorAll('.reveal');
+  const observerOptions = {
+    threshold: 0.15,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  revealElements.forEach(el => revealObserver.observe(el));
+}
+
+// 2. Interactive 3D Card Parallax Tilt Effect
+function init3DTiltEffect() {
+  const tiltCard = document.getElementById('tiltCard');
+  if (!tiltCard) return;
+
+  const container = tiltCard.parentElement;
+
+  container.addEventListener('mousemove', (e) => {
+    const rect = container.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+
+    const tiltX = (y / rect.height) * 16;
+    const tiltY = -(x / rect.width) * 16;
+
+    tiltCard.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(1.02)`;
+  });
+
+  container.addEventListener('mouseleave', () => {
+    tiltCard.style.transform = `rotateX(0deg) rotateY(0deg) scale(1)`;
+  });
+}
+
+// 3. Live Notice Board Filtering & Cross-Fade
 function initNoticeBoard() {
   const tabBtns = document.querySelectorAll('.tab-btn');
   const searchInput = document.getElementById('noticeSearchInput');
+  const noticeGrid = document.getElementById('noticeGrid');
 
   tabBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       tabBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      const filter = btn.dataset.filter;
-      filterNotices(filter, searchInput ? searchInput.value : '');
+
+      if (noticeGrid) noticeGrid.style.opacity = '0';
+
+      setTimeout(() => {
+        const filter = btn.dataset.filter;
+        filterNotices(filter, searchInput ? searchInput.value : '');
+        if (noticeGrid) noticeGrid.style.opacity = '1';
+      }, 200);
     });
   });
 
@@ -133,7 +182,7 @@ function filterNotices(category, query) {
   });
 }
 
-// Language Switcher
+// 4. Bilingual Language Switcher
 function initLanguageToggle() {
   const langBtn = document.getElementById('langToggleBtn');
   if (!langBtn) return;
@@ -157,7 +206,7 @@ function initLanguageToggle() {
   });
 }
 
-// Form Submission & Toast
+// 5. Form Submission & Celebration Modal
 function initFormHandler() {
   const form = document.getElementById('admissionForm');
   if (!form) return;
@@ -181,16 +230,16 @@ function initFormHandler() {
     if (modalBody) {
       modalBody.innerHTML = `
         <div style="text-align: center; padding: 1rem;">
-          <div style="width: 70px; height: 70px; background: #D1FAE5; color: #059669; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem auto; font-size: 2rem;">
-            <i class="fa-solid fa-circle-check"></i>
+          <div style="width: 80px; height: 80px; background: #FFE4E6; color: #F43F5E; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem auto; font-size: 2.2rem; box-shadow: 0 0 25px rgba(244,63,94,0.4); animation: pulse-glow 2s infinite;">
+            <i class="fa-solid fa-check-double"></i>
           </div>
-          <h3 style="color: #0F172A; font-size: 1.4rem; margin-bottom: 0.5rem;">Parent Inquiry Submitted!</h3>
-          <p style="color: #64748B; margin-bottom: 1.5rem;">Thank you, <strong>${guardian}</strong>. Inquiry for student <strong>${name}</strong> for admission in <strong>${applyClass}</strong> has been registered.</p>
+          <h3 style="color: #0F172A; font-size: 1.45rem; margin-bottom: 0.5rem;">Admission Inquiry Received!</h3>
+          <p style="color: #64748B; margin-bottom: 1.5rem;">Thank you, <strong>${guardian}</strong>. Inquiry for student <strong>${name}</strong> for class <strong>${applyClass}</strong> has been logged successfully.</p>
           <div style="background: #F8FAFC; border: 1px dashed #CBD5E1; padding: 1rem; border-radius: 12px; display: inline-block; width: 100%; margin-bottom: 1.5rem;">
             <span style="font-size: 0.85rem; color: #64748B; display: block;">School Helpdesk Tracking Code</span>
-            <strong style="font-size: 1.3rem; color: #1E3A8A; letter-spacing: 1px;">${refId}</strong>
+            <strong style="font-size: 1.35rem; color: #F43F5E; letter-spacing: 1px;">${refId}</strong>
           </div>
-          <p style="font-size: 0.88rem; color: #475569;">Please visit the school office with original documents or call <strong>+91 3228 240211</strong> for further queries.</p>
+          <p style="font-size: 0.88rem; color: #475569;">Please visit the school office or call <strong>+91 3228 240211</strong> for counseling dates.</p>
         </div>
       `;
       openModal('confirmationModal');
@@ -199,7 +248,7 @@ function initFormHandler() {
   });
 }
 
-// Government Welfare Schemes Modal Guide
+// 6. Government Welfare Scheme Modal Guide
 function openWelfareModal(scheme) {
   const modalBody = document.getElementById('noticePdfModalBody');
   const modalTitle = document.getElementById('noticePdfModalTitle');
@@ -215,11 +264,10 @@ function openWelfareModal(scheme) {
         <ul style="list-style: disc; padding-left: 1.5rem;">
           <li><strong>K1 Annual Stipend:</strong> ₹1,000 per year for students aged 13 to 18 years.</li>
           <li><strong>K2 One-Time Grant:</strong> ₹25,000 upon reaching 18 years of age and continuing studies.</li>
-          <li><strong>Required Documents:</strong> Student Bank Account Passbook, Aadhaar Card, Unmarried Certificate, School ID.</li>
         </ul>
         <br>
-        <a href="https://wbkanyashree.gov.in" target="_blank" class="btn btn-emerald" style="display: inline-flex; width: 100%; margin-top: 1rem;">
-          <i class="fa-solid fa-arrow-up-right-from-square"></i> Visit Official Kanyashree Portal
+        <a href="https://wbkanyashree.gov.in" target="_blank" class="btn btn-rose" style="display: inline-flex; width: 100%;">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i> Visit Kanyashree Official Portal
         </a>
       </div>
     `;
@@ -229,8 +277,6 @@ function openWelfareModal(scheme) {
       <div style="line-height: 1.7; color: #334155;">
         <h4 style="color: #1E3A8A; font-size: 1.1rem; margin-bottom: 0.5rem;">Bicycle Distribution Scheme for School Students</h4>
         <p>Under Sabooj Sathi scheme, free bicycles are provided to female students studying in Class IX to XII to facilitate easy commuting to school.</p>
-        <br>
-        <p><em>Distribution takes place annually at the school campus under supervision of the Headmistress & Block Development Office.</em></p>
       </div>
     `;
   } else if (scheme === 'taruner_swapna') {
@@ -239,15 +285,13 @@ function openWelfareModal(scheme) {
       <div style="line-height: 1.7; color: #334155;">
         <h4 style="color: #1E3A8A; font-size: 1.1rem; margin-bottom: 0.5rem;">₹10,000 Financial Grant for Smartphone / Tablet</h4>
         <p>Class XII Higher Secondary students receive a direct bank transfer of ₹10,000 from the West Bengal Government to purchase digital learning devices.</p>
-        <br>
-        <p>Contact the school computer department for account verification.</p>
       </div>
     `;
   }
   openModal('noticePdfModal');
 }
 
-// PDF Notice Viewer Simulation Modal
+// 7. PDF Notice Viewer Simulation Modal
 function openNoticePdfModal(title, date, category) {
   const modalBody = document.getElementById('noticePdfModalBody');
   const modalTitle = document.getElementById('noticePdfModalTitle');
@@ -256,25 +300,23 @@ function openNoticePdfModal(title, date, category) {
   modalTitle.textContent = title;
   modalBody.innerHTML = `
     <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 2rem;">
-      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #1E3A8A; padding-bottom: 1rem; margin-bottom: 1.5rem;">
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #F43F5E; padding-bottom: 1rem; margin-bottom: 1.5rem;">
         <div>
           <h4 style="color: #1E3A8A; font-size: 1.1rem; margin-bottom: 0.2rem;">MAHISHADAL GAYESWARI GIRLS' HIGH SCHOOL (H.S.)</h4>
-          <span style="font-size: 0.8rem; color: #64748B;">Official Circular Ref: MGGHS/CIRCULAR/2026/N-${Math.floor(100+Math.random()*900)}</span>
+          <span style="font-size: 0.8rem; color: #64748B;">Circular Ref: MGGHS/CIRCULAR/2026/N-${Math.floor(100+Math.random()*900)}</span>
         </div>
-        <span style="background: #FEF3C7; color: #B45309; font-weight: 700; font-size: 0.8rem; padding: 0.3rem 0.8rem; border-radius: 20px;">${date}</span>
+        <span style="background: #FFE4E6; color: #F43F5E; font-weight: 700; font-size: 0.8rem; padding: 0.3rem 0.8rem; border-radius: 20px;">${date}</span>
       </div>
 
       <div style="color: #334155; line-height: 1.7; margin-bottom: 2rem;">
         <p><strong>SUBJECT: ${title.toUpperCase()}</strong></p>
         <br>
         <p>This is an official administrative notice issued by order of Headmistress Smt. Kalyani Maity and the School Managing Committee of Mahishadal Gayeswari Girls' High School (H.S.).</p>
-        <br>
-        <p>All students, teaching staff, and guardians are requested to adhere strictly to the schedule announced herein.</p>
       </div>
 
       <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #E2E8F0; padding-top: 1.2rem;">
-        <span style="font-size: 0.85rem; color: #64748B;"><i class="fa-solid fa-file-pdf" style="color: #1E3A8A;"></i> Document Format: PDF (180 KB)</span>
-        <button class="btn btn-primary" onclick="downloadNoticePdf('${title}')">
+        <span style="font-size: 0.85rem; color: #64748B;"><i class="fa-solid fa-file-pdf" style="color: #F43F5E;"></i> Format: Verified PDF (180 KB)</span>
+        <button class="btn btn-rose" onclick="downloadNoticePdf('${title}')">
           <i class="fa-solid fa-download"></i> Download Notice PDF
         </button>
       </div>
@@ -291,14 +333,14 @@ function downloadRoutine() {
   alert('Downloading Madhyamik & H.S. Exam Routine 2026 (PDF)...');
 }
 
-// Lightbox Modal
+// 8. Gallery Lightbox Modal
 function initGalleryLightbox() {
-  const items = document.querySelectorAll('.gallery-item');
+  const items = document.querySelectorAll('.gallery-item, .reel-card');
   items.forEach(item => {
     item.addEventListener('click', () => {
       const img = item.querySelector('img').src;
-      const title = item.querySelector('.gallery-item-title').textContent;
-      const cat = item.querySelector('.gallery-item-cat').textContent;
+      const title = item.querySelector('.gallery-item-title, .reel-title').textContent;
+      const cat = item.querySelector('.gallery-item-cat, .reel-cat').textContent;
 
       const modalBody = document.getElementById('lightboxModalBody');
       if (modalBody) {
@@ -306,12 +348,30 @@ function initGalleryLightbox() {
           <div style="text-align: center;">
             <img src="${img}" style="max-height: 70vh; border-radius: 12px; width: 100%; object-fit: cover; margin-bottom: 1rem;">
             <h3 style="color: #FFFFFF; font-size: 1.3rem;">${title}</h3>
-            <span style="color: #FBBF24; font-weight: 700; font-size: 0.9rem;">${cat}</span>
+            <span style="color: #F59E0B; font-weight: 700; font-size: 0.9rem;">${cat}</span>
           </div>
         `;
         openModal('lightboxModal');
       }
     });
+  });
+}
+
+// 9. Back To Top Rocket Button
+function initBackToTop() {
+  const backBtn = document.getElementById('backToTopBtn');
+  if (!backBtn) return;
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) {
+      backBtn.classList.add('visible');
+    } else {
+      backBtn.classList.remove('visible');
+    }
+  });
+
+  backBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 }
 
@@ -326,7 +386,7 @@ function closeModal(id) {
   if (modal) modal.classList.remove('active');
 }
 
-// Mobile Nav Menu
+// Mobile Menu
 function initMobileMenu() {
   const btn = document.getElementById('mobileMenuBtn');
   const links = document.getElementById('navLinks');
