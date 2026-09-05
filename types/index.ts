@@ -1,9 +1,9 @@
 /**
  * MAHISHADAL GAYESWARI GIRLS' HIGH SCHOOL (H.S.)
- * Strict TypeScript Type Definitions
+ * Extended TypeScript Definitions (Including Admin Dashboard)
  */
 
-export type NoticeCategory = 'all' | 'wbbse' | 'wbchse' | 'schemes' | 'holiday';
+export type NoticeCategory = 'all' | 'wbbse' | 'wbchse' | 'schemes' | 'holiday' | 'tender';
 
 export interface Notice {
   id: string;
@@ -12,17 +12,21 @@ export interface Notice {
   publishDate: string;
   pdfUrl: string;
   isNew: boolean;
+  isPinned?: boolean;
   fileSize: string;
   description: string;
 }
 
 export interface AdmissionInquiry {
+  id?: string;
   studentName: string;
   guardianName: string;
   targetClass: string;
   phoneNumber: string;
   address: string;
   remarks?: string;
+  submittedAt?: string;
+  status?: 'pending' | 'verified' | 'contacted';
 }
 
 export interface SchemeDetail {
@@ -49,12 +53,19 @@ export interface GalleryItem {
   title: string;
   category: string;
   imageUrl: string;
+  assignedSection?: 'hero' | 'events' | 'facilities';
 }
 
-export interface StaffProfile {
-  name: string;
-  designation: string;
-  qualification: string;
-  imageUrl: string;
-  message: string;
+export interface AdminUser {
+  username: string;
+  role: 'headmistress' | 'office_clerk';
+  token: string;
+}
+
+export interface DashboardStats {
+  activeNoticesCount: number;
+  galleryPhotosCount: number;
+  pendingInquiriesCount: number;
+  storageUsedMb: number;
+  emergencyTickerActive: boolean;
 }

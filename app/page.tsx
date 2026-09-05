@@ -8,12 +8,16 @@ import { BentoGrid } from '../components/BentoGrid';
 import { SchemesCorner } from '../components/SchemesCorner';
 import { EventGallery } from '../components/EventGallery';
 import { AdmissionModal } from '../components/AdmissionModal';
+import { AdminLoginModal } from '../components/AdminLoginModal';
+import { AdminDashboard } from '../components/AdminDashboard';
 import { Footer } from '../components/Footer';
-import { Notice } from '../types';
+import { Notice, AdminUser } from '../types';
 
 export default function HomePage() {
   const [currentLang, setCurrentLang] = useState<'en' | 'bn'>('en');
   const [isAdmissionModalOpen, setIsAdmissionModalOpen] = useState(false);
+  const [isAdminLoginModalOpen, setIsAdminLoginModalOpen] = useState(false);
+  const [adminUser, setAdminUser] = useState<AdminUser | null>(null);
   const [activePdfNotice, setActivePdfNotice] = useState<Notice | null>(null);
 
   const toggleLanguage = () => {
@@ -36,6 +40,16 @@ export default function HomePage() {
     alert(`Opening detailed official guide for scheme: "${schemeId.toUpperCase()}".`);
   };
 
+  // If Admin is logged in, show Admin Dashboard view!
+  if (adminUser) {
+    return (
+      <AdminDashboard
+        user={adminUser}
+        onLogout={() => setAdminUser(null)}
+      />
+    );
+  }
+
   return (
     <div className={`min-h-screen ${currentLang === 'bn' ? 'lang-bn' : ''}`}>
       
@@ -44,6 +58,7 @@ export default function HomePage() {
         currentLang={currentLang}
         onToggleLang={toggleLanguage}
         onOpenAdmissionModal={() => setIsAdmissionModalOpen(true)}
+        onOpenAdminLoginModal={() => setIsAdminLoginModalOpen(true)}
       />
 
       {/* 2. 3D Parallax Hero Showcase */}
@@ -96,13 +111,20 @@ export default function HomePage() {
       {/* 8. Institutional Footer */}
       <Footer />
 
-      {/* 9. Admission Modal Dialog */}
+      {/* 9. Parent Admission Inquiry Modal */}
       <AdmissionModal
         isOpen={isAdmissionModalOpen}
         onClose={() => setIsAdmissionModalOpen(false)}
       />
 
-      {/* 10. PDF Viewer Simulation Modal */}
+      {/* 10. Admin Authentication Login Modal */}
+      <AdminLoginModal
+        isOpen={isAdminLoginModalOpen}
+        onClose={() => setIsAdminLoginModalOpen(false)}
+        onLoginSuccess={(user) => setAdminUser(user)}
+      />
+
+      {/* 11. PDF Viewer Simulation Modal */}
       {activePdfNotice && (
         <div className="fixed inset-0 z-50 bg-slate-900/75 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="bg-white rounded-2xl max-w-2xl w-full p-6 md:p-8 shadow-2xl border border-slate-200">

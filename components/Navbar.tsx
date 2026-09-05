@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
-import { Globe, Bell, Menu, X, Phone, Mail } from 'lucide-react';
+import { Globe, Bell, Menu, X, Phone, Mail, ShieldCheck } from 'lucide-react';
 
 interface NavbarProps {
   currentLang: 'en' | 'bn';
   onToggleLang: () => void;
   onOpenAdmissionModal: () => void;
+  onOpenAdminLoginModal: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   currentLang,
   onToggleLang,
   onOpenAdmissionModal,
+  onOpenAdminLoginModal,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -45,6 +47,14 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           <div className="flex items-center gap-3">
             <button
+              onClick={onOpenAdminLoginModal}
+              className="flex items-center gap-1.5 bg-amber-500/20 hover:bg-amber-500 text-amber-300 hover:text-slate-950 border border-amber-500/40 px-2.5 py-1 rounded-full text-xs font-bold transition-all"
+            >
+              <ShieldCheck className="w-3.5 h-3.5" />
+              <span>Admin Portal</span>
+            </button>
+
+            <button
               onClick={onToggleLang}
               className="flex items-center gap-1.5 bg-white/10 hover:bg-rose-600 text-white px-3 py-1 rounded-full text-xs font-bold transition-all"
             >
@@ -70,7 +80,6 @@ export const Navbar: React.FC<NavbarProps> = ({
                 {item}
               </span>
             ))}
-            {/* Duplicated for smooth loop */}
             {tickerItems.map((item, idx) => (
               <span key={`dup-${idx}`} className="inline-flex items-center gap-2 mx-6">
                 <Bell className="w-3.5 h-3.5 text-amber-400 inline" />
