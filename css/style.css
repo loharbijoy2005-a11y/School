@@ -426,10 +426,13 @@ img {
 }
 
 .logo-img {
-  width: 58px;
-  height: 58px;
-  object-fit: contain;
-  border-radius: 50%;
+  width: 58px !important;
+  height: 58px !important;
+  max-width: 58px !important;
+  max-height: 58px !important;
+  flex-shrink: 0 !important;
+  object-fit: contain !important;
+  border-radius: 50% !important;
   box-shadow: 0 4px 15px rgba(244, 63, 94, 0.25);
   transition: transform 0.4s ease;
 }

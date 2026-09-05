@@ -81,7 +81,12 @@ export const Navbar: React.FC<NavbarProps> = ({
       <header className="header-nav">
         <div className="container nav-container">
           <a href="#" className="brand-logo-group">
-            <img src="/assets/school_logo.jpg" alt="MGGHS Crest Emblem Logo" className="logo-img" />
+            <img
+              src="/assets/school_logo.jpg"
+              alt="MGGHS Crest Emblem Logo"
+              className="logo-img"
+              style={{ width: '58px', height: '58px', minWidth: '58px', minHeight: '58px', flexShrink: 0, objectFit: 'contain', borderRadius: '50%' }}
+            />
             <div className="brand-titles">
               <h1>
                 {currentLang === 'bn'
