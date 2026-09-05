@@ -5,24 +5,30 @@
 @tailwind utilities;
 
 /* ==========================================================================
-   MAHISHADAL GAYESWARI GIRLS' HIGH SCHOOL (H.S.) - LIGHT THEME OVERHAUL
-   Theme: Warm Parchment & Ivory (#FAF7F2), Crisp White (#FFFFFF), Deep Imperial Charcoal (#1E293B),
-          Royal Amber Gold (#B45309), Deep Crimson (#881337), Rose-Plum (#9D174D)
+   MAHISHADAL GAYESWARI GIRLS' HIGH SCHOOL (H.S.) - 1:1 AUTHENTIC INSTITUTIONAL PORTAL
+   Theme: Warm Heritage Alabaster (#F5F1EA / #FBF9F5), Royal Maroon (#701A1E),
+          Antique Ochre Gold (#C58B24), Vintage Forest Green (#1B4332), Deep Charcoal (#292524)
    ========================================================================== */
 
 :root {
-  --clr-parchment: #FAF7F2;
-  --clr-ivory-light: #FDFBF7;
-  --clr-charcoal: #1E293B;
-  --clr-navy-dark: #0F172A;
-  --clr-amber-gold: #B45309;
-  --clr-amber-bright: #D97706;
-  --clr-crimson: #881337;
-  --clr-rose-plum: #9D174D;
-  --clr-emerald: #047857;
-  --clr-border-warm: #E8DFD0;
-  --clr-border-subtle: #E2D9CC;
+  --clr-heritage-alabaster: #F5F1EA;
+  --clr-paper-ivory: #FBF9F5;
+  --clr-paper-card: #FAF7F0;
+  --clr-[#FFFFFF]: #FFFFFF;
   
+  --clr-maroon: #701A1E;
+  --clr-maroon-dark: #501215;
+  --clr-ochre-gold: #C58B24;
+  --clr-gold-light: #FEF3C7;
+  --clr-forest-green: #1B4332;
+  
+  --clr-charcoal-brown: #292524;
+  --clr-slate-dark: #334155;
+  --clr-border-tan: #DFD7C7;
+  --clr-divider-gold: #D4C5B0;
+  
+  --clr-footer-navy: #0F172A;
+
   --ff-sans: 'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif;
   --ff-heading: 'Playfair Display', 'Cinzel', Georgia, serif;
   --ff-bengali: 'Noto Sans Bengali', sans-serif;
@@ -41,12 +47,12 @@ html {
 
 body {
   font-family: var(--ff-sans);
-  background-color: var(--clr-parchment);
+  background-color: var(--clr-heritage-alabaster);
   background-image: 
-    radial-gradient(rgba(180, 83, 9, 0.035) 1px, transparent 0),
-    url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23B45309' fill-opacity='0.025'%3E%3Cpath d='M40 0l40 40-40 40L0 40zM40 10L10 40l30 30 30-30z'/%3E%3Ccircle cx='40' cy='40' r='8'/%3E%3C/g%3E%3C/svg%3E");
-  background-size: 40px 40px, 80px 80px;
-  color: var(--clr-charcoal);
+    radial-gradient(rgba(197, 139, 36, 0.04) 1px, transparent 0),
+    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23C58B24' fill-opacity='0.03'%3E%3Cpath d='M30 0l30 30-30 30L0 30zM30 10L10 30l20 20 20-20z'/%3E%3Ccircle cx='30' cy='30' r='6'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 30px 30px, 60px 60px;
+  color: var(--clr-charcoal-brown);
   line-height: 1.6;
   overflow-x: hidden;
 }
@@ -89,13 +95,20 @@ img {
   gap: 0.5rem;
 }
 
+.floating-edge-right {
+  position: fixed;
+  right: 0;
+  top: 38%;
+  transform: translateY(-50%);
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+}
+
 .edge-flap-btn {
-  background: var(--clr-rose-plum);
   color: #FFFFFF;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-left: none;
+  border: 1px solid rgba(255, 255, 255, 0.35);
   padding: 0.75rem 0.6rem;
-  border-radius: 0 12px 12px 0;
   writing-mode: vertical-rl;
   text-orientation: mixed;
   transform: rotate(180deg);
@@ -103,42 +116,43 @@ img {
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  box-shadow: 0 8px 20px rgba(157, 23, 77, 0.25);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   transition: var(--transition-smooth);
   cursor: pointer;
 }
 
+.edge-flap-left-btn {
+  border-left: none;
+  border-radius: 0 12px 12px 0;
+}
+
+.edge-flap-right-btn {
+  border-right: none;
+  border-radius: 12px 0 0 12px;
+  transform: rotate(0deg);
+}
+
 .edge-flap-btn:hover {
-  background: var(--clr-crimson);
-  color: #FFFFFF;
   padding-left: 0.85rem;
+  filter: brightness(1.1);
 }
 
-.floating-edge-bottom-right {
-  position: fixed;
-  right: 1.5rem;
-  bottom: 1.5rem;
-  z-index: 40;
-}
-
-/* Light Card & Glassmorphic Overlay Utility */
-.glass-card-luxury {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--clr-border-warm);
+/* Paper Card Finish Utility */
+.paper-card-heritage {
+  background: var(--clr-paper-card);
+  border: 1px solid var(--clr-border-tan);
   border-radius: 1.25rem;
-  box-shadow: 0 10px 30px rgba(180, 83, 9, 0.06);
+  box-shadow: 0 4px 16px rgba(41, 37, 36, 0.04);
 }
 
-.glass-card-luxury:hover {
-  border-color: rgba(180, 83, 9, 0.4);
-  box-shadow: 0 14px 35px rgba(180, 83, 9, 0.12);
+.paper-card-heritage:hover {
+  border-color: var(--clr-ochre-gold);
+  box-shadow: 0 8px 24px rgba(197, 139, 36, 0.12);
 }
 
-/* Marquee Continuous Banner (Burgundy Ribbon) */
+/* Marquee Continuous Banner (Royal Maroon Ribbon) */
 .ticker-container {
-  background: var(--clr-crimson);
+  background: var(--clr-maroon);
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   color: #FFFFFF;
@@ -148,24 +162,24 @@ img {
   display: inline-block;
   width: 8px;
   height: 8px;
-  background-color: #FBBF24;
+  background-color: var(--clr-ochre-gold);
   border-radius: 50%;
-  box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.7);
+  box-shadow: 0 0 0 0 rgba(197, 139, 36, 0.7);
   animation: pulse-radar 1.5s infinite;
 }
 
 @keyframes pulse-radar {
   0% {
     transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.7);
+    box-shadow: 0 0 0 0 rgba(197, 139, 36, 0.7);
   }
   70% {
     transform: scale(1.1);
-    box-shadow: 0 0 0 10px rgba(251, 191, 36, 0);
+    box-shadow: 0 0 0 10px rgba(197, 139, 36, 0);
   }
   100% {
     transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(251, 191, 36, 0);
+    box-shadow: 0 0 0 0 rgba(197, 139, 36, 0);
   }
 }
 
@@ -174,7 +188,7 @@ img {
   position: fixed;
   inset: 0;
   z-index: 60;
-  background: rgba(30, 41, 59, 0.75);
+  background: rgba(15, 23, 42, 0.75);
   backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
